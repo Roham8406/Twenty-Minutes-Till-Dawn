@@ -3,48 +3,38 @@ package com.tilldawn.View;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.LoginMenuController;
-import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Main;
-import com.tilldawn.Model.User;
 
 public class LoginMenuView implements Screen {
     private Stage stage;
-    private final TextButton setting;
-    private final TextButton profile;
-    private final TextButton pregame;
-    private final TextButton scoreboard;
-    private final TextButton logout;
-    private final TextButton talent;
-    private final TextButton loadGame;
+    private final TextButton register;
+    private final Label usernameLabel;
+    private final TextField usernameField;
+    private final Label passwordLabel;
+    private final TextField passwordField;
+    private final TextButton forgotPassword;
+    private final TextButton playAsGuest;
+    private final TextButton loginButton;
     public Table table;
-    private final Table header;
+    private Table fields;
     private final LoginMenuController controller;
-    private final boolean isSigned;
 
     public LoginMenuView(LoginMenuController controller, Skin skin) {
         this.controller = controller;
-        this.setting = new TextButton("Setting Menu", skin);
-        this.pregame = new TextButton("Pre-Game Menu", skin);
-        this.scoreboard = new TextButton("Scoreboard Menu", skin);
-        this.talent = new TextButton("Talent Menu", skin);
+        this.register = new TextButton("Sign Up", skin);
+        this.usernameField = new TextField("", skin);
+        this.passwordLabel = new Label("Password: ", skin);
+        this.forgotPassword = new TextButton("Forgot Password?", skin);
         this.table = new Table();
-        if (Main.getMain().getCurrentUser() == null) {
-            this.header = User.createUnloggedHeader(skin);
-            this.loadGame = new TextButton("Login Menu", skin);
-            this.isSigned = false;
-        } else {
-            this.header = Main.getMain().getCurrentUser().createHeader(skin);
-            this.loadGame = new TextButton("Load Game", skin);
-            this.isSigned = true;
-        }
-        this.profile = new TextButton("Profile Menu", skin);
-        this.logout = new TextButton("Logout", skin);
+        this.fields = new Table();
+        this.playAsGuest = new TextButton("Continue As Guest!", skin);
+        this.loginButton = new TextButton("Login!", skin);
+        this.usernameLabel = new Label("Username: ", skin);
+        this.passwordField = new TextField("", skin);
 
         controller.setView(this);
     }
@@ -55,23 +45,22 @@ public class LoginMenuView implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         table.setFillParent(true);
-        table.top();
-
-        table.add(header).height(100).colspan(2); // Set height here
-        table.row().pad(140, 0 , 10 , 0);
-        table.add(setting).width(500).padRight(30);
-        table.add(talent).width(500);
-        table.row().pad(10, 0 , 10, 0);
-        table.add(pregame).width(500).padRight(30);
-        table.add(scoreboard).width(500);
+        table.center();
+        fields.center();
+        fields.add(usernameLabel).width(100).padRight(100);
+        fields.add(usernameField).width(300);
+        fields.row().pad(10, 0 , 10, 0);
+        fields.add(passwordLabel).width(100).padRight(100);
+        fields.add(passwordField).width(300);
+        fields.row().pad(10, 0 , 10 , 0);
+        table.add(fields).width(500).colspan(2);
+        table.row().pad(10, 0, 10, 0);
+        table.add(loginButton).width(500).colspan(2).center();
         table.row().pad(10, 0 , 10 , 0);
-        if (isSigned) {
-            table.add(profile).width(500).padRight(30);
-            table.add(logout).width(500);
-            table.row().pad(10, 0, 10, 0);
-        }
-        table.add(loadGame).width(500).colspan(2).center();
-
+        table.add(register).width(500).padRight(30);
+        table.add(forgotPassword).width(500);
+        table.row().pad(10, 0, 10, 0);
+        table.add(playAsGuest).width(500).colspan(2).center();
 
         stage.addActor(table);
     }
@@ -111,31 +100,31 @@ public class LoginMenuView implements Screen {
 
     }
 
-    public TextButton getSetting() {
-        return setting;
+    public TextButton getRegister() {
+        return register;
     }
 
-    public TextButton getProfile() {
-        return profile;
+    public TextField getPasswordField() {
+        return passwordField;
     }
 
-    public TextButton getPregame() {
-        return pregame;
+    public TextButton getForgotPassword() {
+        return forgotPassword;
     }
 
-    public TextButton getLoadGame() {
-        return loadGame;
+    public TextField getUsernameField() {
+        return usernameField;
     }
 
-    public TextButton getScoreboard() {
-        return scoreboard;
+    public TextButton getLoginButton() {
+        return loginButton;
     }
 
-    public TextButton getLogout() {
-        return logout;
+    public TextButton getPlayAsGuest() {
+        return playAsGuest;
     }
 
-    public TextButton getTalent() {
-        return talent;
+    public void alert(String theFieldsAreEssential) {
+        //todo
     }
 }

@@ -26,12 +26,14 @@ public class MainMenuController {
             } else if (view.getScoreboard().isChecked()) {
                 Main.getMain().getScreen().dispose();
                 Main.getMain().setScreen(new ScoreboardMenuView(new ScoreboardMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
-            } else if (view.getLoadGame().isChecked()) {
+            } else if (view.getLogging().isChecked()) {
                 if (Main.getMain().getCurrentUser() != null) {
-                    //logout logic
+                    Main.getMain().setCurrentUser(null);
+                    Main.getMain().getScreen().dispose();
+                    Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
                 } else {
                     Main.getMain().getScreen().dispose();
-                    Main.getMain().setScreen(new TalentMenuView(new TalentMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+                    Main.getMain().setScreen(new LoginMenuView(new LoginMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
                 }
             }
         }

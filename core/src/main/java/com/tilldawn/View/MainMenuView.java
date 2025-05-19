@@ -16,9 +16,9 @@ public class MainMenuView implements Screen {
     private final TextButton profile;
     private final TextButton pregame;
     private final TextButton scoreboard;
-    private final TextButton logout;
-    private final TextButton talent;
     private final TextButton loadGame;
+    private final TextButton talent;
+    private final TextButton logging;
     public Table table;
     private final Table header;
     private final MainMenuController controller;
@@ -33,15 +33,15 @@ public class MainMenuView implements Screen {
         this.table = new Table();
         if (Main.getMain().getCurrentUser() == null) {
             this.header = User.createUnloggedHeader(skin);
-            this.loadGame = new TextButton("Login Menu", skin);
+            this.logging = new TextButton("Login Menu", skin);
             this.isSigned = false;
         } else {
             this.header = Main.getMain().getCurrentUser().createHeader(skin);
-            this.loadGame = new TextButton("Load Game", skin);
+            this.logging = new TextButton("Logout", skin);
             this.isSigned = true;
         }
         this.profile = new TextButton("Profile Menu", skin);
-        this.logout = new TextButton("Logout", skin);
+        this.loadGame = new TextButton("Load Game", skin);
 
         controller.setView(this);
     }
@@ -64,10 +64,10 @@ public class MainMenuView implements Screen {
         table.row().pad(10, 0 , 10 , 0);
         if (isSigned) {
             table.add(profile).width(500).padRight(30);
-            table.add(logout).width(500);
+            table.add(loadGame).width(500);
             table.row().pad(10, 0, 10, 0);
         }
-        table.add(loadGame).width(500).colspan(2).center();
+        table.add(logging).width(500).colspan(2).center();
 
 
         stage.addActor(table);
@@ -120,16 +120,16 @@ public class MainMenuView implements Screen {
         return pregame;
     }
 
-    public TextButton getLoadGame() {
-        return loadGame;
+    public TextButton getLogging() {
+        return logging;
     }
 
     public TextButton getScoreboard() {
         return scoreboard;
     }
 
-    public TextButton getLogout() {
-        return logout;
+    public TextButton getLoadGame() {
+        return loadGame;
     }
 
     public TextButton getTalent() {

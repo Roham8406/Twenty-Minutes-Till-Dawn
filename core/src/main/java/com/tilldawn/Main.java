@@ -12,12 +12,14 @@ import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.Model.User;
 import com.tilldawn.View.MainMenuView;
+import com.tilldawn.service.UserSql;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends Game {
     private static Main main;
     private static SpriteBatch batch;
     private User currentUser;
+    private UserSql userSql;
 
     @Override
     public void create() {
@@ -54,5 +56,14 @@ public class Main extends Game {
 
     public User getCurrentUser() {
         return currentUser;
+    }
+
+    public UserSql getUserSql() {
+        if (userSql == null) userSql = new UserSql();
+        return userSql;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 }
