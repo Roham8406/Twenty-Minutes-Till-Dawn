@@ -3,14 +3,17 @@ package com.tilldawn.View;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.MainMenuController;
+import com.tilldawn.Control.SettingMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.Model.User;
 
-public class MainMenuView implements Screen {
+public class SettingsMenuView implements Screen {
     private Stage stage;
     private final TextButton setting;
     private final TextButton profile;
@@ -21,10 +24,10 @@ public class MainMenuView implements Screen {
     private final TextButton loadGame;
     public Table table;
     private final Table header;
-    private final MainMenuController controller;
+    private final SettingMenuController controller;
     private final boolean isSigned;
 
-    public MainMenuView(MainMenuController controller, Skin skin) {
+    public SettingsMenuView(SettingMenuController controller, Skin skin) {
         this.controller = controller;
         this.setting = new TextButton("Setting Menu", skin);
         this.pregame = new TextButton("Pre-Game Menu", skin);
@@ -75,7 +78,7 @@ public class MainMenuView implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0.9f, 0.4f, 0.4f, 1);
+        ScreenUtils.clear(0.2f, 0.5f, 0.4f, 1);
         Main.getBatch().begin();
         Main.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
