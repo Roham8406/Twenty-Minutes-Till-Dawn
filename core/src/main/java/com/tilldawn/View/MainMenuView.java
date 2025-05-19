@@ -2,27 +2,45 @@ package com.tilldawn.View;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Main;
+import com.tilldawn.Model.User;
 
 public class MainMenuView implements Screen {
     private Stage stage;
-    private final TextButton playButton;
-    private final Label gameTitle;
-    private final TextField field;
+    private final TextButton setting;
+    private final TextButton profile;
+    private final TextButton pregame;
+    private final TextButton scoreboard;
+    private final TextButton talent;
+    private final TextButton loadGame;
     public Table table;
+    private final Table header;
     private final MainMenuController controller;
 
     public MainMenuView(MainMenuController controller, Skin skin) {
         this.controller = controller;
-        this.playButton = new TextButton("play", skin);
-        this.gameTitle = new Label("This is a title", skin);
-        this.field = new TextField("this is a field", skin);
+        this.setting = new TextButton("Setting Menu", skin);
+        this.pregame = new TextButton("Pre-Game Menu", skin);
+        this.scoreboard = new TextButton("Scoreboard Menu", skin);
+        this.talent = new TextButton("Talent Menu", skin);
         this.table = new Table();
+        if (Main.getMain().getCurrentUser() == null) {
+            this.header = User.createUnloggedHeader(skin);
+            this.profile = new TextButton("Logout", skin);
+            this.loadGame = new TextButton("Login Menu", skin);
+        } else {
+            this.header = Main.getMain().getCurrentUser().createHeader(skin);
+            this.loadGame = new TextButton("Load Game", skin);
+            this.profile = new TextButton("Profile Menu", skin);
+        }
 
         controller.setView(this);
     }
@@ -33,19 +51,25 @@ public class MainMenuView implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         table.setFillParent(true);
-        table.center();
-        table.add(gameTitle);
+        table.top();
+
+        table.add(header).height(200).colspan(2); // Set height here
+        table.row().pad(200, 0 , 10 , 0);
+        table.add(setting).width(500).padRight(30);
+        table.add(talent).width(500);
+        table.row().pad(10, 0 , 10, 0);
+        table.add(pregame).width(500).padRight(30);
+        table.add(scoreboard).width(500);
         table.row().pad(10, 0 , 10 , 0);
-        table.add(field).width(600);
-        table.row().pad(10, 0 , 10 , 0);
-        table.add(playButton);
+        table.add(profile).width(500).padRight(30);
+        table.add(loadGame).width(500);
 
         stage.addActor(table);
     }
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0, 0, 0, 1);
+        ScreenUtils.clear(0.2f, 0.5f, 0.4f, 1);
         Main.getBatch().begin();
         Main.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
@@ -79,10 +103,7 @@ public class MainMenuView implements Screen {
     }
 
     public TextButton getPlayButton() {
-        return playButton;
+        return setting;
     }
 
-    public TextField getField() {
-        return field;
-    }
 }

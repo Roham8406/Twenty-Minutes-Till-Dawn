@@ -16,7 +16,7 @@ public class MainMenuController {
 
     public void handleMainMenuButtons() {
         if (view != null) {
-            if (view.getPlayButton().isChecked() && view.getField().getText().equals("kiarash")) {
+            if (view.getPlayButton().isChecked()) {
                 Main.getMain().getScreen().dispose();
                 Main.getMain().setScreen(new PreGameMenuView(new PreGameMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             }

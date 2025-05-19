@@ -10,12 +10,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Model.GameAssetManager;
+import com.tilldawn.Model.User;
 import com.tilldawn.View.MainMenuView;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends Game {
     private static Main main;
     private static SpriteBatch batch;
+    private User currentUser;
 
     @Override
     public void create() {
@@ -48,5 +50,9 @@ public class Main extends Game {
 
     public static void setBatch(SpriteBatch batch) {
         Main.batch = batch;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
 }
