@@ -17,13 +17,15 @@ public class LoginMenuController {
             if (view.getLoginButton().isChecked()) {
                 String username = view.getUsernameField().getText();
                 String password = view.getPasswordField().getText();
-                if  (username.equals("") || password.equals("")) {
+                if  (username.isEmpty() || password.isEmpty()) {
                     view.alert("The fields are essential", 5);
+                    view.getLoginButton().setChecked(false);
                     return;
                 }
                 User user = Main.getMain().getUserSql().findUser(username, password);
                 if (user.getUsername() == null)  {
                     view.alert(user.getAlert(), 5);
+                    view.getLoginButton().setChecked(false);
                     return;
                 }
                 Main.getMain().setCurrentUser(user);
