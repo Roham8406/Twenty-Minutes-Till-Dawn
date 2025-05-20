@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.tilldawn.Main;
 import com.tilldawn.Model.Sfx;
 
 public abstract class MenuController {
@@ -23,7 +24,7 @@ public abstract class MenuController {
                 actor.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        click.play();
+                        if (Main.getMain().isSfx()) click.play();
                     }
                 });
             }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.tilldawn.Main;
 import com.tilldawn.Model.GameAssetManager;
+import com.tilldawn.View.ControlSettingsMenuView;
 import com.tilldawn.View.MainMenuView;
 import com.tilldawn.View.SettingsMenuView;
 
@@ -38,16 +39,23 @@ public class SettingMenuController extends MenuController {
             view.getAutoReload().addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    Main.getMain().setAutoReload(view.getAutoReload().isChecked());
+                    Main.getMain().setAutoReload(view.getAutoReload().isChecked()); //TODO
                 }
             });
             view.getBlackAndWhite().addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    Main.getMain().setBlackAndWhite(view.getBlackAndWhite().isChecked());
+                    Main.getMain().setBlackAndWhite(view.getBlackAndWhite().isChecked()); //TODO
                 }
             });
-
+            if (view.getControlSettings().isChecked()) {
+                Main.getMain().getScreen().dispose();
+                Main.getMain().setScreen(new ControlSettingsMenuView(new ControlSettingMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+            }
+            if (view.getMainMenu().isChecked()) {
+                Main.getMain().getScreen().dispose();
+                Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+            }
         }
     }
 }
