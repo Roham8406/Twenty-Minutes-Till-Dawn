@@ -4,12 +4,14 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Model.GameAssetManager;
+import com.tilldawn.Model.MusicTracks;
 import com.tilldawn.Model.User;
 import com.tilldawn.View.MainMenuView;
 import com.tilldawn.service.UserSql;
@@ -20,11 +22,14 @@ public class Main extends Game {
     private static SpriteBatch batch;
     private User currentUser;
     private UserSql userSql;
+    private MusicTracks music = MusicTracks.Hitman;
+    private Float musicVolume = 0.5f;
 
     @Override
     public void create() {
         main = this;
         batch = new SpriteBatch();
+        Main.getMain().playMusic();
         getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
     }
 
@@ -65,5 +70,28 @@ public class Main extends Game {
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public Float getMusicVolume() {
+        return musicVolume;
+    }
+
+    public MusicTracks getMusic() {
+        return music;
+    }
+
+    public void setMusicVolume(Float musicVolume) {
+        this.musicVolume = musicVolume;
+    }
+
+    public void setMusic(String music) {
+        this.music = MusicTracks.findMusic(music);
+    }
+
+    public void playMusic() {
+        Music music = Gdx.audio.newMusic(Gdx.files.internal(this.music.getPath()));
+        music.setLooping(true);
+        music.setVolume(musicVolume);
+        music.play();
     }
 }
