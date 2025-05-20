@@ -18,12 +18,12 @@ public class LoginMenuController {
                 String username = view.getUsernameField().getText();
                 String password = view.getPasswordField().getText();
                 if  (username.equals("") || password.equals("")) {
-                    view.alert("The fields are essential");
+                    view.alert("The fields are essential", 5);
                     return;
                 }
                 User user = Main.getMain().getUserSql().findUser(username, password);
                 if (user.getUsername() == null)  {
-                    view.alert(user.getAlert());
+                    view.alert(user.getAlert(), 5);
                     return;
                 }
                 Main.getMain().setCurrentUser(user);

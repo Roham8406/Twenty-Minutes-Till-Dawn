@@ -35,13 +35,9 @@ public class User {
         this.avatar = Avatar.getAvatar(avatar);
     }
 
-    public User(int id, String username, int kills, int playtime, int score, String avatar, int securityQuestion, String securityAnswer) {
+    public User(int id, String username, int securityQuestion, String securityAnswer) {
         this.id = id;
         this.username = username;
-        this.kills = kills;
-        this.playtime = playtime;
-        this.score = score;
-        this.avatar = Avatar.getAvatar(avatar);
         this.securityQuestion = securityQuestion;
         this.securityAnswer = securityAnswer;
     }
@@ -70,5 +66,17 @@ public class User {
     public String getAlert() {
         if (alert == null) {return "200";}
         return alert;
+    }
+
+    public String getSecurityQuestion() {
+        return SecurityQuestions.values()[securityQuestion].getQuestion();
+    }
+
+    public String getSecurityAnswer() {
+        return securityAnswer;
+    }
+
+    public int getId() {
+        return id;
     }
 }

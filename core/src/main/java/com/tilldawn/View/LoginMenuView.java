@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.LoginMenuController;
 import com.tilldawn.Main;
@@ -22,8 +24,10 @@ public class LoginMenuView implements Screen {
     public Table table;
     private Table fields;
     private final LoginMenuController controller;
+    private Skin skin;
 
     public LoginMenuView(LoginMenuController controller, Skin skin) {
+        this.skin = skin;
         this.controller = controller;
         this.register = new TextButton("Sign Up", skin);
         this.usernameField = new TextField("", skin);
@@ -49,14 +53,14 @@ public class LoginMenuView implements Screen {
         fields.center();
         fields.add(usernameLabel).width(100).padRight(100);
         fields.add(usernameField).width(300);
-        fields.row().pad(10, 0 , 10, 0);
+        fields.row().pad(10, 0, 10, 0);
         fields.add(passwordLabel).width(100).padRight(100);
         fields.add(passwordField).width(300);
-        fields.row().pad(10, 0 , 10 , 0);
+        fields.row().pad(10, 0, 10, 0);
         table.add(fields).width(500).colspan(2);
         table.row().pad(10, 0, 10, 0);
         table.add(loginButton).width(500).colspan(2).center();
-        table.row().pad(10, 0 , 10 , 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(register).width(500).padRight(30);
         table.add(forgotPassword).width(500);
         table.row().pad(10, 0, 10, 0);
@@ -124,7 +128,22 @@ public class LoginMenuView implements Screen {
         return playAsGuest;
     }
 
-    public void alert(String theFieldsAreEssential) {
-        //todo
+    public void alert(String message, Integer timer) {
+        final Table alertBox = new Table(skin);
+        alertBox.setSize(1000, 50);
+        alertBox.setPosition(Gdx.graphics.getWidth() / 2f,0,Align.bottom);
+
+        Label label = new Label(message, skin);
+        alertBox.add(label);
+        alertBox.setBackground("progress-bar-health-knob");
+        stage.addActor(alertBox);
+
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                alertBox.remove();
+            }
+        }, timer);
+
     }
 }
