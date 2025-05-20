@@ -135,4 +135,8 @@ public class MainMenuView implements Screen {
     public TextButton getTalent() {
         return talent;
     }
+
+    public Stage getStage() {
+        return stage;
+    }
 }

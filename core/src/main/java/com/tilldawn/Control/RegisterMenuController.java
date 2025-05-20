@@ -8,7 +8,7 @@ import com.tilldawn.View.MainMenuView;
 import com.tilldawn.View.RegisterMenuView;
 import com.tilldawn.service.UserSql;
 
-public class RegisterMenuController {
+public class RegisterMenuController extends MenuController {
     private RegisterMenuView view;
 
     public void setView(RegisterMenuView view) {
@@ -16,6 +16,7 @@ public class RegisterMenuController {
     }
 
     public void handleMainMenuButtons() {
+        addClickSoundToButtons(view.getStage().getRoot());
         if (view != null) {
             if (view.getRegister().isChecked()) {
                 String username = view.getUsernameField().getText();

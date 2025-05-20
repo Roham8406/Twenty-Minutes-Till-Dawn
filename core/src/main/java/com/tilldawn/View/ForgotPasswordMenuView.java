@@ -187,4 +187,8 @@ public class ForgotPasswordMenuView implements Screen {
     public Integer getState() {
         return state;
     }
+
+    public Stage getStage() {
+        return stage;
+    }
 }

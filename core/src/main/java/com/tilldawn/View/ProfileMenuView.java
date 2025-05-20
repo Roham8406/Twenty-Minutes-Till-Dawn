@@ -138,4 +138,8 @@ public class ProfileMenuView implements Screen {
     public TextButton getTalent() {
         return talent;
     }
+
+    public Stage getStage() {
+        return stage;
+    }
 }

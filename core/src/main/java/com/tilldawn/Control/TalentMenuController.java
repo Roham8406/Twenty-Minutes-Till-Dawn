@@ -5,7 +5,7 @@ import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.View.MainMenuView;
 import com.tilldawn.View.TalentMenuView;
 
-public class TalentMenuController {
+public class TalentMenuController extends MenuController {
     private TalentMenuView view;
 
     public void setView(TalentMenuView view) {
@@ -13,6 +13,7 @@ public class TalentMenuController {
     }
 
     public void handleMainMenuButtons() {
+        addClickSoundToButtons(view.getStage().getRoot());
         if (view != null) {
 
         }

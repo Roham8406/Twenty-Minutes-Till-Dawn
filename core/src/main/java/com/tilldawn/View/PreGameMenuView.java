@@ -88,4 +88,7 @@ public class PreGameMenuView implements Screen {
 
     }
 
+    public Stage getStage() {
+        return stage;
+    }
 }

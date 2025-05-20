@@ -4,7 +4,7 @@ import com.tilldawn.Main;
 import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.View.*;
 
-public class MainMenuController {
+public class MainMenuController extends MenuController {
     private MainMenuView view;
 
     public void setView(MainMenuView view) {
@@ -12,10 +12,10 @@ public class MainMenuController {
     }
 
     public void handleMainMenuButtons() {
+        addClickSoundToButtons(view.getStage().getRoot());
         if (view != null) {
             if (view.getSetting().isChecked()) {
                 Main.getMain().getScreen().dispose();
-//                Main.getMain().setScreen(new PreGameMenuView(new PreGameMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
                 Main.getMain().setScreen(new SettingsMenuView(new SettingMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             } else if (view.getTalent().isChecked()) {
                 Main.getMain().getScreen().dispose();

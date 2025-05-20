@@ -153,4 +153,8 @@ public class RegisterMenuView implements Screen {
         }, timer);
 
     }
+
+    public Stage getStage() {
+        return stage;
+    }
 }

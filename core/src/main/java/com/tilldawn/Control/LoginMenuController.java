@@ -5,7 +5,7 @@ import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.Model.User;
 import com.tilldawn.View.*;
 
-public class LoginMenuController {
+public class LoginMenuController extends MenuController {
     private LoginMenuView view;
 
     public void setView(LoginMenuView view) {
@@ -13,6 +13,7 @@ public class LoginMenuController {
     }
 
     public void handleMainMenuButtons() {
+        addClickSoundToButtons(view.getStage().getRoot());
         if (view != null) {
             if (view.getLoginButton().isChecked()) {
                 String username = view.getUsernameField().getText();

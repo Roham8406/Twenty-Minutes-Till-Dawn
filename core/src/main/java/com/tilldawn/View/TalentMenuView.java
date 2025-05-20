@@ -111,6 +111,10 @@ public class TalentMenuView implements Screen {
 
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+
     public TextButton getSetting() {
         return setting;
     }

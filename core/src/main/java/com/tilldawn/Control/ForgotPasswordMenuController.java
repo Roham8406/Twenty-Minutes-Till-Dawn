@@ -9,7 +9,7 @@ import com.tilldawn.View.LoginMenuView;
 import com.tilldawn.View.MainMenuView;
 import com.tilldawn.service.UserSql;
 
-public class ForgotPasswordMenuController {
+public class ForgotPasswordMenuController extends MenuController {
     private ForgotPasswordMenuView view;
     User user;
 
@@ -18,6 +18,7 @@ public class ForgotPasswordMenuController {
     }
 
     public void handleMainMenuButtons() {
+        addClickSoundToButtons(view.getStage().getRoot());
         if (view != null) {
             switch (view.getState()) {
                 case 0: {

@@ -22,7 +22,11 @@ public class Main extends Game {
     private static SpriteBatch batch;
     private User currentUser;
     private UserSql userSql;
-    private MusicTracks music = MusicTracks.Hitman;
+    private MusicTracks musicTrack = MusicTracks.Hitman;
+    private boolean sfx = true;
+    private boolean blackAndWhite;
+    private boolean autoReload;
+    private Music music;
     private Float musicVolume = 0.5f;
 
     @Override
@@ -77,21 +81,50 @@ public class Main extends Game {
     }
 
     public MusicTracks getMusic() {
-        return music;
+        return musicTrack;
     }
 
     public void setMusicVolume(Float musicVolume) {
         this.musicVolume = musicVolume;
+        this.music.setVolume(musicVolume);
     }
 
     public void setMusic(String music) {
-        this.music = MusicTracks.findMusic(music);
+        this.musicTrack = MusicTracks.findMusic(music);
+        this.music.pause();
+        this.music.stop();
+        this.music.dispose();
+        playMusic();
     }
 
     public void playMusic() {
-        Music music = Gdx.audio.newMusic(Gdx.files.internal(this.music.getPath()));
+        music = Gdx.audio.newMusic(Gdx.files.internal(this.musicTrack.getPath()));
         music.setLooping(true);
         music.setVolume(musicVolume);
         music.play();
+    }
+
+    public boolean isAutoReload() {
+        return autoReload;
+    }
+
+    public void setAutoReload(boolean autoReload) {
+        this.autoReload = autoReload;
+    }
+
+    public boolean isSfx() {
+        return sfx;
+    }
+
+    public void setSfx(boolean sfx) {
+        this.sfx = sfx;
+    }
+
+    public boolean isBlackAndWhite() {
+        return blackAndWhite;
+    }
+
+    public void setBlackAndWhite(boolean blackAndWhite) {
+        this.blackAndWhite = blackAndWhite;
     }
 }

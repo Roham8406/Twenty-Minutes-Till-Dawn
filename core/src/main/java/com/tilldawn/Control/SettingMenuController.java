@@ -1,11 +1,13 @@
 package com.tilldawn.Control;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.tilldawn.Main;
 import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.View.MainMenuView;
 import com.tilldawn.View.SettingsMenuView;
 
-public class SettingMenuController {
+public class SettingMenuController extends MenuController {
     private SettingsMenuView view;
 
     public void setView(SettingsMenuView view) {
@@ -13,7 +15,38 @@ public class SettingMenuController {
     }
 
     public void handleMainMenuButtons() {
+        addClickSoundToButtons(view.getStage().getRoot());
         if (view != null) {
+            view.getMusicVolume().addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    Main.getMain().setMusicVolume(view.getMusicVolume().getValue());
+                }
+            });
+            view.getMusicTrack().addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    Main.getMain().setMusic(view.getMusicTrack().getSelected());
+                }
+            });
+            view.getSfx().addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    Main.getMain().setSfx(view.getSfx().isChecked());
+                }
+            });
+            view.getAutoReload().addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    Main.getMain().setAutoReload(view.getAutoReload().isChecked());
+                }
+            });
+            view.getBlackAndWhite().addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    Main.getMain().setBlackAndWhite(view.getBlackAndWhite().isChecked());
+                }
+            });
 
         }
     }

@@ -108,4 +108,8 @@ public class GameView implements Screen, InputProcessor {
     public boolean scrolled(float amountX, float amountY) {
         return false;
     }
+
+    public Stage getStage() {
+        return stage;
+    }
 }

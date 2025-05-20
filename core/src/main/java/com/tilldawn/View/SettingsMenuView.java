@@ -67,6 +67,9 @@ public class SettingsMenuView implements Screen {
         table.add(sfx).width(400).padRight(50);
         table.add(blackAndWhite).width(600).padRight(50);
         table.add(autoReload).width(500);
+        if (Main.getMain().isSfx()) sfx.setChecked(true);
+        if (Main.getMain().isBlackAndWhite()) blackAndWhite.setChecked(true);
+        if (Main.getMain().isAutoReload()) autoReload.setChecked(true);
         table.row().pad(10, 0 , 10 , 0);
         table.add(controlSettings).colspan(3).width(500);
         table.row().pad(10, 0 , 10 , 0);
@@ -136,5 +139,9 @@ public class SettingsMenuView implements Screen {
 
     public TextButton getMainMenu() {
         return mainMenu;
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 }

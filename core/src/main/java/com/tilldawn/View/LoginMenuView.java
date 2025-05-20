@@ -146,4 +146,8 @@ public class LoginMenuView implements Screen {
         }, timer);
 
     }
+
+    public Stage getStage() {
+        return stage;
+    }
 }
