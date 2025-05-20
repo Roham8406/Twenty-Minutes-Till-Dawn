@@ -3,9 +3,7 @@ package com.tilldawn.Control;
 import com.tilldawn.Main;
 import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.Model.User;
-import com.tilldawn.View.LoginMenuView;
-import com.tilldawn.View.MainMenuView;
-import com.tilldawn.View.TalentMenuView;
+import com.tilldawn.View.*;
 
 public class LoginMenuController {
     private LoginMenuView view;
@@ -29,6 +27,18 @@ public class LoginMenuController {
                     return;
                 }
                 Main.getMain().setCurrentUser(user);
+                Main.getMain().getScreen().dispose();
+                Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+            }
+            if (view.getForgotPassword().isChecked()) {
+                Main.getMain().getScreen().dispose();
+                Main.getMain().setScreen(new ForgotPasswordMenuView(new ForgotPasswordMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+            }
+            if (view.getRegister().isChecked()) {
+                Main.getMain().getScreen().dispose();
+                Main.getMain().setScreen(new RegisterMenuView(new RegisterMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+            }
+            if (view.getPlayAsGuest().isChecked()) {
                 Main.getMain().getScreen().dispose();
                 Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             }
