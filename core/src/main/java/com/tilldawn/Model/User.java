@@ -32,7 +32,7 @@ public class User {
         this.kills = kills;
         this.playtime = playtime;
         this.score = score;
-        this.avatar = Avatar.getAvatar(avatar);
+        this.avatar = new Avatar(avatar);
     }
 
     public User(int id, String username, int securityQuestion, String securityAnswer) {
@@ -74,6 +74,18 @@ public class User {
 
     public String getSecurityAnswer() {
         return securityAnswer;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 
     public int getId() {

@@ -1,5 +1,6 @@
 package com.tilldawn.service;
 
+import com.tilldawn.Main;
 import com.tilldawn.Model.Avatar;
 import com.tilldawn.Model.Response;
 import com.tilldawn.Model.User;
@@ -129,4 +130,79 @@ public class UserSql {
         }
     }
 
+    public Response updateInfo(String username, String password) {
+        if (password == null) {
+            String query = "UPDATE users SET username = ? WHERE id = ?";
+
+            try {
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setString(1, username);
+                statement.setInt(2, Main.getMain().getCurrentUser().getId());
+                int rowsAffected = statement.executeUpdate();
+                statement.close();
+                if (rowsAffected == 0) {
+                    return new Response("User not found! Try again!", false);
+                }
+                Main.getMain().getCurrentUser().setUsername(username);
+                return new Response("Successfully changed username!", true);
+            } catch (Exception e) {
+                return new Response(e.getMessage(), false);
+            }
+        } else {
+            String query = "UPDATE users SET username = ?, password = ? WHERE id = ?";
+
+            try {
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setString(1, username);
+                statement.setString(2, password);
+                statement.setInt(3, Main.getMain().getCurrentUser().getId());
+                int rowsAffected = statement.executeUpdate();
+                statement.close();
+                if (rowsAffected == 0) {
+                    return new Response("User not found! Try again!", false);
+                }
+                Main.getMain().getCurrentUser().setUsername(username);
+                Main.getMain().getCurrentUser().setPassword(password);
+                return new Response("Successfully changed info!", true);
+            } catch (Exception e) {
+                return new Response(e.getMessage(), false);
+            }
+        }
+    }
+
+    public Response deleteAccount() {
+        String query = "DELETE FROM users WHERE id = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, Main.getMain().getCurrentUser().getId());
+            int rowsAffected = statement.executeUpdate();
+            statement.close();
+            if (rowsAffected == 0) {
+                return new Response("User not found! Try again!", false);
+            }
+
+            return new Response("User successfully deleted!", true);
+        } catch (Exception e) {
+            return new Response(e.getMessage(), false);
+        }
+    }
+
+    public Response updateAvatar(String path) {
+        String query = "UPDATE users SET avatar = ? WHERE id = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, path);
+            statement.setInt(2, Main.getMain().getCurrentUser().getId());
+            int rowsAffected = statement.executeUpdate();
+            statement.close();
+            if (rowsAffected == 0) {
+                return new Response("User not found! Try again!", false);
+            }
+            return new Response("Successfully changed avatar!", true);
+        } catch (Exception e) {
+            return new Response(e.getMessage(), false);
+        }
+    }
 }

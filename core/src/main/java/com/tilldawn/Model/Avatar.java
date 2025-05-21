@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 
@@ -28,16 +29,28 @@ public class Avatar {
         avatar = defaultAvatars[new Random().nextInt(defaultAvatars.length)];
     }
 
-    public Array<ImageButton> getDefaultAvatars() {
+    public Avatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Array<Avatar> getDefaultAvatars() {
         String[] defaultAvatars = {avatar, avatar1, avatar2, avatar3, avatar4, avatar5};
-        Array<ImageButton> avatars = new Array<>();
+        Array<Avatar> avatars = new Array<>();
         for (String defaultAvatar : defaultAvatars) {
-            Texture buttonTexture = new Texture(Gdx.files.internal(defaultAvatar));
-            TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(buttonTexture));
-            avatars.add(new ImageButton(drawable));
+            avatars.add(new Avatar(defaultAvatar));
         }
         return avatars;
     }
+//    public Array<ImageButton> getDefaultAvatars() {
+//        String[] defaultAvatars = {avatar, avatar1, avatar2, avatar3, avatar4, avatar5};
+//        Array<ImageButton> avatars = new Array<>();
+//        for (String defaultAvatar : defaultAvatars) {
+//            Texture buttonTexture = new Texture(Gdx.files.internal(defaultAvatar));
+//            TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(buttonTexture));
+//            avatars.add(new ImageButton(drawable));
+//        }
+//        return avatars;
+//    }
 
     public String getAvatar() {
         return avatar;
@@ -47,5 +60,21 @@ public class Avatar {
         Texture buttonTexture = new Texture(Gdx.files.internal(avatar));
         TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(buttonTexture));
         return new ImageButton(drawable);
+    }
+
+    @Override
+    public String toString() {
+        return avatar;
+    }
+
+    public void getAvatars(Table chooseAvatar) {
+        String[] defaultAvatars = {avatar, avatar1, avatar2, avatar3, avatar4, avatar5};
+        Array<ImageButton> avatars = new Array<>();
+        for (String defaultAvatar : defaultAvatars) {
+            Texture buttonTexture = new Texture(Gdx.files.internal(defaultAvatar));
+            TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(buttonTexture));
+            ImageButton imageButton = new ImageButton(drawable);
+            chooseAvatar.add(imageButton).width(70).padRight(30);
+        }
     }
 }

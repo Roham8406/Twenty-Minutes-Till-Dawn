@@ -4,15 +4,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Control.ProfileMenuController;
 import com.tilldawn.Main;
+import com.tilldawn.Model.Avatar;
 import com.tilldawn.Model.User;
 
 public class ProfileMenuView implements Screen {
     private Stage stage;
+    private final ImageButton avatarPreview;
     private final Label usernameLabel;
     private final TextField username;
     private final Label passwordLabel;
@@ -20,7 +25,7 @@ public class ProfileMenuView implements Screen {
     private final TextButton changeAvatar;
     private final TextButton deleteAccount;
     private final TextButton changeInfo;
-    private final SelectBox<ImageButton> chooseAvatar;
+    private final Table chooseAvatar;
     private final TextButton chooseLocalAvatar;
     private final TextButton apply;
     public Table table;
@@ -43,6 +48,7 @@ public class ProfileMenuView implements Screen {
         this.apply = new TextButton("Apply", skin);
         this.chooseAvatar = null;
         this.chooseLocalAvatar = null;
+        this.avatarPreview = null;
         controller.setView(this);
     }
 
@@ -50,10 +56,10 @@ public class ProfileMenuView implements Screen {
         this.controller = controller;
         this.skin = skin;
         this.changingAvatar = changingAvatar;
-        this.chooseAvatar = new SelectBox<>(skin);
-        this.chooseAvatar.setItems(Main.getMain().getCurrentUser().getAvatar().getDefaultAvatars());
-        this.chooseAvatar.setSelectedIndex(0);
+        this.chooseAvatar = new Table();
+        Main.getMain().getCurrentUser().getAvatar().getAvatars(this.chooseAvatar);
         this.chooseLocalAvatar = new TextButton("Choose Local Avatar", skin);
+        this.avatarPreview = new Avatar(controller.getPath()).getActor(skin);
         this.usernameLabel = null;
         this.username = null;
         this.passwordLabel = null;
@@ -74,11 +80,13 @@ public class ProfileMenuView implements Screen {
         table.top();
 
         if (changingAvatar) {
-            table.add(chooseAvatar).width(500);
+            table.add(new Avatar(controller.getPath()).getActor(skin)).height(200);
             table.row().pad(10, 0 , 10, 0);
-            table.add(chooseLocalAvatar).width(500);
+            table.add(chooseAvatar).height(100);
             table.row().pad(10, 0 , 10, 0);
-            table.add(apply).width(500);
+            table.add(chooseLocalAvatar).width(700);
+            table.row().pad(10, 0 , 10, 0);
+            table.add(apply).width(700);
         } else {
             table.add(usernameLabel).width(80).padRight(50);
             table.add(username).width(300);
@@ -145,7 +153,7 @@ public class ProfileMenuView implements Screen {
         return deleteAccount;
     }
 
-    public SelectBox<ImageButton> getChooseAvatar() {
+    public Table getChooseAvatar() {
         return chooseAvatar;
     }
 
@@ -167,5 +175,32 @@ public class ProfileMenuView implements Screen {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public void alert(String message, Integer timer) {
+        final Table alertBox = new Table(skin);
+        alertBox.setSize(1000, 50);
+        alertBox.setPosition(Gdx.graphics.getWidth() / 2f,0, Align.bottom);
+
+        Label label = new Label(message, skin);
+        alertBox.add(label);
+        alertBox.setBackground("progress-bar-health-knob");
+        stage.addActor(alertBox);
+
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                alertBox.remove();
+            }
+        }, timer);
+
+    }
+
+    public boolean isChangingAvatar() {
+        return changingAvatar;
+    }
+
+    public ImageButton getAvatarPreview() {
+        return avatarPreview;
     }
 }
