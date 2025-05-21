@@ -1,8 +1,10 @@
 package com.tilldawn.View;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -13,38 +15,57 @@ import com.tilldawn.Control.TalentMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.Model.User;
 
+import java.util.function.Function;
+
 public class TalentMenuView implements Screen {
     private Stage stage;
-    private final TextButton setting;
-    private final TextButton profile;
-    private final TextButton pregame;
-    private final TextButton scoreboard;
-    private final TextButton logout;
-    private final TextButton talent;
-    private final TextButton loadGame;
+    private Skin skin;
+    private final Label hero1;
+    private final Label hero2;
+    private final Label hero3;
+    private final Label cheatCode;
+    private final Label ability;
+    private final Label upLabel;
+    private final Label downLabel;
+    private final Label leftLabel;
+    private final Label rightLabel;
+    private final Label autoAimLabel;
+    private final Label reloadLabel;
+    private final TextButton upTextButton;
+    private final TextButton downTextButton;
+    private final TextButton leftTextButton;
+    private final TextButton rightTextButton;
+    private final TextButton autoAimTextButton;
+    private final TextButton reloadTextButton;
+    private final TextButton mainMenu;
     public Table table;
-    private final Table header;
     private final TalentMenuController controller;
-    private final boolean isSigned;
 
     public TalentMenuView(TalentMenuController controller, Skin skin) {
         this.controller = controller;
-        this.setting = new TextButton("Setting Menu", skin);
-        this.pregame = new TextButton("Pre-Game Menu", skin);
-        this.scoreboard = new TextButton("Scoreboard Menu", skin);
-        this.talent = new TextButton("Talent Menu", skin);
+        this.skin = skin;
+        this.hero1 = new Label("Hero1 Information", skin); //todo
+        this.hero2 = new Label("Hero2 Information", skin); //todo
+        this.hero3 = new Label("Hero3 Information", skin); //todo
+        this.cheatCode = new Label("Cheat code information", skin); //todo
+        this.ability = new Label("Abilities information", skin); //todo
+        this.upLabel = new Label("Up", skin);
+        this.downLabel = new Label("Down", skin);
+        this.leftLabel = new Label("Left", skin);
+        this.rightLabel = new Label("Right", skin);
+        this.autoAimLabel = new Label("Auto Aim", skin);
+        this.reloadLabel = new Label("Reload", skin);
+        Function<String, String> keyDecoder = key ->
+            Input.Keys.toString(Main.getMain().getControl().getKeys().get(key));
+        this.upTextButton = new TextButton(keyDecoder.apply("up"), skin);
+        this.downTextButton = new TextButton(keyDecoder.apply("down"), skin);
+        this.leftTextButton = new TextButton(keyDecoder.apply("left"), skin);
+        this.rightTextButton = new TextButton(keyDecoder.apply("right"), skin);
+        this.autoAimTextButton = new TextButton(keyDecoder.apply("autoAim"), skin);
+        this.reloadTextButton = new TextButton(keyDecoder.apply("reload"), skin);
+        this.mainMenu = new TextButton("Main Menu", skin);
         this.table = new Table();
-        if (Main.getMain().getCurrentUser() == null) {
-            this.header = User.createUnloggedHeader(skin);
-            this.loadGame = new TextButton("Login Menu", skin);
-            this.isSigned = false;
-        } else {
-            this.header = Main.getMain().getCurrentUser().createHeader(skin);
-            this.loadGame = new TextButton("Load Game", skin);
-            this.isSigned = true;
-        }
-        this.profile = new TextButton("Profile Menu", skin);
-        this.logout = new TextButton("Logout", skin);
+        this.skin = skin;
 
         controller.setView(this);
     }
@@ -55,23 +76,33 @@ public class TalentMenuView implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         table.setFillParent(true);
-        table.top();
+        table.center();
 
-        table.add(header).height(100).colspan(2); // Set height here
-        table.row().pad(140, 0 , 10 , 0);
-        table.add(setting).width(500).padRight(30);
-        table.add(talent).width(500);
+        table.add(hero1).colspan(6).width(700);
         table.row().pad(10, 0 , 10, 0);
-        table.add(pregame).width(500).padRight(30);
-        table.add(scoreboard).width(500);
-        table.row().pad(10, 0 , 10 , 0);
-        if (isSigned) {
-            table.add(profile).width(500).padRight(30);
-            table.add(logout).width(500);
-            table.row().pad(10, 0, 10, 0);
-        }
-        table.add(loadGame).width(500).colspan(2).center();
-
+        table.add(hero2).colspan(6).width(700);
+        table.row().pad(10, 0 , 10, 0);
+        table.add(hero3).colspan(6).width(700);
+        table.row().pad(10, 0 , 10, 0);
+        table.add(cheatCode).colspan(6).width(700);
+        table.row().pad(10, 0 , 10, 0);
+        table.add(ability).colspan(6).width(700);
+        table.row().pad(10, 0 , 10, 0);
+        table.add(autoAimLabel).width(100).padRight(40);
+        table.add(autoAimTextButton).width(200).padRight(60);
+        table.add(upLabel).width(100).padRight(40);
+        table.add(upTextButton).width(200).padRight(60);
+        table.add(reloadLabel).width(100).padRight(40);
+        table.add(reloadTextButton).width(200).padRight(60);
+        table.row().pad(10, 0 , 10, 0);
+        table.add(leftLabel).width(100).padRight(40);
+        table.add(leftTextButton).width(200).padRight(60);
+        table.add(downLabel).width(100).padRight(40);
+        table.add(downTextButton).width(200).padRight(60);
+        table.add(rightLabel).width(100).padRight(40);
+        table.add(rightTextButton).width(200).padRight(60);
+        table.row().pad(10, 0 , 10, 0);
+        table.add(mainMenu).colspan(6).width(500);
 
         stage.addActor(table);
     }
@@ -115,31 +146,7 @@ public class TalentMenuView implements Screen {
         return stage;
     }
 
-    public TextButton getSetting() {
-        return setting;
-    }
-
-    public TextButton getProfile() {
-        return profile;
-    }
-
-    public TextButton getPregame() {
-        return pregame;
-    }
-
-    public TextButton getLoadGame() {
-        return loadGame;
-    }
-
-    public TextButton getScoreboard() {
-        return scoreboard;
-    }
-
-    public TextButton getLogout() {
-        return logout;
-    }
-
-    public TextButton getTalent() {
-        return talent;
+    public TextButton getMainMenu() {
+        return mainMenu;
     }
 }

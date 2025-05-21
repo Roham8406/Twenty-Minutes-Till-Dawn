@@ -15,7 +15,10 @@ public class TalentMenuController extends MenuController {
     public void handleMainMenuButtons() {
         addClickSoundToButtons(view.getStage().getRoot());
         if (view != null) {
-
+            if (view.getMainMenu().isChecked()) {
+                Main.getMain().getScreen().dispose();
+                Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+            }
         }
     }
 }

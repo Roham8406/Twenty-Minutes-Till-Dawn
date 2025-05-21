@@ -77,7 +77,7 @@ public class ProfileMenuView implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         table.setFillParent(true);
-        table.top();
+        table.center();
 
         if (changingAvatar) {
             table.add(new Avatar(controller.getPath()).getActor(skin)).height(200);
