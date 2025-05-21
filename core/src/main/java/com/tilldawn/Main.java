@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Control.MainMenuController;
+import com.tilldawn.Model.Control;
 import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.Model.MusicTracks;
 import com.tilldawn.Model.User;
@@ -27,6 +28,7 @@ public class Main extends Game {
     private boolean blackAndWhite;
     private boolean autoReload;
     private Music music;
+    private Control control;
     private Float musicVolume = 0.5f;
 
     @Override
@@ -34,6 +36,7 @@ public class Main extends Game {
         main = this;
         batch = new SpriteBatch();
         Main.getMain().playMusic();
+        control = new Control();
         getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
     }
 
@@ -126,5 +129,9 @@ public class Main extends Game {
 
     public void setBlackAndWhite(boolean blackAndWhite) {
         this.blackAndWhite = blackAndWhite;
+    }
+
+    public Control getControl() {
+        return control;
     }
 }
