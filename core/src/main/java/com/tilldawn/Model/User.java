@@ -79,4 +79,8 @@ public class User {
     public int getId() {
         return id;
     }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
 }

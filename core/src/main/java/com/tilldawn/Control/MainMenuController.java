@@ -26,6 +26,9 @@ public class MainMenuController extends MenuController {
             } else if (view.getScoreboard().isChecked()) {
                 Main.getMain().getScreen().dispose();
                 Main.getMain().setScreen(new ScoreboardMenuView(new ScoreboardMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+            } else if (view.getProfile().isChecked()) {
+                Main.getMain().getScreen().dispose();
+                Main.getMain().setScreen(new ProfileMenuView(new ProfileMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
             } else if (view.getLogging().isChecked()) {
                 if (Main.getMain().getCurrentUser() != null) {
                     Main.getMain().setCurrentUser(null);

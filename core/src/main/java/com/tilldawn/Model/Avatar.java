@@ -1,8 +1,14 @@
 package com.tilldawn.Model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Avatar {
@@ -22,12 +28,24 @@ public class Avatar {
         avatar = defaultAvatars[new Random().nextInt(defaultAvatars.length)];
     }
 
+    public Array<ImageButton> getDefaultAvatars() {
+        String[] defaultAvatars = {avatar, avatar1, avatar2, avatar3, avatar4, avatar5};
+        Array<ImageButton> avatars = new Array<>();
+        for (String defaultAvatar : defaultAvatars) {
+            Texture buttonTexture = new Texture(Gdx.files.internal(defaultAvatar));
+            TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(buttonTexture));
+            avatars.add(new ImageButton(drawable));
+        }
+        return avatars;
+    }
+
     public String getAvatar() {
         return avatar;
     }
 
-    public TextButton getActor(Skin skin) {
-        return new TextButton("Avatar", skin);
-//        return new TextButton(type, skin);
+    public ImageButton getActor(Skin skin) {
+        Texture buttonTexture = new Texture(Gdx.files.internal(avatar));
+        TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(buttonTexture));
+        return new ImageButton(drawable);
     }
 }

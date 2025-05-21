@@ -3,9 +3,7 @@ package com.tilldawn.View;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.MainMenuController;
@@ -15,38 +13,56 @@ import com.tilldawn.Model.User;
 
 public class ProfileMenuView implements Screen {
     private Stage stage;
-    private final TextButton setting;
-    private final TextButton profile;
-    private final TextButton pregame;
-    private final TextButton scoreboard;
-    private final TextButton logout;
-    private final TextButton talent;
-    private final TextButton loadGame;
+    private final Label usernameLabel;
+    private final TextField username;
+    private final Label passwordLabel;
+    private final TextField password;
+    private final TextButton changeAvatar;
+    private final TextButton deleteAccount;
+    private final TextButton changeInfo;
+    private final SelectBox<ImageButton> chooseAvatar;
+    private final TextButton chooseLocalAvatar;
+    private final TextButton apply;
     public Table table;
-    private final Table header;
     private final ProfileMenuController controller;
-    private final boolean isSigned;
+    private boolean changingAvatar;
+    private final Skin skin;
 
     public ProfileMenuView(ProfileMenuController controller, Skin skin) {
         this.controller = controller;
-        this.setting = new TextButton("Setting Menu", skin);
-        this.pregame = new TextButton("Pre-Game Menu", skin);
-        this.scoreboard = new TextButton("Scoreboard Menu", skin);
-        this.talent = new TextButton("Talent Menu", skin);
         this.table = new Table();
-        if (Main.getMain().getCurrentUser() == null) {
-            this.header = User.createUnloggedHeader(skin);
-            this.loadGame = new TextButton("Login Menu", skin);
-            this.isSigned = false;
-        } else {
-            this.header = Main.getMain().getCurrentUser().createHeader(skin);
-            this.loadGame = new TextButton("Load Game", skin);
-            this.isSigned = true;
-        }
-        this.profile = new TextButton("Profile Menu", skin);
-        this.logout = new TextButton("Logout", skin);
-
+        this.usernameLabel = new Label("Username", skin);
+        this.username = new TextField(Main.getMain().getCurrentUser().getUsername(), skin);
+        this.passwordLabel = new Label("Password", skin);
+        this.password = new TextField("", skin);
+        this.changeAvatar = new TextButton("Change Avatar", skin);
+        this.deleteAccount = new TextButton("Delete Account", skin);
+        this.changeInfo = new TextButton("Change Info", skin);
+        this.changingAvatar = false;
+        this.skin = skin;
+        this.apply = new TextButton("Apply", skin);
+        this.chooseAvatar = null;
+        this.chooseLocalAvatar = null;
         controller.setView(this);
+    }
+
+    public ProfileMenuView(ProfileMenuController controller, Skin skin, boolean changingAvatar) {
+        this.controller = controller;
+        this.skin = skin;
+        this.changingAvatar = changingAvatar;
+        this.chooseAvatar = new SelectBox<>(skin);
+        this.chooseAvatar.setItems(Main.getMain().getCurrentUser().getAvatar().getDefaultAvatars());
+        this.chooseAvatar.setSelectedIndex(0);
+        this.chooseLocalAvatar = new TextButton("Choose Local Avatar", skin);
+        this.usernameLabel = null;
+        this.username = null;
+        this.passwordLabel = null;
+        this.password = null;
+        this.changeAvatar = null;
+        this.deleteAccount = null;
+        this.changeInfo = null;
+        this.table = new Table(skin);
+        this.apply = new TextButton("Apply", skin);
     }
 
     @Override
@@ -57,21 +73,27 @@ public class ProfileMenuView implements Screen {
         table.setFillParent(true);
         table.top();
 
-        table.add(header).height(100).colspan(2); // Set height here
-        table.row().pad(140, 0 , 10 , 0);
-        table.add(setting).width(500).padRight(30);
-        table.add(talent).width(500);
-        table.row().pad(10, 0 , 10, 0);
-        table.add(pregame).width(500).padRight(30);
-        table.add(scoreboard).width(500);
-        table.row().pad(10, 0 , 10 , 0);
-        if (isSigned) {
-            table.add(profile).width(500).padRight(30);
-            table.add(logout).width(500);
-            table.row().pad(10, 0, 10, 0);
+        if (changingAvatar) {
+            table.add(chooseAvatar).width(500);
+            table.row().pad(10, 0 , 10, 0);
+            table.add(chooseLocalAvatar).width(500);
+            table.row().pad(10, 0 , 10, 0);
+            table.add(apply).width(500);
+        } else {
+            table.add(usernameLabel).width(80).padRight(50);
+            table.add(username).width(300);
+            table.row().pad(10, 0 , 10, 0);
+            table.add(passwordLabel).width(80).padRight(50);
+            table.add(password).width(300);
+            table.row().pad(10, 0 , 10, 0);
+            table.add(changeInfo).colspan(2).width(500);
+            table.row().pad(10, 0 , 10, 0);
+            table.add(changeAvatar).colspan(2).width(500);
+            table.row().pad(10, 0 , 10, 0);
+            table.add(deleteAccount).colspan(2).width(500);
+            table.row().pad(10, 0 , 10, 0);
+            table.add(apply).width(500).colspan(2);
         }
-        table.add(loadGame).width(500).colspan(2).center();
-
 
         stage.addActor(table);
     }
@@ -111,32 +133,36 @@ public class ProfileMenuView implements Screen {
 
     }
 
-    public TextButton getSetting() {
-        return setting;
+    public TextField getUsername() {
+        return username;
     }
 
-    public TextButton getProfile() {
-        return profile;
+    public TextField getPassword() {
+        return password;
     }
 
-    public TextButton getPregame() {
-        return pregame;
+    public TextButton getDeleteAccount() {
+        return deleteAccount;
     }
 
-    public TextButton getLoadGame() {
-        return loadGame;
+    public SelectBox<ImageButton> getChooseAvatar() {
+        return chooseAvatar;
     }
 
-    public TextButton getScoreboard() {
-        return scoreboard;
+    public TextButton getApply() {
+        return apply;
     }
 
-    public TextButton getLogout() {
-        return logout;
+    public TextButton getChangeAvatar() {
+        return changeAvatar;
     }
 
-    public TextButton getTalent() {
-        return talent;
+    public TextButton getChangeInfo() {
+        return changeInfo;
+    }
+
+    public TextButton getChooseLocalAvatar() {
+        return chooseLocalAvatar;
     }
 
     public Stage getStage() {
