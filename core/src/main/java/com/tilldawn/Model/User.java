@@ -95,4 +95,10 @@ public class User {
     public Avatar getAvatar() {
         return avatar;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%-60s\t%-20d\t%-20d\t%-20s", username, kills, score, playtime);
+    }
+
 }

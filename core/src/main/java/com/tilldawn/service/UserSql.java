@@ -6,6 +6,7 @@ import com.tilldawn.Model.Response;
 import com.tilldawn.Model.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -203,6 +204,30 @@ public class UserSql {
             return new Response("Successfully changed avatar!", true);
         } catch (Exception e) {
             return new Response(e.getMessage(), false);
+        }
+    }
+
+
+    public ArrayList<User> sortScoreboard(String scoreName) {
+        String query = "SELECT * FROM `users` ORDER BY `" + scoreName + "` DESC LIMIT 10";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            ArrayList<User> users = new ArrayList<>();
+
+            while (resultSet.next()) {
+                users.add(new User(0,
+                                   resultSet.getString("username"),
+                                   resultSet.getInt("kills"),
+                                   resultSet.getInt("playTime"),
+                                   resultSet.getInt("score"), null));
+            }
+
+            return users;
+        } catch (Exception e) {
+            return null;
         }
     }
 }
