@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.tilldawn.Main;
+import com.tilldawn.Model.AnimatedSprite;
 import com.tilldawn.Model.Bullet;
 import com.tilldawn.Model.Weapon;
 
@@ -16,6 +17,10 @@ public class WeaponController {
 
     public WeaponController(Weapon weapon){
         this.weapon = weapon;
+    }
+
+    public boolean isReloading() {
+        return weapon.isReloading();
     }
 
     public void update(){
@@ -35,12 +40,17 @@ public class WeaponController {
     }
 
     public void handleWeaponShoot(int x, int y){
-        bullets.add(new Bullet(x, y));
-        weapon.setAmmo(weapon.getAmmo() - 1);
+        if (weapon.canShoot()) {
+            bullets.add(new Bullet(x, y, weapon.getProjectTile(), weapon.getDamage()));
+            weapon.setAmmo(weapon.getAmmo() - 1);
+            if (Main.getMain().getGame().isAutoReload() && weapon.getAmmo() == 0) {
+                weapon.reload();
+            }
+        }
     }
 
     public void updateBullets() {
-        for(Bullet b : bullets) {
+        for(Bullet b : bullets.toArray(new Bullet[bullets.size()])) {
             b.getSprite().draw(Main.getBatch());
             Vector2 direction = new Vector2(
                 Gdx.graphics.getWidth()/2f - b.getX(),
@@ -49,7 +59,14 @@ public class WeaponController {
 
             b.getSprite().setX(b.getSprite().getX() - direction.x * 5);
             b.getSprite().setY(b.getSprite().getY() + direction.y * 5);
+            b.decrementTile();
+            if (b.isRangeEnded()) {
+                bullets.remove(b);
+            }
         }
     }
 
+    public Sprite getSprite() {
+        return weapon.getSprite();
+    }
 }

@@ -62,4 +62,20 @@ public enum WeaponType {
     public String getName() {
         return name;
     }
+
+    public Integer getAmmoMax() {
+        return ammoMax;
+    }
+
+    public Integer getTimeReload() {
+        return timeReload;
+    }
+
+    public Integer getProjectTile() {
+        return projectTile;
+    }
+
+    public Integer getDamage() {
+        return damage;
+    }
 }

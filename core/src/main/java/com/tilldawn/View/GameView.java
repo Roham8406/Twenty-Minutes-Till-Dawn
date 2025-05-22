@@ -10,7 +10,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tilldawn.Control.GameController;
+import com.tilldawn.Control.WeaponController;
 import com.tilldawn.Main;
+import com.tilldawn.Model.AnimatedSprite;
 
 public class GameView implements Screen, InputProcessor {
     private Stage stage;
@@ -34,6 +36,9 @@ public class GameView implements Screen, InputProcessor {
         controller.updateGame();
         Main.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        if (controller.getWeaponController().isReloading()) {
+            ((AnimatedSprite)controller.getWeaponController().getSprite()).update(delta);
+        }
         stage.draw();
 
     }

@@ -21,6 +21,7 @@ public class GameController {
 
     public void updateGame() {
         if (view != null) {
+
             worldController.update();
             playerController.update();
             weaponController.update();

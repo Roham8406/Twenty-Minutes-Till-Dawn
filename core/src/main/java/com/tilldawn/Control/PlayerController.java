@@ -27,18 +27,21 @@ public class PlayerController {
 
 
     public void handlePlayerInput(){
-        if (Gdx.input.isKeyPressed(Input.Keys.W)){
+        if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("up"))){
             player.setPosY(player.getPosY() - player.getSpeed());
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)){
+        if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("right"))){
             player.setPosX(player.getPosX() - player.getSpeed());
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)){
+        if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("down"))){
             player.setPosY(player.getPosY() + player.getSpeed());
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)){
+        if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("left"))){
             player.setPosX(player.getPosX() + player.getSpeed());
             player.getPlayerSprite().flip(true, false);
+        }
+        if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("reload"))){
+            Main.getMain().getGame().getWeapon().reload();
         }
     }
 

@@ -19,7 +19,7 @@ public class Player {
     private CollisionRect rect ;
     private float time = 0;
     private float speed = 5;
-    private GameCharacter gameCharacter;
+    private final GameCharacter gameCharacter;
 
     public float getSpeed() {
         return speed;
