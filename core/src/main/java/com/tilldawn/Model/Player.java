@@ -3,11 +3,13 @@ package com.tilldawn.Model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.tilldawn.Main;
 
 import java.util.ArrayList;
 
 public class Player {
-    private Texture playerTexture = new Texture(GameAssetManager.getGameAssetManager().getCharacter1_idle0());
+    private TextureRegion playerTexture = Main.getMain().getGameCharacter().getDefaultTexture();
     private Sprite playerSprite = new Sprite(playerTexture);
     private float posX = 0;
     private float posY = 0;
@@ -25,15 +27,15 @@ public class Player {
 
     public Player(){
         playerSprite.setPosition((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight() / 2);
-        playerSprite.setSize(playerTexture.getWidth() * 3, playerTexture.getHeight() * 3);
-        rect = new CollisionRect((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight(), playerTexture.getWidth() * 3, playerTexture.getHeight() * 3);
+        playerSprite.setSize(playerTexture.getRegionWidth() * 3, playerTexture.getRegionHeight() * 3);
+        rect = new CollisionRect((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight(), playerTexture.getRegionWidth() * 3, playerTexture.getRegionHeight() * 3);
     }
 
-    public Texture getPlayerTexture() {
+    public TextureRegion getPlayerTexture() {
         return playerTexture;
     }
 
-    public void setPlayerTexture(Texture playerTexture) {
+    public void setPlayerTexture(TextureRegion playerTexture) {
         this.playerTexture = playerTexture;
     }
 

@@ -1,19 +1,11 @@
 package com.tilldawn;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Control.MainMenuController;
-import com.tilldawn.Model.Control;
-import com.tilldawn.Model.GameAssetManager;
-import com.tilldawn.Model.MusicTracks;
-import com.tilldawn.Model.User;
+import com.tilldawn.Model.*;
 import com.tilldawn.View.MainMenuView;
 import com.tilldawn.service.UserSql;
 
@@ -30,6 +22,7 @@ public class Main extends Game {
     private Music music;
     private Control control;
     private Float musicVolume = 0.5f;
+    private GameCharacter gameCharacter = GameCharacter.Shana;
 
     @Override
     public void create() {
@@ -133,5 +126,13 @@ public class Main extends Game {
 
     public Control getControl() {
         return control;
+    }
+
+    public GameCharacter getGameCharacter() {
+        return gameCharacter;
+    }
+
+    public void setGameCharacter(String gameCharacter) {
+        this.gameCharacter = GameCharacter.valueOf(gameCharacter);
     }
 }

@@ -2,8 +2,8 @@ package com.tilldawn.Control;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.tilldawn.Main;
 import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.Model.Player;
@@ -44,7 +44,7 @@ public class PlayerController {
 
 
     public void idleAnimation(){
-        Animation<Texture> animation = GameAssetManager.getGameAssetManager().getCharacter1_idle_animation();
+        Animation<TextureRegion> animation = GameAssetManager.getGameAssetManager().getCharacterAnimation();
 
         player.getPlayerSprite().setRegion(animation.getKeyFrame(player.getTime()));
 
