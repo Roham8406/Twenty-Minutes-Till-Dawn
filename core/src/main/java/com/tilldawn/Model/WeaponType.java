@@ -54,7 +54,9 @@ public enum WeaponType {
     public ImageButton getPortraitButton() {
         init();
         TextureRegionDrawable drawable = new TextureRegionDrawable(textureFrames[0][0]);
-        return new ImageButton(drawable);
+        ImageButton button = new ImageButton(drawable);
+        button.setSize(100, 100); //TODO
+        return button;
     }
 
     public String getName() {

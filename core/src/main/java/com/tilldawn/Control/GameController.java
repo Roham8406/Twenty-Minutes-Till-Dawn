@@ -1,5 +1,6 @@
 package com.tilldawn.Control;
 
+import com.tilldawn.Main;
 import com.tilldawn.Model.Player;
 import com.tilldawn.Model.Weapon;
 import com.tilldawn.View.GameView;
@@ -13,9 +14,9 @@ public class GameController {
 
     public void setView(GameView view) {
         this.view = view;
-        playerController = new PlayerController(new Player());
+        playerController = new PlayerController(Main.getMain().getGame().getHero());
         worldController = new WorldController(playerController);
-        weaponController = new WeaponController(new Weapon());
+        weaponController = new WeaponController(Main.getMain().getGame().getWeapon());
     }
 
     public void updateGame() {

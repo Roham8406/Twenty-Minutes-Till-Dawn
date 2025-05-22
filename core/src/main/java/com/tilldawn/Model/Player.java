@@ -2,21 +2,24 @@ package com.tilldawn.Model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.tilldawn.Control.GameController;
 import com.tilldawn.Main;
 
 import java.util.ArrayList;
 
 public class Player {
-    private TextureRegion playerTexture = Main.getMain().getGameCharacter().getDefaultTexture();
-    private Sprite playerSprite = new Sprite(playerTexture);
+    private TextureRegion playerTexture;
+    private Sprite playerSprite;
     private float posX = 0;
     private float posY = 0;
     private float playerHealth = 100;
     private CollisionRect rect ;
     private float time = 0;
     private float speed = 5;
+    private GameCharacter gameCharacter;
 
     public float getSpeed() {
         return speed;
@@ -25,10 +28,13 @@ public class Player {
     private boolean isPlayerIdle = true;
     private boolean isPlayerRunning = false;
 
-    public Player(){
+    public Player(GameCharacter gameCharacter){
+        playerTexture = gameCharacter.getDefaultTexture();
+        playerSprite = new Sprite(playerTexture);
         playerSprite.setPosition((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight() / 2);
         playerSprite.setSize(playerTexture.getRegionWidth() * 3, playerTexture.getRegionHeight() * 3);
         rect = new CollisionRect((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight(), playerTexture.getRegionWidth() * 3, playerTexture.getRegionHeight() * 3);
+        this.gameCharacter = gameCharacter;
     }
 
     public TextureRegion getPlayerTexture() {
@@ -104,4 +110,8 @@ public class Player {
         this.time = time;
     }
 
+
+    public Animation<TextureRegion> getCharacterAnimation() {
+        return gameCharacter.getCharacterAnimation();
+    }
 }

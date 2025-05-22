@@ -25,6 +25,7 @@ public class Main extends Game {
     private WeaponType weaponType = WeaponType.Revolver;
     private Integer time = 2;
     private GameCharacter gameCharacter = GameCharacter.Shana;
+    private MainGame mainGame;
 
     @Override
     public void create() {
@@ -153,5 +154,13 @@ public class Main extends Game {
 
     public void setTime(Integer time) {
         this.time = time;
+    }
+
+    public MainGame getGame() {
+        return mainGame;
+    }
+
+    public void setGame(MainGame mainGame) {
+        this.mainGame = mainGame;
     }
 }

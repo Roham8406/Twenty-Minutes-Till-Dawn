@@ -3,14 +3,15 @@ package com.tilldawn.Model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.tilldawn.Control.WeaponController;
 
 public class Weapon {
     private Sprite sprite;
-    WeaponType weaponType = WeaponType.Shotgun;
+    WeaponType weaponType;
     private int ammo = 30;
 
-    public Weapon(){
-
+    public Weapon(WeaponType type){
+        this.weaponType = type;
     }
 
     private void init(){

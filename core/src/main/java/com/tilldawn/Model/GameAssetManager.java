@@ -10,12 +10,6 @@ import com.tilldawn.Main;
 public class GameAssetManager {
     private static GameAssetManager gameAssetManager;
     private final Skin skin = new Skin(Gdx.files.internal("skin/pixthulhu-ui.json"));
-
-
-
-    private final String smg = "smg/SMGStill.png";
-    private final Texture smgTexture = new Texture(smg);
-
     private final String bullet = "bullet.png";
 
 
@@ -35,20 +29,13 @@ public class GameAssetManager {
     }
 
     public Animation<TextureRegion> getCharacterAnimation() {
-        return Main.getMain().getGameCharacter().getCharacterAnimation();
+        return Main.getMain().getGame().getHero().getCharacterAnimation();
     }
 
     public TextureRegion getDefaultTexture() {
         return Main.getMain().getGameCharacter().getDefaultTexture();
     }
 
-    public Texture getSmgTexture(){
-        return smgTexture;
-    }
-
-    public String getSmg(){
-        return smg;
-    }
 
     public String getBullet(){
         return bullet;

@@ -44,7 +44,7 @@ public class PlayerController {
 
 
     public void idleAnimation(){
-        Animation<TextureRegion> animation = GameAssetManager.getGameAssetManager().getCharacterAnimation();
+        Animation<TextureRegion> animation = Main.getMain().getGame().getHero().getCharacterAnimation();
 
         player.getPlayerSprite().setRegion(animation.getKeyFrame(player.getTime()));
 
