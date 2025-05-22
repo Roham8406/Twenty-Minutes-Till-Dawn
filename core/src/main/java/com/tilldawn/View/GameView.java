@@ -17,9 +17,11 @@ import com.tilldawn.Model.AnimatedSprite;
 public class GameView implements Screen, InputProcessor {
     private Stage stage;
     private GameController controller;
+    private Skin skin;
 
     public GameView(GameController controller, Skin skin) {
         this.controller = controller;
+        this.skin = skin;
         controller.setView(this);
     }
 
@@ -27,6 +29,7 @@ public class GameView implements Screen, InputProcessor {
     public void show() {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(this);
+        Main.getMain().getGame().getTimer().start();
     }
 
     @Override
@@ -36,6 +39,7 @@ public class GameView implements Screen, InputProcessor {
         controller.updateGame();
         Main.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+        Main.getMain().getGame().getTimer().update(delta);
         if (controller.getWeaponController().isReloading()) {
             ((AnimatedSprite)controller.getWeaponController().getSprite()).update(delta);
         }
@@ -116,5 +120,9 @@ public class GameView implements Screen, InputProcessor {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public Skin getSkin() {
+        return skin;
     }
 }

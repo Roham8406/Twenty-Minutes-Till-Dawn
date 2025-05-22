@@ -1,5 +1,6 @@
 package com.tilldawn.Model;
 
+import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Main;
 
 import java.lang.ModuleLayer;
@@ -11,6 +12,7 @@ public class MainGame {
     private User user;
     private Control control;
     private boolean autoReload ;
+    private Countdown timer;
 
     public MainGame() {
         hero = new Player(Main.getMain().getGameCharacter());
@@ -19,14 +21,11 @@ public class MainGame {
         user = Main.getMain().getCurrentUser();
         control = Main.getMain().getControl();
         autoReload = Main.getMain().isAutoReload();
+        timer = new Countdown(Main.getMain().getTime());
     }
 
     public Player getHero() {
         return hero;
-    }
-
-    public int getDuration() {
-        return duration;
     }
 
     public Weapon getWeapon() {
@@ -43,5 +42,9 @@ public class MainGame {
 
     public boolean isAutoReload() {
         return autoReload;
+    }
+
+    public Countdown getTimer() {
+        return timer;
     }
 }

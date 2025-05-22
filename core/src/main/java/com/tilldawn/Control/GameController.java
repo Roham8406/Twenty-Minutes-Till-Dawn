@@ -15,13 +15,12 @@ public class GameController {
     public void setView(GameView view) {
         this.view = view;
         playerController = new PlayerController(Main.getMain().getGame().getHero());
-        worldController = new WorldController(playerController);
+        worldController = new WorldController(playerController, this);
         weaponController = new WeaponController(Main.getMain().getGame().getWeapon());
     }
 
     public void updateGame() {
         if (view != null) {
-
             worldController.update();
             playerController.update();
             weaponController.update();
@@ -34,5 +33,13 @@ public class GameController {
 
     public WeaponController getWeaponController() {
         return weaponController;
+    }
+
+    public WorldController getWorldController() {
+        return worldController;
+    }
+
+    public GameView getView() {
+        return view;
     }
 }
