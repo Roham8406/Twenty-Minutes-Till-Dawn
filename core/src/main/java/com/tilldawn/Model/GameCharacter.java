@@ -57,4 +57,8 @@ public enum GameCharacter {
         TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(buttonTexture));
         return new ImageButton(drawable);
     }
+
+    public String getName() {
+        return name;
+    }
 }

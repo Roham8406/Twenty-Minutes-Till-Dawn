@@ -22,6 +22,8 @@ public class Main extends Game {
     private Music music;
     private Control control;
     private Float musicVolume = 0.5f;
+    private WeaponType weaponType = WeaponType.Revolver;
+    private Integer time = 2;
     private GameCharacter gameCharacter = GameCharacter.Shana;
 
     @Override
@@ -132,7 +134,24 @@ public class Main extends Game {
         return gameCharacter;
     }
 
-    public void setGameCharacter(String gameCharacter) {
-        this.gameCharacter = GameCharacter.valueOf(gameCharacter);
+    public void setGameCharacter(GameCharacter gameCharacter) {
+        this.gameCharacter = gameCharacter;
+    }
+
+    public WeaponType getWeaponType() {
+        return weaponType;
+    }
+
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public void setWeaponType(WeaponType weaponType) {
+        this.weaponType = weaponType;
+    }
+
+    public void setTime(Integer time) {
+        this.time = time;
     }
 }

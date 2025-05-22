@@ -19,12 +19,12 @@ public class WeaponController {
     }
 
     public void update(){
-        weapon.getSmgSprite().draw(Main.getBatch());
+        weapon.getSprite().draw(Main.getBatch());
         updateBullets();
     }
 
     public void handleWeaponRotation(int x, int y) {
-        Sprite weaponSprite = weapon.getSmgSprite();
+        Sprite weaponSprite = weapon.getSprite();
 
         float weaponCenterX = (float) Gdx.graphics.getWidth() / 2;
         float weaponCenterY = (float) Gdx.graphics.getHeight() / 2;
