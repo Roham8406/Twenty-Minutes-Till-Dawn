@@ -36,13 +36,11 @@ public class GameView implements Screen, InputProcessor {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
         Main.getBatch().begin();
-        controller.updateGame();
+        controller.updateGame(delta);
         Main.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         Main.getMain().getGame().getTimer().update(delta);
-        if (controller.getWeaponController().isReloading()) {
-            ((AnimatedSprite)controller.getWeaponController().getSprite()).update(delta);
-        }
+
         stage.draw();
 
     }

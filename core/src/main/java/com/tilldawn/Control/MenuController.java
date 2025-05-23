@@ -11,10 +11,8 @@ import com.tilldawn.Main;
 import com.tilldawn.Model.Sfx;
 
 public abstract class MenuController {
-    private Sound click;
 
     MenuController() {
-        click = Gdx.audio.newSound(Gdx.files.internal(Sfx.Click.getPath()));
     }
     public void addClickSoundToButtons(Group group) {
         for (Actor actor : group.getChildren()) {
@@ -24,7 +22,7 @@ public abstract class MenuController {
                 actor.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        if (Main.getMain().isSfx()) click.play();
+                        if (Main.getMain().isSfx()) Sfx.Click.play();
                     }
                 });
             }

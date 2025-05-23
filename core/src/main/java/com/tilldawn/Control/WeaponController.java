@@ -1,19 +1,21 @@
 package com.tilldawn.Control;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
 import com.tilldawn.Model.Bullet;
+import com.tilldawn.Model.Sfx;
 import com.tilldawn.Model.Weapon;
 
 import java.util.ArrayList;
 
 public class WeaponController {
-    private Weapon weapon;
-    private ArrayList<Bullet> bullets = new ArrayList<>();
+    private final Weapon weapon;
+    private final ArrayList<Bullet> bullets = new ArrayList<>();
 
     public WeaponController(Weapon weapon){
         this.weapon = weapon;
@@ -23,8 +25,11 @@ public class WeaponController {
         return weapon.isReloading();
     }
 
-    public void update(){
+    public void update(float delta) {
         weapon.getSprite().draw(Main.getBatch());
+        if (weapon.isReloading()) {
+            ((AnimatedSprite)weapon.getSprite()).update(delta);
+        }
         updateBullets();
     }
 
@@ -43,6 +48,7 @@ public class WeaponController {
         if (weapon.canShoot()) {
             bullets.add(new Bullet(x, y, weapon.getProjectTile(), weapon.getDamage()));
             weapon.setAmmo(weapon.getAmmo() - 1);
+            if (Main.getMain().isSfx()) Sfx.Shot.play();
             if (Main.getMain().getGame().isAutoReload() && weapon.getAmmo() == 0) {
                 weapon.reload();
             }

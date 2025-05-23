@@ -21,7 +21,7 @@ public class Main extends Game {
     private boolean autoReload;
     private Music music;
     private Control control;
-    private Float musicVolume = 0.5f;
+    private Float musicVolume = 0.1f;
     private WeaponType weaponType = WeaponType.Revolver;
     private Integer time = 2;
     private GameCharacter gameCharacter = GameCharacter.Shana;

@@ -61,4 +61,12 @@ public enum GameCharacter {
     public String getName() {
         return name;
     }
+
+    public Integer getHealth() {
+        return health;
+    }
+
+    public Integer getSpeed() {
+        return speed;
+    }
 }

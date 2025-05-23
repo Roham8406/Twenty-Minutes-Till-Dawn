@@ -1,5 +1,12 @@
 package com.tilldawn.Control;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.tilldawn.Main;
 import com.tilldawn.Model.Player;
 import com.tilldawn.Model.Weapon;
@@ -19,11 +26,11 @@ public class GameController {
         weaponController = new WeaponController(Main.getMain().getGame().getWeapon());
     }
 
-    public void updateGame() {
+    public void updateGame(float delta) {
         if (view != null) {
-            worldController.update();
+            worldController.update(delta);
             playerController.update();
-            weaponController.update();
+            weaponController.update(delta);
         }
     }
 

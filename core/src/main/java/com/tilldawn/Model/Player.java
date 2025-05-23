@@ -15,10 +15,14 @@ public class Player {
     private Sprite playerSprite;
     private float posX = 0;
     private float posY = 0;
-    private float playerHealth = 100;
     private CollisionRect rect ;
     private float time = 0;
-    private float speed = 5;
+    private float speed;
+    private int hp;
+    private boolean isInvincible;
+    private int level;
+    private int xp;
+    private int maxHp;
     private final GameCharacter gameCharacter;
 
     public float getSpeed() {
@@ -35,6 +39,11 @@ public class Player {
         playerSprite.setSize(playerTexture.getRegionWidth() * 3, playerTexture.getRegionHeight() * 3);
         rect = new CollisionRect((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight(), playerTexture.getRegionWidth() * 3, playerTexture.getRegionHeight() * 3);
         this.gameCharacter = gameCharacter;
+        hp = gameCharacter.getHealth();
+        maxHp = gameCharacter.getHealth();
+        speed = gameCharacter.getSpeed();
+        isInvincible = false;
+        level = 0;
     }
 
     public TextureRegion getPlayerTexture() {
@@ -70,11 +79,7 @@ public class Player {
     }
 
     public float getPlayerHealth() {
-        return playerHealth;
-    }
-
-    public void setPlayerHealth(float playerHealth) {
-        this.playerHealth = playerHealth;
+        return hp;
     }
 
     public CollisionRect getRect() {
@@ -110,6 +115,17 @@ public class Player {
         this.time = time;
     }
 
+    public void removeHp(int hp) {
+        this.hp -= hp;
+    }
+
+    public void setInvincible(boolean invincible) {
+        isInvincible = invincible;
+    }
+
+    public boolean isInvincible() {
+        return isInvincible;
+    }
 
     public Animation<TextureRegion> getCharacterAnimation() {
         return gameCharacter.getCharacterAnimation();
