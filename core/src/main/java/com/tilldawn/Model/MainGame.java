@@ -2,10 +2,12 @@ package com.tilldawn.Model;
 
 import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Main;
+import com.tilldawn.Model.enemy.Enemy;
 import com.tilldawn.Model.enemy.Tree;
 
 import java.lang.ModuleLayer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class MainGame {
@@ -17,6 +19,8 @@ public class MainGame {
     private boolean autoReload ;
     private Countdown timer;
     private ArrayList<Tree> trees = new ArrayList<>();
+    private ArrayList<Float> lastSpawn = new ArrayList<>(3);
+    private ArrayList<Enemy> enemies = new ArrayList<>();
 
     public MainGame() {
         hero = new Player(Main.getMain().getGameCharacter());
@@ -26,6 +30,9 @@ public class MainGame {
         control = Main.getMain().getControl();
         autoReload = Main.getMain().isAutoReload();
         timer = new Countdown(Main.getMain().getTime());
+        lastSpawn.add(timer.getRemaining());
+        lastSpawn.add(timer.getRemaining());
+        lastSpawn.add(timer.getRemaining());
         Random rand = new Random();
         int treesNumber = rand.nextInt(50, 70);
         for (int i = 0; i < treesNumber; i++) {
@@ -59,5 +66,13 @@ public class MainGame {
 
     public ArrayList<Tree> getTrees() {
         return trees;
+    }
+
+    public ArrayList<Float> getLastSpawn() {
+        return lastSpawn;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
     }
 }

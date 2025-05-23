@@ -46,4 +46,8 @@ public class Countdown {
     public float getDuration() {
         return duration;
     }
+
+    public float getRemaining() {
+        return remaining;
+    }
 }

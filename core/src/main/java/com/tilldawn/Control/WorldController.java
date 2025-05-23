@@ -1,14 +1,18 @@
 package com.tilldawn.Control;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
 import com.tilldawn.Model.Sfx;
+import com.tilldawn.Model.enemy.Enemy;
+import com.tilldawn.Model.enemy.TentacleMonster;
 import com.tilldawn.Model.enemy.Tree;
 
 import java.awt.*;
+import java.util.Random;
 
 public class WorldController {
     private PlayerController playerController;
@@ -54,6 +58,45 @@ public class WorldController {
         font.draw(Main.getBatch(),  Main.getMain().getGame().getTimer().toString() + " HP: " +
             Main.getMain().getGame().getHero().getPlayerHealth(), backgroundX,backgroundY);
 //        Main.getBatch().draw(timer);
+        spawnEnemies(delta);
+        for (Enemy enemy : Main.getMain().getGame().getEnemies()) {
+            enemy.getSprite(backgroundX, backgroundY).draw(Main.getBatch());
+            ((AnimatedSprite) enemy.getSprite(backgroundX, backgroundY)).update(delta);
+        }
+        enemiesAttack(delta);
     }
 
+    private void spawnEnemies(float delta) {
+        Random random = new Random();
+        int tentacleCount = TentacleMonster.spawnCount();
+        for (int i = 0; i < tentacleCount; i++) {
+            int x,y;
+            switch (random.nextInt(4)) {
+                case 0: {
+                    x = random.nextInt(Gdx.graphics.getWidth());
+                    y = Gdx.graphics.getHeight();
+                } break;
+                case 1: {
+                    x = random.nextInt(Gdx.graphics.getWidth());
+                    y = 0;
+                } break;
+                case 2: {
+                    x = Gdx.graphics.getWidth();
+                    y = random.nextInt(Gdx.graphics.getHeight());
+                } break;
+                default: {
+                    x = Gdx.graphics.getWidth();
+                    y = 0;
+                }
+            }
+            TentacleMonster tentacleMonster = new TentacleMonster(x,y,delta);
+            Main.getMain().getGame().getEnemies().add(tentacleMonster);
+        }
+    }
+
+    private void enemiesAttack(float delta) {
+        for (Enemy enemy : Main.getMain().getGame().getEnemies()) {
+            enemy.attack();
+        }
+    }
 }
