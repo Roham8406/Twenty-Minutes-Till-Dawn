@@ -8,6 +8,7 @@ import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
 import com.tilldawn.Model.Sfx;
 import com.tilldawn.Model.enemy.Enemy;
+import com.tilldawn.Model.enemy.EyeBat;
 import com.tilldawn.Model.enemy.TentacleMonster;
 import com.tilldawn.Model.enemy.Tree;
 
@@ -71,7 +72,8 @@ public class WorldController {
 
     private void spawnEnemies(float delta) {
         Random random = new Random();
-        int tentacleCount = TentacleMonster.spawnCount();
+        int tentacleCount = 0;
+//        int tentacleCount = TentacleMonster.spawnCount();
         for (int i = 0; i < tentacleCount; i++) {
             float x,y;
             switch (random.nextInt(4)) {
@@ -94,6 +96,32 @@ public class WorldController {
             }
             TentacleMonster tentacleMonster = new TentacleMonster(x,y,delta);
             Main.getMain().getGame().getEnemies().add(tentacleMonster);
+        }
+
+        int eyeBatCount = EyeBat.spawnCount();
+        if (Main.getMain().getGame().getEnemies().size() > 0) {eyeBatCount = 0;}
+        for (int i = 0; i < eyeBatCount; i++) {
+            float x,y;
+            switch (random.nextInt(4)) {
+                case 0: {
+                    x = -playerController.getPlayer().getPosX() + random.nextFloat(Gdx.graphics.getWidth());
+                    y = -playerController.getPlayer().getPosY() + Gdx.graphics.getHeight();
+                } break;
+                case 1: {
+                    x = -playerController.getPlayer().getPosX() + random.nextFloat(Gdx.graphics.getWidth());
+                    y = -playerController.getPlayer().getPosY() - 0;
+                } break;
+                case 2: {
+                    x = -playerController.getPlayer().getPosX() + Gdx.graphics.getWidth();
+                    y = -playerController.getPlayer().getPosY() + random.nextFloat(Gdx.graphics.getHeight());
+                } break;
+                default: {
+                    x = -playerController.getPlayer().getPosX() - 0;
+                    y = -playerController.getPlayer().getPosY() + random.nextFloat(Gdx.graphics.getHeight());
+                }
+            }
+            EyeBat eyeBat = new EyeBat(x,y,delta);
+            Main.getMain().getGame().getEnemies().add(eyeBat);
         }
     }
 

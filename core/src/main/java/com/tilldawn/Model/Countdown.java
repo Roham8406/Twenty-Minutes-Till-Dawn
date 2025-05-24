@@ -1,7 +1,7 @@
 package com.tilldawn.Model;
 
 public class Countdown {
-    private float duration;
+    private final float duration;
     private float remaining;
     private boolean running;
 

@@ -21,6 +21,7 @@ public class MainGame {
     private ArrayList<Tree> trees = new ArrayList<>();
     private ArrayList<Float> lastSpawn = new ArrayList<>(3);
     private ArrayList<Enemy> enemies = new ArrayList<>();
+    private ArrayList<EnemyBullet> bullets = new ArrayList<>();
 
     public MainGame() {
         hero = new Player(Main.getMain().getGameCharacter());
@@ -74,5 +75,9 @@ public class MainGame {
 
     public ArrayList<Enemy> getEnemies() {
         return enemies;
+    }
+
+    public ArrayList<EnemyBullet> getBullets() {
+        return bullets;
     }
 }
