@@ -3,6 +3,7 @@ package com.tilldawn.Model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.tilldawn.Main;
 
 public class Bullet {
     private Texture texture = new Texture(GameAssetManager.getGameAssetManager().getBullet());
@@ -18,13 +19,17 @@ public class Bullet {
     public Bullet(float x, float y, int projectTile, int damage){
         sprite.setSize(20 , 20);
         this.x = x;
-        this.posX = x;
+        this.posX = Main.getMain().getGame().getHero().getPosX();
         this.y = y;
-        this.posY = y;
+        this.posY = Main.getMain().getGame().getHero().getPosY();
         this.damage = damage;
         this.projectTile = projectTile;
-        sprite.setX((float) Gdx.graphics.getWidth() / 2);
-        sprite.setY((float) Gdx.graphics.getHeight() / 2);
+        updatePos();
+    }
+
+    public void updatePos() {
+        sprite.setX(-posX + Main.getMain().getGame().getHero().getPosX() + (float) Gdx.graphics.getWidth() / 2);
+        sprite.setY(-posY + Main.getMain().getGame().getHero().getPosY() + (float) Gdx.graphics.getHeight() / 2);
     }
 
     public Texture getTexture() {

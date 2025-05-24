@@ -45,7 +45,14 @@ public class WeaponController {
 
     public void handleWeaponShoot(int x, int y){
         if (weapon.canShoot()) {
-            bullets.add(new Bullet(x, y, weapon.getProjectTile(), weapon.getDamage()));
+            for (int i = 0; i < weapon.getProjectTile(); i++) {
+                Timer.schedule(new Timer.Task(){
+                    @Override
+                    public void run() {
+                        bullets.add(new Bullet(x, y, weapon.getProjectTile(), weapon.getDamage()));
+                    }
+                }, 0.2f * i);
+            }
             weapon.setAmmo(weapon.getAmmo() - 1);
             if (Main.getMain().isSfx()) Sfx.Shot.play();
             if (Main.getMain().getGame().isAutoReload() && weapon.getAmmo() == 0) {
@@ -70,11 +77,9 @@ public class WeaponController {
                 }
             }
 
-            b.setPosX(b.getPosX() - direction.x * 5);
-            b.setPosY(b.getPosY() + direction.y * 5);
-//            b.updatePos();
-            b.getSprite().setX(b.getSprite().getX() - direction.x * 5);
-            b.getSprite().setY(b.getSprite().getY() + direction.y * 5);
+            b.setPosX(b.getPosX() + direction.x * 5);
+            b.setPosY(b.getPosY() - direction.y * 5);
+            b.updatePos();
             b.decrementTile();
             if (b.isRangeEnded()) {
                 bullets.remove(b);
@@ -90,8 +95,9 @@ public class WeaponController {
             ).nor(); //todo not working properly when walking and shooting
 
 
-            b.getSprite().setX(b.getSprite().getX() - direction.x * 5);
-            b.getSprite().setY(b.getSprite().getY() - direction.y * 5);
+            b.setPosX(b.getPosX() - direction.x * 5);
+            b.setPosY(b.getPosY() - direction.y * 5);
+            b.updatePos();
             b.decrementTile();
             if (b.isRangeEnded()) {
                 Main.getMain().getGame().getBullets().remove(b);

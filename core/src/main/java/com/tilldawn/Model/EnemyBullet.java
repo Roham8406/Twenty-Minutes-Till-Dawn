@@ -12,14 +12,22 @@ public class EnemyBullet {
     private int projectTile = 1;
     private float x;
     private float y;
+    private float posX;
+    private float posY;
     private int range = 120;
 
     public EnemyBullet(float x, float y){
         sprite.setSize(20 , 20);
         this.x = x;
         this.y = y;
-        sprite.setX(x + Main.getMain().getGame().getHero().getPosX());
-        sprite.setY(y + Main.getMain().getGame().getHero().getPosY());
+        this.posX = x;
+        this.posY = y;
+        updatePos();
+    }
+
+    public void updatePos(){
+        sprite.setX(posX + Main.getMain().getGame().getHero().getPosX());
+        sprite.setY(posY + Main.getMain().getGame().getHero().getPosY());
     }
 
     public Texture getTexture() {
@@ -57,5 +65,21 @@ public class EnemyBullet {
     public boolean isCollisioned(float posX, float posY) {
         return Math.abs(posX - sprite.getX()) < 80 &&
             Math.abs(posY - sprite.getY()) < 70;
+    }
+
+    public void setPosX(float posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(float posY) {
+        this.posY = posY;
+    }
+
+    public float getPosX() {
+        return posX;
+    }
+
+    public float getPosY() {
+        return posY;
     }
 }
