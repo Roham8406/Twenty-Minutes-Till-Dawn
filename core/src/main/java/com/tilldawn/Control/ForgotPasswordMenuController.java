@@ -57,7 +57,7 @@ public class ForgotPasswordMenuController extends MenuController {
                 } break;
                 case 2: {
                     if (view.getChangePassword().isChecked()) {
-                        if (view.getSecurityAnswerField().getText().isEmpty()) {
+                        if (view.getNewPasswordField().getText().isEmpty()) {
                             view.alert("Please enter your new password.", 5);
                             view.getChangePassword().setChecked(false);
                             return;
