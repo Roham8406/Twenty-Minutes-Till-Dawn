@@ -65,10 +65,14 @@ public class WeaponController {
             for (Enemy enemy : Main.getMain().getGame().getEnemies().toArray(new Enemy[Main.getMain().getGame().getEnemies().size()])) {
                 if (enemy.isCollisioned(b.getSprite().getX(), b.getSprite().getY())) {
                     enemy.removeHp(b.getDamage());
+                    Main.getMain().getGame().getHero().incrementKills();
                     bullets.remove(b);
                 }
             }
 
+            b.setPosX(b.getPosX() - direction.x * 5);
+            b.setPosY(b.getPosY() + direction.y * 5);
+//            b.updatePos();
             b.getSprite().setX(b.getSprite().getX() - direction.x * 5);
             b.getSprite().setY(b.getSprite().getY() + direction.y * 5);
             b.decrementTile();

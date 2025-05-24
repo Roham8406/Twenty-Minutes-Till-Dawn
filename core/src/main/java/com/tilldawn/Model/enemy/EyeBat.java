@@ -28,23 +28,16 @@ public class EyeBat extends Enemy{
 
     }
 
-//    public static Integer spawnCount() {
-//        Countdown countdown = Main.getMain().getGame().getTimer();
-//        if (countdown.getRemaining() > countdown.getDuration()*3f/4f) return 0;
-//        if (Main.getMain().getGame().getLastSpawn().get(1) - 10 < countdown.getRemaining()) {
-//            return 0;
-//        }
-//        Main.getMain().getGame().getLastSpawn().set(1, countdown.getRemaining());
-//        return (int)Math.ceil((3*countdown.getDuration() - 4*countdown.getRemaining() + 30)/30);
-//    }
-public static Integer spawnCount() {
-    Countdown countdown = Main.getMain().getGame().getTimer();
-    if (Main.getMain().getGame().getLastSpawn().get(0) - 3 < countdown.getRemaining()) {
-        return 0;
+    public static Integer spawnCount() {
+        Countdown countdown = Main.getMain().getGame().getTimer();
+        if (countdown.getRemaining() > countdown.getDuration()*3f/4f) return 0;
+        if (Main.getMain().getGame().getLastSpawn().get(1) - 10 < countdown.getRemaining()) {
+            return 0;
+        }
+        Main.getMain().getGame().getLastSpawn().set(1, countdown.getRemaining());
+        return (int)Math.ceil((3*countdown.getDuration() - 4*countdown.getRemaining() + 30)/30);
     }
-    Main.getMain().getGame().getLastSpawn().set(0, countdown.getRemaining());
-    return (int)Math.ceil((countdown.getDuration() - countdown.getRemaining())/30);
-}
+
 
     @Override
     public void attack() {

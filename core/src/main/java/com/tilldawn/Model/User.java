@@ -88,6 +88,18 @@ public class User {
         this.avatar = avatar;
     }
 
+    public void addKills(int kills) {
+        this.kills += kills;
+    }
+
+    public void  addPlaytime(int playtime) {
+        this.playtime += playtime;
+    }
+
+    public void addScore(int score) {
+        this.score += score;
+    }
+
     public int getId() {
         return id;
     }
@@ -101,4 +113,15 @@ public class User {
         return String.format("%-60s\t%-20d\t%-20d\t%-20s", username, kills, score, playtime);
     }
 
+    public Integer getKills() {
+        return kills;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public Integer getPlaytime() {
+        return playtime;
+    }
 }

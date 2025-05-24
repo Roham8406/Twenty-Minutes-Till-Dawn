@@ -9,14 +9,18 @@ public class Bullet {
     private Sprite sprite = new Sprite(texture);
     private int damage;
     private int projectTile;
-    private int x;
-    private int y;
+    private float x;
+    private float y;
+    private float posX;
+    private float posY;
     private int range = 120;
 
-    public Bullet(int x, int y, int projectTile, int damage){
+    public Bullet(float x, float y, int projectTile, int damage){
         sprite.setSize(20 , 20);
         this.x = x;
+        this.posX = x;
         this.y = y;
+        this.posY = y;
         this.damage = damage;
         this.projectTile = projectTile;
         sprite.setX((float) Gdx.graphics.getWidth() / 2);
@@ -43,15 +47,31 @@ public class Bullet {
         return range == 0;
     }
 
-    public int getX() {
+    public float getX() {
         return x;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 
     public int getProjectTile() {
         return projectTile;
+    }
+
+    public void setPosX(float posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(float posY) {
+        this.posY = posY;
+    }
+
+    public float getPosX() {
+        return posX;
+    }
+
+    public float getPosY() {
+        return posY;
     }
 }

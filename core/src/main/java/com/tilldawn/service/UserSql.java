@@ -230,4 +230,20 @@ public class UserSql {
             return null;
         }
     }
+
+    public void updateStats(User user) {
+        String query = "UPDATE users SET score = ?, kills = ?, playtime = ?  WHERE id = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, user.getScore());
+            statement.setInt(2, user.getKills());
+            statement.setInt(3, user.getPlaytime());
+            statement.setInt(4, user.getId());
+            statement.executeUpdate();
+            statement.close();
+        } catch (Exception e) {
+            int a = 6;
+        }
+    }
 }

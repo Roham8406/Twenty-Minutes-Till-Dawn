@@ -7,10 +7,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Control.AbilityMenuController;
+import com.tilldawn.Control.EndMenuController;
 import com.tilldawn.Control.GameController;
 import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.View.AbilityMenuView;
+import com.tilldawn.View.EndMenuView;
 import com.tilldawn.View.MainMenuView;
 
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ public class Player {
     private int level;
     private int xp;
     private int maxHp;
+    private int kills;
     private final GameCharacter gameCharacter;
 
     public float getSpeed() {
@@ -122,6 +125,10 @@ public class Player {
 
     public void removeHp(int hp) {
         this.hp -= hp;
+        if (this.hp <= 0) {
+            Main.getMain().getScreen().dispose();
+            Main.getMain().setScreen(new EndMenuView(new EndMenuController(), GameAssetManager.getGameAssetManager().getSkin(), false, this));
+        }
     }
 
     public void setInvincible(boolean invincible) {
@@ -147,6 +154,10 @@ public class Player {
         }
     }
 
+    public int getXp() {
+        return xp;
+    }
+
     public void incrementMaxHp() {
         maxHp++;
         hp++;
@@ -160,5 +171,17 @@ public class Player {
                 speed /= 2;
             }
         }, 10);
+    }
+
+    public void incrementKills() {
+        kills++;
+    }
+
+    public int getKills() {
+        return kills;
+    }
+
+    public int getScore() {
+        return level * (level - 1) * 10 + xp;
     }
 }

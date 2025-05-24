@@ -1,5 +1,9 @@
 package com.tilldawn.Model;
 
+import com.tilldawn.Control.EndMenuController;
+import com.tilldawn.Main;
+import com.tilldawn.View.EndMenuView;
+
 public class Countdown {
     private final float duration;
     private float remaining;
@@ -17,6 +21,10 @@ public class Countdown {
             if (remaining < 0) {
                 remaining = 0;
                 running = false;
+                Main.getMain().getScreen().dispose();
+                Main.getMain().setScreen(new EndMenuView(new EndMenuController(),
+                    GameAssetManager.getGameAssetManager().getSkin(), true,
+                    Main.getMain().getGame().getHero()));
             }
         }
     }
