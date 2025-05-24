@@ -5,12 +5,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Control.WeaponController;
+import com.tilldawn.Main;
 
 public class Weapon {
     private Sprite sprite;
     private AnimatedSprite reloadingSprite;
     WeaponType weaponType;
     private int ammo;
+    private Integer damage = 0;
+    private Integer projectile = 0;
+    private Integer maxAmmo = 0;
     private boolean reloading = false;
 
     public Weapon(WeaponType type){
@@ -20,7 +24,7 @@ public class Weapon {
 
     public void reload() {
         reloading = true;
-        this.ammo = weaponType.getAmmoMax();
+        this.ammo = weaponType.getAmmoMax() + maxAmmo;
 
         Timer.schedule(new Timer.Task(){
             @Override
@@ -69,12 +73,28 @@ public class Weapon {
     }
 
     public Integer getProjectTile() {
-        return weaponType.getProjectTile();
+        return weaponType.getProjectTile() + projectile;
     }
 
     public Integer getDamage() {
-        return weaponType.getDamage();
+        return weaponType.getDamage() + damage;
     }
 
+    public void incrementProjectile() {
+        projectile++;
+    }
 
+    public void incrementDamage() {
+        damage = (int) (damage * 1.25);
+        Timer.schedule(new Timer.Task(){
+            @Override
+            public void run() {
+                damage = (int) (0.8 * damage);
+            }
+        }, 10);
+    }
+
+    public void incrementAmmo() {
+        maxAmmo += 5;
+    }
 }

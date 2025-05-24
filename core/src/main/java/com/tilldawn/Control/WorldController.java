@@ -59,7 +59,7 @@ public class WorldController {
             if (!Main.getMain().getGame().getHero().isInvincible()) {
                 if (enemy.isCollisioned(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f)) {
                     if (enemy.isDead()) {
-                        playerController.getPlayer().incrementXp();
+                        playerController.getPlayer().incrementXp(gameController);
                         Main.getMain().getGame().getEnemies().remove(enemy);
                     } else {
                         hurt();
@@ -72,8 +72,7 @@ public class WorldController {
 
     private void spawnEnemies(float delta) {
         Random random = new Random();
-        int tentacleCount = 0;
-//        int tentacleCount = TentacleMonster.spawnCount();
+        int tentacleCount = TentacleMonster.spawnCount();
         for (int i = 0; i < tentacleCount; i++) {
             float x,y;
             switch (random.nextInt(4)) {
@@ -99,7 +98,6 @@ public class WorldController {
         }
 
         int eyeBatCount = EyeBat.spawnCount();
-        if (Main.getMain().getGame().getEnemies().size() > 0) {eyeBatCount = 0;}
         for (int i = 0; i < eyeBatCount; i++) {
             float x,y;
             switch (random.nextInt(4)) {

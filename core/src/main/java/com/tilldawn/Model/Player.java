@@ -5,8 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Timer;
+import com.tilldawn.Control.AbilityMenuController;
 import com.tilldawn.Control.GameController;
+import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Main;
+import com.tilldawn.View.AbilityMenuView;
+import com.tilldawn.View.MainMenuView;
 
 import java.util.ArrayList;
 
@@ -43,7 +48,7 @@ public class Player {
         maxHp = gameCharacter.getHealth();
         speed = gameCharacter.getSpeed();
         isInvincible = false;
-        level = 0;
+        level = 1;
     }
 
     public TextureRegion getPlayerTexture() {
@@ -131,7 +136,29 @@ public class Player {
         return gameCharacter.getCharacterAnimation();
     }
 
-    public void incrementXp() {
+    public void incrementXp(GameController gameController) {
         xp += 3;
+        if (xp >= level*20) {
+            xp -= level*20;
+            level++;
+            Main.getMain().getScreen().dispose();
+            Main.getMain().setScreen(new AbilityMenuView(new AbilityMenuController(),
+                GameAssetManager.getGameAssetManager().getSkin(), gameController, level));
+        }
+    }
+
+    public void incrementMaxHp() {
+        maxHp++;
+        hp++;
+    }
+
+    public void incrementSpeed () {
+        speed *= 2;
+        Timer.schedule(new Timer.Task(){
+            @Override
+            public void run() {
+                speed /= 2;
+            }
+        }, 10);
     }
 }
