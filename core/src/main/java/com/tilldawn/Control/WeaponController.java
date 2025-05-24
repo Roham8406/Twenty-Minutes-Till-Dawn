@@ -10,6 +10,7 @@ import com.tilldawn.Model.AnimatedSprite;
 import com.tilldawn.Model.Bullet;
 import com.tilldawn.Model.Sfx;
 import com.tilldawn.Model.Weapon;
+import com.tilldawn.Model.enemy.Enemy;
 
 import java.util.ArrayList;
 
@@ -61,7 +62,14 @@ public class WeaponController {
             Vector2 direction = new Vector2(
                 Gdx.graphics.getWidth()/2f - b.getX(),
                 Gdx.graphics.getHeight()/2f - b.getY()
-            ).nor();
+            ).nor(); //todo not working properly when walking and shooting
+
+            for (Enemy enemy : Main.getMain().getGame().getEnemies().toArray(new Enemy[Main.getMain().getGame().getEnemies().size()])) {
+                if (enemy.isCollisioned(b.getSprite().getX(), b.getSprite().getY())) {
+                    enemy.removeHp(b.getDamage());
+                    bullets.remove(b);
+                }
+            }
 
             b.getSprite().setX(b.getSprite().getX() - direction.x * 5);
             b.getSprite().setY(b.getSprite().getY() + direction.y * 5);

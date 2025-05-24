@@ -11,13 +11,14 @@ public class Bullet {
     private int projectTile;
     private int x;
     private int y;
+    private int range = 120;
 
     public Bullet(int x, int y, int projectTile, int damage){
         sprite.setSize(20 , 20);
         this.x = x;
         this.y = y;
         this.damage = damage;
-        this.projectTile = projectTile*5;
+        this.projectTile = projectTile;
         sprite.setX((float) Gdx.graphics.getWidth() / 2);
         sprite.setY((float) Gdx.graphics.getHeight() / 2);
     }
@@ -35,11 +36,11 @@ public class Bullet {
     }
 
     public void decrementTile() {
-        projectTile--;
+        range--;
     }
 
     public boolean isRangeEnded() {
-        return projectTile == 0;
+        return range == 0;
     }
 
     public int getX() {
@@ -48,5 +49,9 @@ public class Bullet {
 
     public int getY() {
         return y;
+    }
+
+    public int getProjectTile() {
+        return projectTile;
     }
 }

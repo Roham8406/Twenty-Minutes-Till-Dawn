@@ -130,4 +130,8 @@ public class Player {
     public Animation<TextureRegion> getCharacterAnimation() {
         return gameCharacter.getCharacterAnimation();
     }
+
+    public void incrementXp() {
+        xp += 3;
+    }
 }

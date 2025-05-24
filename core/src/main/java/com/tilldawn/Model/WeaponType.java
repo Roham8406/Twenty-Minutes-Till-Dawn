@@ -23,7 +23,7 @@ public enum WeaponType {
     Animation<TextureRegion> reloadAnimation;
 
 
-    WeaponType(String name, String frames, Integer ammoMax, Integer timeReload, Integer damage, Integer projectTile) {
+    WeaponType(String name, String frames, Integer ammoMax, Integer timeReload, Integer projectTile, Integer damage) {
         this.name = name;
         this.frames = frames;
         this.ammoMax = ammoMax;
