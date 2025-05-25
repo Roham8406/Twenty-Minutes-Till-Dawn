@@ -81,7 +81,7 @@ public class Player {
         this.posY = posY;
     }
 
-    public float getPlayerHealth() {
+    public int getPlayerHealth() {
         return hp;
     }
 
@@ -162,8 +162,11 @@ public class Player {
         hp++;
     }
 
-    public void incrementHp() {
-        if (hp < maxHp) hp++;
+    public void incrementHp(GameController gameController) {
+        if (hp < maxHp) {
+            hp++;
+            gameController.getWorldController().reviveHeart();
+        }
     }
 
     public void incrementSpeed () {
@@ -190,5 +193,9 @@ public class Player {
 
     public void addLevel(GameController gameController) {
         incrementXp(gameController, level * 20 - xp);
+    }
+
+    public int getMaxHp() {
+        return maxHp;
     }
 }

@@ -23,7 +23,7 @@ public class GameController {
         this.view = view;
         playerController = new PlayerController(Main.getMain().getGame().getHero(), this);
         worldController = new WorldController(playerController, this);
-        weaponController = new WeaponController(Main.getMain().getGame().getWeapon());
+        weaponController = new WeaponController(worldController, Main.getMain().getGame().getWeapon());
     }
 
     public void updateGame(float delta) {

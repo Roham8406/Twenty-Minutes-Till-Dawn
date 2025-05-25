@@ -15,9 +15,11 @@ import java.util.ArrayList;
 public class WeaponController {
     private final Weapon weapon;
     private final ArrayList<Bullet> bullets = new ArrayList<>();
+    private final WorldController worldController;
 
-    public WeaponController(Weapon weapon){
+    public WeaponController(WorldController worldController, Weapon weapon){
         this.weapon = weapon;
+        this.worldController = worldController;
     }
 
     public boolean isReloading() {
@@ -122,6 +124,7 @@ public class WeaponController {
         Main.getMain().getGame().getHero().removeHp(1);
         Main.getMain().getGame().getHero().setInvincible(true);
         if (Main.getMain().isSfx()) Sfx.Hurt.play();
+        worldController.killHeart();
         Timer.schedule(new Timer.Task(){
             @Override
             public void run() {

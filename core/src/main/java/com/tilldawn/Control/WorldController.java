@@ -2,8 +2,10 @@ package com.tilldawn.Control;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
@@ -13,31 +15,46 @@ import com.tilldawn.Model.enemy.EyeBat;
 import com.tilldawn.Model.enemy.TentacleMonster;
 import com.tilldawn.Model.enemy.Tree;
 
-import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class WorldController {
     private PlayerController playerController;
+    private Texture heartTexture;
     private Texture backgroundTexture;
-    private Label timer;
+    private TextureRegion[][] heartFrames;
+    private Animation<TextureRegion> heartAnimation;
+    private Animation<TextureRegion> deadHeart;
+    private Sprite timer;
     private BitmapFont font;
     private float backgroundX = 0;
     private float backgroundY = 0;
-    GameController gameController;;
+    private ArrayList<AnimatedSprite> heartSprites = new ArrayList<>();
+    GameController gameController;
 
     public WorldController(PlayerController playerController, GameController gameController) {
         this.backgroundTexture = new Texture("background.png");
         this.playerController = playerController;
         this.gameController = gameController;
-        this.timer = new Label("");
-        this.timer.setBounds(0,0,50,50);
+        Texture spriteTexture = new Texture(Gdx.files.internal("T/T_TentacleAttackIndicator_0.png"));
+        this.timer = new Sprite(spriteTexture);
+//        this.timer.setCenterX(Gdx.graphics.getWidth()/2f);
+//        this.timer.setCenterY(Gdx.graphics.getHeight() - 20);
+        this.timer.setBounds(440,Gdx.graphics.getHeight()-62,Gdx.graphics.getWidth()-880,60);
         this.font = new BitmapFont();
+        this.heartTexture = new Texture("T/T_HeartAnimation.png");
+        this.heartFrames = TextureRegion.split(heartTexture, 32, 32);
+        this.heartAnimation = new Animation<>(0.2f, heartFrames[0][0], heartFrames[0][1], heartFrames[0][2]);
+        this.deadHeart = new Animation<>(0.2f, heartFrames[0][3], heartFrames[0][3]);
+        for (int i = 0; i < Main.getMain().getGame().getHero().getMaxHp(); i++) {
+            heartSprites.add(new AnimatedSprite(heartAnimation));
+            heartSprites.get(i).setPosition(470 + 30*i, timer.getY() + 15);
+        }
     }
 
     public void update(float delta) {
         backgroundX = playerController.getPlayer().getPosX();
         backgroundY = playerController.getPlayer().getPosY();
-        timer.setText(Main.getMain().getGame().getTimer().toString());
         Main.getBatch().draw(backgroundTexture, backgroundX, backgroundY);
         for (Tree tree : Main.getMain().getGame().getTrees()) {
             tree.getSprite(backgroundX, backgroundY).draw(Main.getBatch());
@@ -50,10 +67,13 @@ public class WorldController {
         }
         font.draw(Main.getBatch(),  Main.getMain().getGame().getTimer().toString() + " HP: " +
             Main.getMain().getGame().getHero().getPlayerHealth(), backgroundX,backgroundY);
-//        Main.getBatch().draw(timer);
+        timer.draw(Main.getBatch());
+        font.draw(Main.getBatch(), Main.getMain().getGame().getTimer().toString(), timer.getX() + timer.getWidth()/2f - 20
+            , timer.getY() + timer.getHeight()/2f + 10);
+        drawHearts(delta);
         spawnEnemies(delta);
         Enemy nearest = null;
-        double distance = 0.0;
+        double distance = Integer.MAX_VALUE;
         int x = 0,y = 0;
         for (Enemy enemy : Main.getMain().getGame().getEnemies().toArray(
             new Enemy[Main.getMain().getGame().getEnemies().size()]
@@ -62,8 +82,9 @@ public class WorldController {
             sprite.draw(Main.getBatch());
             ((AnimatedSprite) sprite).update(delta);
             if (!enemy.isDead()) {
-                double dist = Math.sqrt(sprite.getY() * sprite.getY() + sprite.getX() + sprite.getX());
-                if (dist >= distance) {
+                double dist = Math.sqrt(Math.pow(sprite.getY()-Gdx.graphics.getHeight()/2f, 2)
+                    + Math.pow(sprite.getX()-Gdx.graphics.getWidth()/2f, 2));
+                if (dist <= distance) {
                     nearest = enemy;
                     distance = dist;
                     x = (int) sprite.getX();
@@ -85,7 +106,7 @@ public class WorldController {
         }
         if (Main.getMain().getGame().isAutoAim()) {
             if (nearest != null) {
-                Gdx.input.setCursorPosition(x + 32, Gdx.graphics.getHeight()-y + 32);
+                Gdx.input.setCursorPosition(x + 32, Gdx.graphics.getHeight()-y - 32);
             }
         }
         enemiesAttack(delta);
@@ -154,11 +175,27 @@ public class WorldController {
         Main.getMain().getGame().getHero().removeHp(1);
         Main.getMain().getGame().getHero().setInvincible(true);
         if (Main.getMain().isSfx()) Sfx.Hurt.play();
+        killHeart();
         Timer.schedule(new Timer.Task(){
             @Override
             public void run() {
                 Main.getMain().getGame().getHero().setInvincible(false);
             }
         }, 3);
+    }
+
+    private void drawHearts(float delta) {
+        for (AnimatedSprite heartSprite : heartSprites) {
+            heartSprite.update(delta);
+            heartSprite.draw(Main.getBatch());
+        }
+    }
+
+    public void killHeart() {
+        heartSprites.get(Main.getMain().getGame().getHero().getPlayerHealth()).edit(deadHeart);
+    }
+
+    public void reviveHeart() {
+        heartSprites.get(Main.getMain().getGame().getHero().getPlayerHealth() - 1).edit(heartAnimation);
     }
 }

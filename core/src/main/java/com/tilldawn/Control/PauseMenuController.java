@@ -54,7 +54,7 @@ public class PauseMenuController extends MenuController {
                 view.getBossFight().setChecked(false);
             }
             if (view.getHpIncrement().isChecked()) {
-                Main.getMain().getGame().getHero().incrementHp();
+                Main.getMain().getGame().getHero().incrementHp(view.getGameController());
                 view.getHpIncrement().setChecked(false);
             }
             if (view.getTimeDiscount().isChecked()) {
