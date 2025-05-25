@@ -22,6 +22,11 @@ public class MainGame {
     private ArrayList<Float> lastSpawn = new ArrayList<>(3);
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private ArrayList<EnemyBullet> bullets = new ArrayList<>();
+    private Integer vitality = 0;
+    private Integer amocrease = 0;
+    private Integer damager = 0;
+    private Integer procrease = 0;
+    private Integer speedy = 0;
 
     public MainGame() {
         hero = new Player(Main.getMain().getGameCharacter());
@@ -79,5 +84,41 @@ public class MainGame {
 
     public ArrayList<EnemyBullet> getBullets() {
         return bullets;
+    }
+
+    public void incrementVitality() {
+        vitality++;
+    }
+    public void incrementAmocrease() {
+        amocrease++;
+    }
+    public void incrementDamager() {
+        damager++;
+    }
+    public void incrementProcrease() {
+        procrease++;
+    }
+    public void incrementSpeedy() {
+        speedy++;
+    }
+
+    public Integer getAmocrease() {
+        return amocrease;
+    }
+
+    public Integer getDamager() {
+        return damager;
+    }
+
+    public Integer getProcrease() {
+        return procrease;
+    }
+
+    public Integer getSpeedy() {
+        return speedy;
+    }
+
+    public Integer getVitality() {
+        return vitality;
     }
 }

@@ -21,7 +21,7 @@ public class GameController {
 
     public void setView(GameView view) {
         this.view = view;
-        playerController = new PlayerController(Main.getMain().getGame().getHero());
+        playerController = new PlayerController(Main.getMain().getGame().getHero(), this);
         worldController = new WorldController(playerController, this);
         weaponController = new WeaponController(Main.getMain().getGame().getWeapon());
     }

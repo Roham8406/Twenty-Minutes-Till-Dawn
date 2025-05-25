@@ -1,13 +1,7 @@
 package com.tilldawn.Control;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.tilldawn.Main;
-import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.View.AbilityMenuView;
-import com.tilldawn.View.ControlSettingsMenuView;
-import com.tilldawn.View.MainMenuView;
-import com.tilldawn.View.SettingsMenuView;
 
 public class AbilityMenuController extends MenuController {
     private AbilityMenuView view;
@@ -21,26 +15,31 @@ public class AbilityMenuController extends MenuController {
         if (view != null) {
             if (view.getAmocrease().isChecked()) {
                 Main.getMain().getGame().getWeapon().incrementAmmo();
+                Main.getMain().getGame().incrementAmocrease();
                 Main.getMain().getScreen().dispose();
                 Main.getMain().setScreen(view.getGameController().getView());
             }
             if (view.getDamager().isChecked()) {
                 Main.getMain().getGame().getWeapon().incrementDamage();
+                Main.getMain().getGame().incrementDamager();
                 Main.getMain().getScreen().dispose();
                 Main.getMain().setScreen(view.getGameController().getView());
             }
             if (view.getProcrease().isChecked()) {
                 Main.getMain().getGame().getWeapon().incrementProjectile();
+                Main.getMain().getGame().incrementProcrease();
                 Main.getMain().getScreen().dispose();
                 Main.getMain().setScreen(view.getGameController().getView());
             }
             if (view.getVitality().isChecked()) {
                 Main.getMain().getGame().getHero().incrementMaxHp();
+                Main.getMain().getGame().incrementVitality();
                 Main.getMain().getScreen().dispose();
                 Main.getMain().setScreen(view.getGameController().getView());
             }
             if (view.getSpeedy().isChecked()) {
                 Main.getMain().getGame().getHero().incrementSpeed();
+                Main.getMain().getGame().incrementSpeedy();
                 Main.getMain().getScreen().dispose();
                 Main.getMain().setScreen(view.getGameController().getView());
             }

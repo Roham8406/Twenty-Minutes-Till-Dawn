@@ -1,7 +1,6 @@
 package com.tilldawn.Model;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -9,13 +8,9 @@ import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Control.AbilityMenuController;
 import com.tilldawn.Control.EndMenuController;
 import com.tilldawn.Control.GameController;
-import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.View.AbilityMenuView;
 import com.tilldawn.View.EndMenuView;
-import com.tilldawn.View.MainMenuView;
-
-import java.util.ArrayList;
 
 public class Player {
     private TextureRegion playerTexture;
@@ -144,7 +139,11 @@ public class Player {
     }
 
     public void incrementXp(GameController gameController) {
-        xp += 3;
+        incrementXp(gameController, 3);
+    }
+
+    private void incrementXp(GameController gameController, int XP) {
+        xp += XP;
         if (xp >= level*20) {
             xp -= level*20;
             level++;
@@ -161,6 +160,10 @@ public class Player {
     public void incrementMaxHp() {
         maxHp++;
         hp++;
+    }
+
+    public void incrementHp() {
+        if (hp < maxHp) hp++;
     }
 
     public void incrementSpeed () {
@@ -183,5 +186,9 @@ public class Player {
 
     public int getScore() {
         return level * (level - 1) * 10 + xp;
+    }
+
+    public void addLevel(GameController gameController) {
+        incrementXp(gameController, level * 20 - xp);
     }
 }
