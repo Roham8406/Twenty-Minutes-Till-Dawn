@@ -72,7 +72,7 @@ public class WeaponController {
             Vector2 direction = new Vector2(
                 Gdx.graphics.getWidth()/2f - b.getX(),
                 Gdx.graphics.getHeight()/2f - b.getY()
-            ).nor(); //todo not working properly when walking and shooting
+            ).nor();
 
             for (Enemy enemy : Main.getMain().getGame().getEnemies().toArray(new Enemy[Main.getMain().getGame().getEnemies().size()])) {
                 if (enemy.isDead()) continue;
@@ -97,7 +97,7 @@ public class WeaponController {
             Vector2 direction = new Vector2(
                 Main.getMain().getGame().getHero().getPosX() -Gdx.graphics.getWidth()/2f + b.getX() - 16,
                 Main.getMain().getGame().getHero().getPosY() -Gdx.graphics.getHeight()/2f + b.getY() - 16
-            ).nor(); //todo not working properly when walking and shooting
+            ).nor();
 
 
             b.setPosX(b.getPosX() - direction.x * 5);
@@ -111,6 +111,7 @@ public class WeaponController {
             if (b.isCollisioned(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f)) {
                 Main.getMain().getGame().getBullets().remove(b);
                 if (!Main.getMain().getGame().getHero().isInvincible()) {
+                    worldController.shotted();
                     hurt();
                 }
             }

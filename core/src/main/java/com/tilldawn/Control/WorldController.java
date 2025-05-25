@@ -23,6 +23,10 @@ public class WorldController {
     private Texture heartTexture;
     private Texture backgroundTexture;
     private Texture ammoTexture;
+    private TextureRegion[][] shottedFrames;
+    private Animation<TextureRegion> shottedAnimation;
+    private Animation<TextureRegion> unshottedAnimation;
+    private AnimatedSprite shottedSprite;
     private final ArrayList<Sprite> ammoSprites = new ArrayList<>();
     private TextureRegion[][] heartFrames;
     private Animation<TextureRegion> heartAnimation;
@@ -53,6 +57,13 @@ public class WorldController {
             heartSprites.add(new AnimatedSprite(heartAnimation));
             heartSprites.get(i).setPosition(470 + 30*i, timer.getY() + 15);
         }
+        Texture shottedTexture = new Texture("T/T_CurseFX.png");
+        this.shottedFrames = TextureRegion.split(shottedTexture, 32, 32);
+        this.shottedAnimation = new Animation<>(0.33f, shottedFrames[0][0], shottedFrames[0][1], shottedFrames[0][2]);
+        this.unshottedAnimation = new Animation<>(0.33f, shottedFrames[0][3], shottedFrames[0][3]);
+        this.shottedSprite = new AnimatedSprite(unshottedAnimation);
+        this.shottedSprite.setX(Gdx.graphics.getWidth()/2f);
+        this.shottedSprite.setY(Gdx.graphics.getHeight()/2f);
 
         Texture progressBar = new Texture(Gdx.files.internal("T/T_ProgressBar.png"));
         this.progressBar = new Sprite(progressBar);
@@ -81,15 +92,17 @@ public class WorldController {
 //            Main.getMain().getGame().getHero().getLevel()/20,1);
         progressBar.setScale(Gdx.graphics.getWidth() / 234f * Main.getMain().getGame().getHero().getXp() /
             Main.getMain().getGame().getHero().getLevel()/10,1);
-        font.draw(Main.getBatch(),  Main.getMain().getGame().getTimer().toString() + " HP: " +
-            Main.getMain().getGame().getHero().getPlayerHealth(), backgroundX,backgroundY);
         timer.draw(Main.getBatch());
         font.draw(Main.getBatch(), Main.getMain().getGame().getTimer().toString(), timer.getX() + timer.getWidth()/2f - 20
-            , timer.getY() + timer.getHeight()/2f + 10);
+            , timer.getY() + timer.getHeight()/2f + 16);
+        font.draw(Main.getBatch(), "Level " + Main.getMain().getGame().getHero().getLevel(), timer.getX() + timer.getWidth()/2f - 20
+            , timer.getY() + timer.getHeight()/2f + 1);
         font.draw(Main.getBatch(), Main.getMain().getGame().getHero().getKills().toString(), timer.getX() + timer.getWidth() - 40
             , timer.getY() + timer.getHeight()/2f + 10);
         drawHearts(delta);
         drawAmmo();
+        shottedSprite.draw(Main.getBatch());
+        shottedSprite.update(delta);
         spawnEnemies(delta);
         Enemy nearest = null;
         double distance = Integer.MAX_VALUE;
@@ -201,6 +214,16 @@ public class WorldController {
                 Main.getMain().getGame().getHero().setInvincible(false);
             }
         }, 3);
+    }
+
+    public void shotted() {
+        shottedSprite.edit(shottedAnimation);
+        Timer.schedule(new Timer.Task(){
+            @Override
+            public void run() {
+                shottedSprite.edit(unshottedAnimation);
+            }
+        }, 2);
     }
 
     private void drawHearts(float delta) {
