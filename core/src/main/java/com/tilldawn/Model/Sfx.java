@@ -6,9 +6,11 @@ import com.badlogic.gdx.audio.Sound;
 public enum Sfx {
     Click("sfx/click.mp3"),
     Shot("sfx/shot.mp3"),
-    Hurt("sfx/hurt.mp3");
+    Hurt("sfx/hurt.mp3"),
+    EmptyShot("sfx/emptyShot.mp3"),
+    Reload("sfx/reload.mp3");
 
-    private Sfx(String path) {
+    Sfx(String path) {
         this.path = path;
     }
 

@@ -3,6 +3,7 @@ package com.tilldawn.Control;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
@@ -51,20 +52,40 @@ public class WorldController {
             Main.getMain().getGame().getHero().getPlayerHealth(), backgroundX,backgroundY);
 //        Main.getBatch().draw(timer);
         spawnEnemies(delta);
+        Enemy nearest = null;
+        double distance = 0.0;
+        int x = 0,y = 0;
         for (Enemy enemy : Main.getMain().getGame().getEnemies().toArray(
             new Enemy[Main.getMain().getGame().getEnemies().size()]
         )) {
-            enemy.getSprite(backgroundX, backgroundY).draw(Main.getBatch());
-            ((AnimatedSprite) enemy.getSprite(backgroundX, backgroundY)).update(delta);
-            if (!Main.getMain().getGame().getHero().isInvincible()) {
-                if (enemy.isCollisioned(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f)) {
-                    if (enemy.isDead()) {
-                        playerController.getPlayer().incrementXp(gameController);
-                        Main.getMain().getGame().getEnemies().remove(enemy);
-                    } else {
+            Sprite sprite = enemy.getSprite(backgroundX, backgroundY);
+            sprite.draw(Main.getBatch());
+            ((AnimatedSprite) sprite).update(delta);
+            if (!enemy.isDead()) {
+                double dist = Math.sqrt(sprite.getY() * sprite.getY() + sprite.getX() + sprite.getX());
+                if (dist >= distance) {
+                    nearest = enemy;
+                    distance = dist;
+                    x = (int) sprite.getX();
+                    y = (int) sprite.getY();
+                }
+            }
+            if (enemy.isCollisioned(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f)) {
+                if (enemy.isDead()) {
+                    playerController.getPlayer().incrementXp(gameController);
+                    Main.getMain().getGame().getEnemies().remove(enemy);
+                } else {
+                    if (!Main.getMain().getGame().getHero().isInvincible()) {
                         hurt();
+                    } else {
+                        enemy.die();
                     }
                 }
+            }
+        }
+        if (Main.getMain().getGame().isAutoAim()) {
+            if (nearest != null) {
+                Gdx.input.setCursorPosition(x + 32, Gdx.graphics.getHeight()-y + 32);
             }
         }
         enemiesAttack(delta);

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
 
 public abstract class Enemy {
@@ -22,12 +23,16 @@ public abstract class Enemy {
     public void removeHp(int hp){
         this.hp -= hp;
         if (this.hp <= 0) {
-            dead = true;
-            textureFrames = TextureRegion.split(seed, 42, 42);
-            animationFrames = new Animation<>(0.3f, textureFrames[0][0], textureFrames[0][0]);
-            sprite = new AnimatedSprite(animationFrames);
-
+            die();
         }
+    }
+
+    public void die() {
+        dead = true;
+        Main.getMain().getGame().getHero().incrementKills();
+        textureFrames = TextureRegion.split(seed, 42, 42);
+        animationFrames = new Animation<>(0.3f, textureFrames[0][0], textureFrames[0][0]);
+        sprite = new AnimatedSprite(animationFrames);
     }
 
     public boolean isDead() {

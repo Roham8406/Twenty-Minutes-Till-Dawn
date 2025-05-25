@@ -3,7 +3,9 @@ package com.tilldawn.View;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -18,17 +20,23 @@ public class GameView implements Screen, InputProcessor {
     private Stage stage;
     private GameController controller;
     private Skin skin;
+    private Cursor cursor;
+
 
     public GameView(GameController controller, Skin skin) {
         this.controller = controller;
         this.skin = skin;
         controller.setView(this);
+        Pixmap pixmap = new Pixmap(Gdx.files.internal("T/T_Cursor.png"));
+        cursor = Gdx.graphics.newCursor(pixmap, 16, 16);
+        pixmap.dispose();
     }
 
     @Override
     public void show() {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(this);
+        Gdx.graphics.setCursor(cursor);
         Main.getMain().getGame().getTimer().start();
     }
 

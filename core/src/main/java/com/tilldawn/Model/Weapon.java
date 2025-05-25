@@ -23,6 +23,7 @@ public class Weapon {
     }
 
     public void reload() {
+        if (Main.getMain().isSfx()) Sfx.Reload.play();
         reloading = true;
         this.ammo = weaponType.getAmmoMax() + maxAmmo;
 

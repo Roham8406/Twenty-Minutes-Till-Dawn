@@ -58,6 +58,8 @@ public class WeaponController {
             if (Main.getMain().getGame().isAutoReload() && weapon.getAmmo() == 0) {
                 weapon.reload();
             }
+        } else {
+            if (Main.getMain().isSfx()) Sfx.EmptyShot.play();
         }
     }
 
@@ -70,9 +72,9 @@ public class WeaponController {
             ).nor(); //todo not working properly when walking and shooting
 
             for (Enemy enemy : Main.getMain().getGame().getEnemies().toArray(new Enemy[Main.getMain().getGame().getEnemies().size()])) {
+                if (enemy.isDead()) continue;
                 if (enemy.isCollisioned(b.getSprite().getX(), b.getSprite().getY())) {
                     enemy.removeHp(b.getDamage());
-                    Main.getMain().getGame().getHero().incrementKills();
                     bullets.remove(b);
                 }
             }

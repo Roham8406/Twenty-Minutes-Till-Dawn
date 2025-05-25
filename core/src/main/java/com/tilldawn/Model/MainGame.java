@@ -1,18 +1,16 @@
 package com.tilldawn.Model;
 
-import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Main;
 import com.tilldawn.Model.enemy.Enemy;
 import com.tilldawn.Model.enemy.Tree;
 
-import java.lang.ModuleLayer;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 public class MainGame {
     private Player hero;
     private int duration;
+    private boolean autoAim;
     private Weapon weapon;
     private User user;
     private Control control;
@@ -120,5 +118,13 @@ public class MainGame {
 
     public Integer getVitality() {
         return vitality;
+    }
+
+    public boolean isAutoAim() {
+        return autoAim;
+    }
+
+    public void triggerAutoAim() {
+        autoAim = !autoAim;
     }
 }

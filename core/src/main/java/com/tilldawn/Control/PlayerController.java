@@ -46,6 +46,9 @@ public class PlayerController {
         if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("reload"))){
             Main.getMain().getGame().getWeapon().reload();
         }
+        if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("autoAim"))){
+            Main.getMain().getGame().triggerAutoAim();
+        }
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             Main.getMain().getScreen().dispose();
             Main.getMain().setScreen(new PauseMenuView(new PauseMenuController(), GameAssetManager.getGameAssetManager().getSkin(), gameController));
