@@ -131,4 +131,8 @@ public class GameView implements Screen, InputProcessor {
     public Skin getSkin() {
         return skin;
     }
+
+    public GameController getController() {
+        return controller;
+    }
 }

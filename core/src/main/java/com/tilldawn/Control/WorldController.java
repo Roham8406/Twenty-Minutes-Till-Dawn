@@ -22,6 +22,8 @@ public class WorldController {
     private PlayerController playerController;
     private Texture heartTexture;
     private Texture backgroundTexture;
+    private Texture ammoTexture;
+    private final ArrayList<Sprite> ammoSprites = new ArrayList<>();
     private TextureRegion[][] heartFrames;
     private Animation<TextureRegion> heartAnimation;
     private Animation<TextureRegion> deadHeart;
@@ -30,6 +32,7 @@ public class WorldController {
     private float backgroundX = 0;
     private float backgroundY = 0;
     private ArrayList<AnimatedSprite> heartSprites = new ArrayList<>();
+    private Sprite progressBar;
     GameController gameController;
 
     public WorldController(PlayerController playerController, GameController gameController) {
@@ -38,9 +41,9 @@ public class WorldController {
         this.gameController = gameController;
         Texture spriteTexture = new Texture(Gdx.files.internal("T/T_TentacleAttackIndicator_0.png"));
         this.timer = new Sprite(spriteTexture);
-//        this.timer.setCenterX(Gdx.graphics.getWidth()/2f);
-//        this.timer.setCenterY(Gdx.graphics.getHeight() - 20);
         this.timer.setBounds(440,Gdx.graphics.getHeight()-62,Gdx.graphics.getWidth()-880,60);
+        this.ammoTexture = new Texture(Gdx.files.internal("T/T_AmmoIcon.png"));
+        setAmmo();
         this.font = new BitmapFont();
         this.heartTexture = new Texture("T/T_HeartAnimation.png");
         this.heartFrames = TextureRegion.split(heartTexture, 32, 32);
@@ -50,6 +53,14 @@ public class WorldController {
             heartSprites.add(new AnimatedSprite(heartAnimation));
             heartSprites.get(i).setPosition(470 + 30*i, timer.getY() + 15);
         }
+
+        Texture progressBar = new Texture(Gdx.files.internal("T/T_ProgressBar.png"));
+        this.progressBar = new Sprite(progressBar);
+        this.progressBar.setX(440 +
+            timer.getWidth() * (timer.getWidth() * Main.getMain().getGame().getHero().getXp()) /
+                Main.getMain().getGame().getHero().getLevel()/40);
+        this.progressBar.setX(0);
+        this.progressBar.setY(Gdx.graphics.getHeight()-40);
     }
 
     public void update(float delta) {
@@ -65,12 +76,20 @@ public class WorldController {
                 }
             }
         }
+        progressBar.draw(Main.getBatch());
+//        progressBar.setScale((float) ((Gdx.graphics.getWidth() - 880) / 234 * Main.getMain().getGame().getHero().getXp()) /
+//            Main.getMain().getGame().getHero().getLevel()/20,1);
+        progressBar.setScale(Gdx.graphics.getWidth() / 234f * Main.getMain().getGame().getHero().getXp() /
+            Main.getMain().getGame().getHero().getLevel()/10,1);
         font.draw(Main.getBatch(),  Main.getMain().getGame().getTimer().toString() + " HP: " +
             Main.getMain().getGame().getHero().getPlayerHealth(), backgroundX,backgroundY);
         timer.draw(Main.getBatch());
         font.draw(Main.getBatch(), Main.getMain().getGame().getTimer().toString(), timer.getX() + timer.getWidth()/2f - 20
             , timer.getY() + timer.getHeight()/2f + 10);
+        font.draw(Main.getBatch(), Main.getMain().getGame().getHero().getKills().toString(), timer.getX() + timer.getWidth() - 40
+            , timer.getY() + timer.getHeight()/2f + 10);
         drawHearts(delta);
+        drawAmmo();
         spawnEnemies(delta);
         Enemy nearest = null;
         double distance = Integer.MAX_VALUE;
@@ -189,6 +208,26 @@ public class WorldController {
             heartSprite.update(delta);
             heartSprite.draw(Main.getBatch());
         }
+    }
+
+    public void setAmmo() {
+        ammoSprites.clear();
+        for (int i = 0; i < Main.getMain().getGame().getWeapon().getAmmo(); i++) {
+            Sprite sprite = new Sprite(ammoTexture);
+            sprite.setX((float) (770 + 12*i - Math.floor(i/12f) * 12 * 12));
+            sprite.setScale(0.5F,0.5F);
+            sprite.setY((float) (timer.getY() + 8 + Math.floor(i/12f)*15));
+            ammoSprites.add(sprite);
+        }
+    }
+    private void drawAmmo() {
+        for (Sprite ammo : ammoSprites) {
+            ammo.draw(Main.getBatch());
+        }
+    }
+
+    public void removeAmmo() {
+        ammoSprites.remove(ammoSprites.get(ammoSprites.size() - 1));
     }
 
     public void killHeart() {

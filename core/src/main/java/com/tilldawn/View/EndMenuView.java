@@ -30,10 +30,10 @@ public class EndMenuView implements Screen {
         this.isWon = won;
         this.won = new TextButton(won?"Congrats you survived":"Loser....", skin);
         this.kills = new TextButton("Kills: " + player.getKills(), skin);
-        this.xp = new TextButton("Score: " + player.getScore(), skin);
         this.playTime = Main.getMain().getGame().getTimer().getDuration()
             - Main.getMain().getGame().getTimer().getRemaining();
         this.playtime = new TextButton("" + Math.floor(playTime), skin);
+        this.xp = new TextButton("Score: " + player.getKills() * this.playTime, skin);
         this.mainMenu = new TextButton("Click to end.", skin);
         this.player = player;
 

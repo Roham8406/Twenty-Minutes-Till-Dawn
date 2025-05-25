@@ -22,7 +22,7 @@ public class EndMenuController extends MenuController {
                  if (user != null) {
                      user.addKills(view.getPlayer().getKills());
                      user.addPlaytime(view.getPlayTime());
-                     user.addScore(view.getPlayer().getScore());
+                     user.addScore(view.getPlayer().getKills() * view.getPlayTime());
                      Main.getMain().getUserSql().updateStats(user);
                  }
                 Main.getMain().getScreen().dispose();

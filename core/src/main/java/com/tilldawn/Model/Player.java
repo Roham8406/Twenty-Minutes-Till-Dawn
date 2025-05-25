@@ -183,12 +183,8 @@ public class Player {
         kills++;
     }
 
-    public int getKills() {
+    public Integer getKills() {
         return kills;
-    }
-
-    public int getScore() {
-        return level * (level - 1) * 10 + xp;
     }
 
     public void addLevel(GameController gameController) {
@@ -197,5 +193,9 @@ public class Player {
 
     public int getMaxHp() {
         return maxHp;
+    }
+
+    public int getLevel() {
+        return level;
     }
 }

@@ -47,6 +47,7 @@ public class WeaponController {
 
     public void handleWeaponShoot(int x, int y){
         if (weapon.canShoot()) {
+            worldController.removeAmmo();
             for (int i = 0; i < weapon.getProjectTile(); i++) {
                 Timer.schedule(new Timer.Task(){
                     @Override

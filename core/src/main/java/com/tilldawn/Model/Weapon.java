@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Control.WeaponController;
 import com.tilldawn.Main;
+import com.tilldawn.View.GameView;
 
 public class Weapon {
     private Sprite sprite;
@@ -26,6 +27,7 @@ public class Weapon {
         if (Main.getMain().isSfx()) Sfx.Reload.play();
         reloading = true;
         this.ammo = weaponType.getAmmoMax() + maxAmmo;
+        ((GameView)Main.getMain().getScreen()).getController().getWorldController().setAmmo();
 
         Timer.schedule(new Timer.Task(){
             @Override
