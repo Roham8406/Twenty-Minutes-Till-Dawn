@@ -1,6 +1,7 @@
 package com.tilldawn.Control;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -20,6 +21,7 @@ import java.util.Random;
 
 public class WorldController {
     private PlayerController playerController;
+    private Sprite backgroundFilter;
     private Texture heartTexture;
     private Texture backgroundTexture;
     private Texture ammoTexture;
@@ -72,6 +74,14 @@ public class WorldController {
                 Main.getMain().getGame().getHero().getLevel()/40);
         this.progressBar.setX(0);
         this.progressBar.setY(Gdx.graphics.getHeight()-40);
+
+        Texture texture = new Texture(Gdx.files.internal("T/filter.png"));
+        this.backgroundFilter = new Sprite(texture);
+        this.backgroundFilter.setColor(1,1,1,0.7f);
+        this.backgroundFilter.setX(0);
+        this.backgroundFilter.setY(0);
+        this.backgroundFilter.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
     }
 
     public void update(float delta) {
@@ -87,22 +97,6 @@ public class WorldController {
                 }
             }
         }
-        progressBar.draw(Main.getBatch());
-//        progressBar.setScale((float) ((Gdx.graphics.getWidth() - 880) / 234 * Main.getMain().getGame().getHero().getXp()) /
-//            Main.getMain().getGame().getHero().getLevel()/20,1);
-        progressBar.setScale(Gdx.graphics.getWidth() / 234f * Main.getMain().getGame().getHero().getXp() /
-            Main.getMain().getGame().getHero().getLevel()/10,1);
-        timer.draw(Main.getBatch());
-        font.draw(Main.getBatch(), Main.getMain().getGame().getTimer().toString(), timer.getX() + timer.getWidth()/2f - 20
-            , timer.getY() + timer.getHeight()/2f + 16);
-        font.draw(Main.getBatch(), "Level " + Main.getMain().getGame().getHero().getLevel(), timer.getX() + timer.getWidth()/2f - 20
-            , timer.getY() + timer.getHeight()/2f + 1);
-        font.draw(Main.getBatch(), Main.getMain().getGame().getHero().getKills().toString(), timer.getX() + timer.getWidth() - 40
-            , timer.getY() + timer.getHeight()/2f + 10);
-        drawHearts(delta);
-        drawAmmo();
-        shottedSprite.draw(Main.getBatch());
-        shottedSprite.update(delta);
         spawnEnemies(delta);
         Enemy nearest = null;
         double distance = Integer.MAX_VALUE;
@@ -142,6 +136,24 @@ public class WorldController {
             }
         }
         enemiesAttack(delta);
+        backgroundFilter.draw(Main.getBatch());
+        progressBar.draw(Main.getBatch());
+//        progressBar.setScale((float) ((Gdx.graphics.getWidth() - 880) / 234 * Main.getMain().getGame().getHero().getXp()) /
+//            Main.getMain().getGame().getHero().getLevel()/20,1);
+        progressBar.setScale(Gdx.graphics.getWidth() / 234f * Main.getMain().getGame().getHero().getXp() /
+            Main.getMain().getGame().getHero().getLevel()/10,1);
+        timer.draw(Main.getBatch());
+        font.draw(Main.getBatch(), Main.getMain().getGame().getTimer().toString(), timer.getX() + timer.getWidth()/2f - 20
+            , timer.getY() + timer.getHeight()/2f + 16);
+        font.draw(Main.getBatch(), "Level " + Main.getMain().getGame().getHero().getLevel(), timer.getX() + timer.getWidth()/2f - 20
+            , timer.getY() + timer.getHeight()/2f + 1);
+        font.draw(Main.getBatch(), Main.getMain().getGame().getHero().getKills().toString(), timer.getX() + timer.getWidth() - 40
+            , timer.getY() + timer.getHeight()/2f + 10);
+        drawHearts(delta);
+        drawAmmo();
+        shottedSprite.draw(Main.getBatch());
+        shottedSprite.update(delta);
+
     }
 
     private void spawnEnemies(float delta) {
