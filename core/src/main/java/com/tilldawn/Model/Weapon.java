@@ -17,10 +17,12 @@ public class Weapon {
     private Integer projectile = 0;
     private Integer maxAmmo = 0;
     private boolean reloading = false;
+    private float timeReload;
 
     public Weapon(WeaponType type){
         this.weaponType = type;
         this.ammo = weaponType.getAmmoMax();
+        this.timeReload = weaponType.getTimeReload();
     }
 
     public void reload() {
@@ -34,7 +36,7 @@ public class Weapon {
             public void run() {
                 reloading = false;
             }
-        }, weaponType.getTimeReload());
+        }, timeReload);
     }
 
     private void init(){
@@ -99,5 +101,9 @@ public class Weapon {
 
     public void incrementAmmo() {
         maxAmmo += 5;
+    }
+
+    public void fastReload() {
+        timeReload = 0.3f;
     }
 }

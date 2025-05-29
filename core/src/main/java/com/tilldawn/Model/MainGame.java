@@ -70,6 +70,10 @@ public class MainGame {
         return autoReload;
     }
 
+    public void enableAutoReload() {
+        this.autoReload = true;
+    }
+
     public Countdown getTimer() {
         return timer;
     }

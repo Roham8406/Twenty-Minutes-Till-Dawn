@@ -256,10 +256,10 @@ public class WorldController {
     }
 
     public void hurt() {
-//        Main.getMain().getGame().getHero().removeHp(1);
+        Main.getMain().getGame().getHero().removeHp(1);
         Main.getMain().getGame().getHero().setInvincible(true);
         if (Main.getMain().isSfx()) Sfx.Hurt.play();
-//        killHeart();
+        killHeart();
         Timer.schedule(new Timer.Task(){
             @Override
             public void run() {

@@ -29,15 +29,12 @@ public class PauseMenuController extends MenuController {
                 view.getSave().setChecked(false);
             }
             if (view.getBlackAndWhite().isChecked()) {
-                if (Main.getMain().isBlackAndWhite()) {
-                    Main.getMain().setBlackAndWhite(false);
-                } else {
-                    Main.getMain().setBlackAndWhite(true);
-                }
+                Main.getMain().setBlackAndWhite(!Main.getMain().isBlackAndWhite());
                 view.getBlackAndWhite().setChecked(false);
             }
             if (view.getSth().isChecked()) {
-                //todo custom cheat code
+                Main.getMain().getGame().getWeapon().fastReload();
+                Main.getMain().getGame().enableAutoReload();
                 view.getSth().setChecked(false);
             }
             if (view.getGiveUp().isChecked()) {
