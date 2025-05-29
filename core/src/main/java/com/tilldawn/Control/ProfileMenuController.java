@@ -49,7 +49,7 @@ public class ProfileMenuController extends MenuController {
                     if (!username.equals(Main.getMain().getCurrentUser().getUsername()) &&
                         !username.isEmpty()) {
                         if (!UserSql.isUsernameValid(username).matches()) {
-                            view.alert("The username must contain only a-zA-z0-9_", 5);
+                            view.alert(Main.getLanguage().InvalidUsernameError, 5);
                             view.getChangeInfo().setChecked(false);
                             return;
                         }
@@ -64,7 +64,7 @@ public class ProfileMenuController extends MenuController {
                     }
                     if (!password.isEmpty()) {
                         if (!UserSql.isPasswordValid(password).matches()) {
-                            view.alert("The password is too easy", 5);
+                            view.alert(Main.getLanguage().EasyPasswordError, 5);
                             view.getChangeInfo().setChecked(false);
                             return;
                         }
@@ -111,7 +111,7 @@ public class ProfileMenuController extends MenuController {
                 if (view.getChooseLocalAvatar().isChecked()) {
                     String path = openFileChooser();
                     if (path == null) {
-                        view.alert("No file selected", 5);
+                        view.alert(Main.getLanguage().NoFileSelectedError, 5);
                         view.getChooseLocalAvatar().setChecked(false);
                         return;
                     }

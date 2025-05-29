@@ -40,10 +40,10 @@ public class PauseMenuView implements Screen {
     public PauseMenuView(PauseMenuController controller, Skin skin, GameController gameController) {
         this.controller = controller;
         this.gameController = gameController;
-        this.resume = new TextButton("Resume", skin);
-        this.save = new TextButton("Save", skin);
-        this.giveUp = new TextButton("Give Up", skin);
-        this.blackAndWhite = new TextButton("Grayscale", skin);
+        this.resume = new TextButton(Main.getLanguage().Resume, skin);
+        this.save = new TextButton(Main.getLanguage().Save, skin);
+        this.giveUp = new TextButton(Main.getLanguage().GiveUp, skin);
+        this.blackAndWhite = new TextButton(Main.getLanguage().Grayscale, skin);
         Texture buttonTexture = new Texture(Gdx.files.internal("T/T_LevelUpFX_8.png"));
         TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(buttonTexture));
         this.levelIncrement = new ImageButton(drawable);
@@ -59,11 +59,11 @@ public class PauseMenuView implements Screen {
         buttonTexture = new Texture(Gdx.files.internal("T/T_LargeChestAnimation_2.png"));
         drawable = new TextureRegionDrawable(new TextureRegion(buttonTexture));
         this.sth = new ImageButton(drawable);
-        this.amocrease = new TextButton("Amocrease *" + Main.getMain().getGame().getAmocrease(), skin);
-        this.procrease = new TextButton("Procrease *" + Main.getMain().getGame().getAmocrease(), skin);
-        this.speedy = new TextButton("Speedy *" + Main.getMain().getGame().getSpeedy(), skin);
-        this.damager = new TextButton("Damager *" + Main.getMain().getGame().getDamager(), skin);
-        this.vitality = new TextButton("Vitality *" + Main.getMain().getGame().getVitality(), skin);
+        this.amocrease = new TextButton(Main.getLanguage().Amocrease + " *" + Main.getMain().getGame().getAmocrease(), skin);
+        this.procrease = new TextButton(Main.getLanguage().Procrease + " *" + Main.getMain().getGame().getAmocrease(), skin);
+        this.speedy = new TextButton(Main.getLanguage().Speedy + " *" + Main.getMain().getGame().getSpeedy(), skin);
+        this.damager = new TextButton(Main.getLanguage().Damager + " *" + Main.getMain().getGame().getDamager(), skin);
+        this.vitality = new TextButton(Main.getLanguage().Vitality + " *" + Main.getMain().getGame().getVitality(), skin);
 
         this.table = new Table();
 

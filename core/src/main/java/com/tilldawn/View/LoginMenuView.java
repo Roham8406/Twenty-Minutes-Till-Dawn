@@ -29,15 +29,15 @@ public class LoginMenuView implements Screen {
     public LoginMenuView(LoginMenuController controller, Skin skin) {
         this.skin = skin;
         this.controller = controller;
-        this.register = new TextButton("Sign Up", skin);
+        this.register = new TextButton(Main.getLanguage().SignUp, skin);
         this.usernameField = new TextField("", skin);
-        this.passwordLabel = new Label("Password: ", skin);
-        this.forgotPassword = new TextButton("Forgot Password?", skin);
+        this.passwordLabel = new Label(Main.getLanguage().Password + ": ", skin);
+        this.forgotPassword = new TextButton(Main.getLanguage().ForgotPassword, skin);
         this.table = new Table();
         this.fields = new Table();
-        this.playAsGuest = new TextButton("Continue As Guest!", skin);
-        this.loginButton = new TextButton("Login!", skin);
-        this.usernameLabel = new Label("Username: ", skin);
+        this.playAsGuest = new TextButton(Main.getLanguage().ContinueAsGuest, skin);
+        this.loginButton = new TextButton(Main.getLanguage().Login, skin);
+        this.usernameLabel = new Label(Main.getLanguage().Username + ": ", skin);
         this.passwordField = new TextField("", skin);
 
         controller.setView(this);

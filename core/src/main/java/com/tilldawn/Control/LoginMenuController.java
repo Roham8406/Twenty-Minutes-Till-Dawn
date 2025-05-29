@@ -19,7 +19,7 @@ public class LoginMenuController extends MenuController {
                 String username = view.getUsernameField().getText();
                 String password = view.getPasswordField().getText();
                 if  (username.isEmpty() || password.isEmpty()) {
-                    view.alert("The fields are essential", 5);
+                    view.alert(Main.getLanguage().EmptyFieldError, 5);
                     view.getLoginButton().setChecked(false);
                     return;
                 }

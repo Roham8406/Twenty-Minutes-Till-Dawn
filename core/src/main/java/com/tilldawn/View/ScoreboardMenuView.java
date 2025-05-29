@@ -39,11 +39,11 @@ public class ScoreboardMenuView implements Screen {
     public ScoreboardMenuView(ScoreboardMenuController controller, Skin skin) {
         this.controller = controller;
         this.skin = skin;
-        this.kill = new TextButton("Kill", skin);
-        this.playtime = new TextButton("Playtime", skin);
-        this.score = new TextButton("Score", skin);
-        this.username = new TextButton("Username", skin);
-        this.mainMenu = new TextButton("Main Menu", skin);
+        this.kill = new TextButton(Main.getLanguage().Kills, skin);
+        this.playtime = new TextButton(Main.getLanguage().Playtime, skin);
+        this.score = new TextButton(Main.getLanguage().Score, skin);
+        this.username = new TextButton(Main.getLanguage().Username, skin);
+        this.mainMenu = new TextButton(Main.getLanguage().MainMenu, skin);
         this.table = new Table(skin);
         controller.setView(this);
     }
@@ -63,7 +63,7 @@ public class ScoreboardMenuView implements Screen {
         table.row().pad(40, 0 , 10 , 0);
         ArrayList<User> users = Main.getMain().getUserSql().sortScoreboard(scoreName);
         if (users == null) {
-            alert("Something went wrong.", 5);
+            alert(Main.getLanguage().SomethingWentWrong, 5);
             return;
         }
         for (int i = 0; i < users.size(); i++) {

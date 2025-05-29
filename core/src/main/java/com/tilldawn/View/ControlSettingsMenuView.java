@@ -39,12 +39,12 @@ public class ControlSettingsMenuView implements Screen {
 
     public ControlSettingsMenuView(ControlSettingMenuController controller, Skin skin) {
         this.controller = controller;
-        this.upLabel = new Label("Up", skin);
-        this.downLabel = new Label("Down", skin);
-        this.leftLabel = new Label("Left", skin);
-        this.rightLabel = new Label("Right", skin);
-        this.autoAimLabel = new Label("Auto Aim", skin);
-        this.reloadLabel = new Label("Reload", skin);
+        this.upLabel = new Label(Main.getLanguage().Up, skin);
+        this.downLabel = new Label(Main.getLanguage().Down, skin);
+        this.leftLabel = new Label(Main.getLanguage().Left, skin);
+        this.rightLabel = new Label(Main.getLanguage().Right, skin);
+        this.autoAimLabel = new Label(Main.getLanguage().AutoAim, skin);
+        this.reloadLabel = new Label(Main.getLanguage().Reload, skin);
         Function<String, String> keyDecoder = key ->
             Input.Keys.toString(Main.getMain().getControl().getKeys().get(key));
         this.upTextButton = new TextButton(keyDecoder.apply("up"), skin);
@@ -53,7 +53,7 @@ public class ControlSettingsMenuView implements Screen {
         this.rightTextButton = new TextButton(keyDecoder.apply("right"), skin);
         this.autoAimTextButton = new TextButton(keyDecoder.apply("autoAim"), skin);
         this.reloadTextButton = new TextButton(keyDecoder.apply("reload"), skin);
-        this.mainMenu = new TextButton("Main Menu", skin);
+        this.mainMenu = new TextButton(Main.getLanguage().MainMenu, skin);
         this.table = new Table();
         this.skin = skin;
 

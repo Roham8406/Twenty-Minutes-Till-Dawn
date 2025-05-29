@@ -6,11 +6,12 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.tilldawn.Main;
 
 public enum WeaponType {
-    Revolver("Revolver", "T/T_Revolver_SS.png", 6, 1, 1, 20),
-    Shotgun("Shotgun", "T/T_Shotgun_SS.png", 2, 1, 4, 10),
-    Smg("SMGs Dual", "T/T_DualSMGs_SS.png", 24, 2, 1, 8);
+    Revolver(Main.getLanguage().Revolver, "T/T_Revolver_SS.png", 6, 1, 1, 20),
+    Shotgun(Main.getLanguage().Shotgun, "T/T_Shotgun_SS.png", 2, 1, 4, 10),
+    Smg(Main.getLanguage().DualSMGs, "T/T_DualSMGs_SS.png", 24, 2, 1, 8);
 
     private String name;
     private String frames;

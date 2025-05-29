@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.tilldawn.Main;
 
 public class User {
     private int id;
@@ -55,7 +56,7 @@ public class User {
     public static Table createUnloggedHeader(Skin skin) {
         Table header = new Table();
         header.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("background.png"))));
-        header.add(new Label("20 Minutes Till Dawn", skin));
+        header.add(new Label(Main.getLanguage().TMTD, skin));
         return header;
     }
 

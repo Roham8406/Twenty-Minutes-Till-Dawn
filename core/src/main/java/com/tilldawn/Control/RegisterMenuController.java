@@ -24,17 +24,17 @@ public class RegisterMenuController extends MenuController {
                 String securityAnswer = view.getSecurityAnswer().getText();
                 Integer securityQuestion = view.getSecurityQuestion().getSelectedIndex();
                 if (username.isEmpty() || password.isEmpty() || securityAnswer.isEmpty()) {
-                    view.alert("The fields are essential", 5);
+                    view.alert(Main.getLanguage().EmptyFieldError, 5);
                     view.getRegister().setChecked(false);
                     return;
                 }
                 if (!UserSql.isUsernameValid(username).matches()) {
-                    view.alert("The username must contain only a-zA-z0-9_", 5);
+                    view.alert(Main.getLanguage().InvalidUsernameError, 5);
                     view.getRegister().setChecked(false);
                     return;
                 }
                 if (!UserSql.isPasswordValid(password).matches()) {
-                    view.alert("The password is too easy", 5);
+                    view.alert(Main.getLanguage().EasyPasswordError, 5);
                     view.getRegister().setChecked(false);
                     return;
                 }

@@ -28,22 +28,22 @@ public class MainMenuView implements Screen {
 
     public MainMenuView(MainMenuController controller, Skin skin) {
         this.controller = controller;
-        this.setting = new TextButton("Setting Menu", skin);
-        this.pregame = new TextButton("Pre-Game Menu", skin);
-        this.scoreboard = new TextButton("Scoreboard Menu", skin);
-        this.talent = new TextButton("Talent Menu", skin);
+        this.setting = new TextButton(Main.getLanguage().SettingMenu, skin);
+        this.pregame = new TextButton(Main.getLanguage().PreGameMenu, skin);
+        this.scoreboard = new TextButton(Main.getLanguage().ScoreboardMenu, skin);
+        this.talent = new TextButton(Main.getLanguage().TalentMenu, skin);
         this.table = new Table();
         if (Main.getMain().getCurrentUser() == null) {
             this.header = User.createUnloggedHeader(skin);
-            this.logging = new TextButton("Login Menu", skin);
+            this.logging = new TextButton(Main.getLanguage().LoginMenu, skin);
             this.isSigned = false;
         } else {
             this.header = Main.getMain().getCurrentUser().createHeader(skin);
-            this.logging = new TextButton("Logout", skin);
+            this.logging = new TextButton(Main.getLanguage().Logout, skin);
             this.isSigned = true;
         }
-        this.profile = new TextButton("Profile Menu", skin);
-        this.loadGame = new TextButton("Load Game", skin);
+        this.profile = new TextButton(Main.getLanguage().ProfileMenu, skin);
+        this.loadGame = new TextButton(Main.getLanguage().LoadGame, skin);
 
         controller.setView(this);
     }

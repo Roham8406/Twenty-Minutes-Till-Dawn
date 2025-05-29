@@ -30,6 +30,14 @@ public class SettingMenuController extends MenuController {
                     Main.getMain().setMusic(view.getMusicTrack().getSelected());
                 }
             });
+            view.getLanguage().addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    Main.getMain().setLanguage(view.getLanguage().getSelected());
+                    Main.getMain().getScreen().dispose();
+                    Main.getMain().setScreen(new SettingsMenuView(new SettingMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+                }
+            });
             view.getSfx().addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -39,13 +47,13 @@ public class SettingMenuController extends MenuController {
             view.getAutoReload().addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    Main.getMain().setAutoReload(view.getAutoReload().isChecked()); //TODO
+                    Main.getMain().setAutoReload(view.getAutoReload().isChecked());
                 }
             });
             view.getBlackAndWhite().addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    Main.getMain().setBlackAndWhite(view.getBlackAndWhite().isChecked()); //TODO
+                    Main.getMain().setBlackAndWhite(view.getBlackAndWhite().isChecked());
                 }
             });
             if (view.getControlSettings().isChecked()) {

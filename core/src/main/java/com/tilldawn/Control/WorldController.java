@@ -166,7 +166,7 @@ public class WorldController {
         timer.draw(Main.getBatch());
         font.draw(Main.getBatch(), Main.getMain().getGame().getTimer().toString(), timer.getX() + timer.getWidth()/2f - 20
             , timer.getY() + timer.getHeight()/2f + 16);
-        font.draw(Main.getBatch(), "Level " + Main.getMain().getGame().getHero().getLevel(), timer.getX() + timer.getWidth()/2f - 20
+        font.draw(Main.getBatch(), Main.getLanguage().Level + " " + Main.getMain().getGame().getHero().getLevel(), timer.getX() + timer.getWidth()/2f - 20
             , timer.getY() + timer.getHeight()/2f + 1);
         font.draw(Main.getBatch(), Main.getMain().getGame().getHero().getKills().toString(), timer.getX() + timer.getWidth() - 40
             , timer.getY() + timer.getHeight()/2f + 10);

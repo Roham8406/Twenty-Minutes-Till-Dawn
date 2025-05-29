@@ -81,17 +81,17 @@ public class PreGameMenuController extends MenuController {
 
     private void setGameCharacter(GameCharacter gameCharacter) {
         Main.getMain().setGameCharacter(gameCharacter);
-        view.alert("Character " + gameCharacter.getName() + " selected.", 5);
+        view.alert(Main.getLanguage().Character + gameCharacter.getName() + Main.getLanguage().Selected, 5);
     }
 
     private void setWeapon(WeaponType weapon) {
         Main.getMain().setWeaponType(weapon);
-        view.alert("Weapon " + weapon.getName() + " selected.", 5);
+        view.alert(Main.getLanguage().Weapon + weapon.getName() + Main.getLanguage().Selected, 5);
     }
 
     private void setTime(Integer time) {
         Main.getMain().setTime(time);
-        view.alert("Time adjusted to " + time + " minutes.", 5);
+        view.alert(Main.getLanguage().TimeAdjusted + time + " " + Main.getLanguage().Minutes + ".", 5);
     }
 
 

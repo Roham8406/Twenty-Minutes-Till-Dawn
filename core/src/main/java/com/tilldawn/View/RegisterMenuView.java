@@ -32,18 +32,18 @@ public class RegisterMenuView implements Screen {
     public RegisterMenuView(RegisterMenuController controller, Skin skin) {
         this.controller = controller;
         this.skin = skin;
-        this.register = new TextButton("Sign Up", skin);
+        this.register = new TextButton(Main.getLanguage().SignUp, skin);
         this.usernameField = new TextField("", skin);
-        this.passwordLabel = new Label("Password: ", skin);
+        this.passwordLabel = new Label(Main.getLanguage().Password + ": ", skin);
         this.table = new Table();
-        this.usernameLabel = new Label("Username: ", skin);
+        this.usernameLabel = new Label(Main.getLanguage().Username + ": ", skin);
         this.passwordField = new TextField("", skin);
         this.securityAnswer = new TextField("", skin);
         this.securityQuestion = new SelectBox<>(skin);
         for (SecurityQuestions value : SecurityQuestions.values()) {
             this.securityQuestion.setItems(value.getQuestion());
         }
-        this.playAsGuest = new TextButton("Continue As Guest!", skin);
+        this.playAsGuest = new TextButton(Main.getLanguage().ContinueAsGuest, skin);
         this.securityQuestion.setItems(Arrays.stream(SecurityQuestions.values())
                                         .map(SecurityQuestions::getQuestion)
                                         .toArray(String[]::new));

@@ -24,7 +24,7 @@ public class ForgotPasswordMenuController extends MenuController {
                 case 0: {
                     if (view.getFindUsername().isChecked()) {
                         if (view.getUsernameField().getText().isEmpty()) {
-                            view.alert("Please enter your username.", 5);
+                            view.alert(Main.getLanguage().NoUsernameError, 5);
                             view.getFindUsername().setChecked(false);
                             return;
                         }
@@ -42,13 +42,13 @@ public class ForgotPasswordMenuController extends MenuController {
                 case 1: {
                     if (view.getAuthorize().isChecked()) {
                         if (view.getSecurityAnswerField().getText().isEmpty()) {
-                            view.alert("Please answer the question.", 5);
+                            view.alert(Main.getLanguage().NoAnswerError, 5);
                             view.getAuthorize().setChecked(false);
                             return;
                         }
                         String answer = view.getSecurityAnswerField().getText();
                         if (!user.getSecurityAnswer().equals(answer)) {
-                            view.alert("The answer you entered is incorrect.", 5);
+                            view.alert(Main.getLanguage().IncorrectAnswerError, 5);
                             view.getAuthorize().setChecked(false);
                             return;
                         }
@@ -58,12 +58,12 @@ public class ForgotPasswordMenuController extends MenuController {
                 case 2: {
                     if (view.getChangePassword().isChecked()) {
                         if (view.getNewPasswordField().getText().isEmpty()) {
-                            view.alert("Please enter your new password.", 5);
+                            view.alert(Main.getLanguage().NoNewPasswordError, 5);
                             view.getChangePassword().setChecked(false);
                             return;
                         }
                         if (!UserSql.isPasswordValid(view.getNewPasswordField().getText()).matches()) {
-                            view.alert("Password too easy.", 5);
+                            view.alert(Main.getLanguage().EasyPasswordError, 5);
                             view.getChangePassword().setChecked(false);
                             return;
                         }

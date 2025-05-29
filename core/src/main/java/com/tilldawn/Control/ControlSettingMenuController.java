@@ -47,7 +47,7 @@ public class ControlSettingMenuController extends MenuController {
                 ArrayList<Integer> keyCodes = new ArrayList<>();
                 for (Integer value : control.values()) {
                     if (keyCodes.contains(value)) {
-                        view.alert("Similar keys for two commands!", 5);
+                        view.alert(Main.getLanguage().SimilarKeysError, 5);
                         view.getMainMenu().setChecked(false);
                         return;
                     }

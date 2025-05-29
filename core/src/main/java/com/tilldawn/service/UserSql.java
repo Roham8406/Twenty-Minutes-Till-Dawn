@@ -36,12 +36,12 @@ public class UserSql {
             ResultSet resultSet = statement.executeQuery();
             User user = null;
             if (!resultSet.next()) {
-                user = new User(null, "Username not found.");
+                user = new User(null, Main.getLanguage().UsernameNotFoundError);
                 statement.close();
                 return user;
             } else if (password != null) {
                 if (!resultSet.getString("password").equals(password)) {
-                    user = new User(null, "Password doesn't match");
+                    user = new User(null, Main.getLanguage().WrongPasswordError);
                 } else {
                     user = new User(resultSet.getInt("id"),
                         resultSet.getString("username"),
@@ -74,9 +74,9 @@ public class UserSql {
             int rowsAffected = statement.executeUpdate();
             statement.close();
             if (rowsAffected == 0) {
-                return new Response("User not found! Try again!", false);
+                return new Response(Main.getLanguage().UsernameNotFoundError, false);
             }
-            return new Response("Successfully changed password!", true);
+            return new Response(Main.getLanguage().PasswordChanged, true);
         } catch (Exception e) {
             return new Response(e.getMessage(), false);
         }
@@ -105,7 +105,7 @@ public class UserSql {
             if (!resultSet.next()) {
                 return new Response("", true);
             }
-            return new Response("Username is not available", false);
+            return new Response(Main.getLanguage().UsernameNotFoundError, false);
         } catch (Exception e) {
             return new Response(e.getMessage(), false);
         }
@@ -123,7 +123,7 @@ public class UserSql {
             int rowsAffected = statement.executeUpdate();
             statement.close();
             if (rowsAffected == 0) {
-                return new Response("Registration failed. Please try again.", false);
+                return new Response(Main.getLanguage().SomethingWentWrong, false);
             }
             return new Response("", true);
         } catch (Exception e) {
@@ -142,10 +142,10 @@ public class UserSql {
                 int rowsAffected = statement.executeUpdate();
                 statement.close();
                 if (rowsAffected == 0) {
-                    return new Response("User not found! Try again!", false);
+                    return new Response(Main.getLanguage().UsernameNotFoundError, false);
                 }
                 Main.getMain().getCurrentUser().setUsername(username);
-                return new Response("Successfully changed username!", true);
+                return new Response(Main.getLanguage().UsernameChanged, true);
             } catch (Exception e) {
                 return new Response(e.getMessage(), false);
             }
@@ -160,11 +160,11 @@ public class UserSql {
                 int rowsAffected = statement.executeUpdate();
                 statement.close();
                 if (rowsAffected == 0) {
-                    return new Response("User not found! Try again!", false);
+                    return new Response(Main.getLanguage().UsernameNotFoundError, false);
                 }
                 Main.getMain().getCurrentUser().setUsername(username);
                 Main.getMain().getCurrentUser().setPassword(password);
-                return new Response("Successfully changed info!", true);
+                return new Response(Main.getLanguage().InfoChanged, true);
             } catch (Exception e) {
                 return new Response(e.getMessage(), false);
             }
@@ -180,10 +180,10 @@ public class UserSql {
             int rowsAffected = statement.executeUpdate();
             statement.close();
             if (rowsAffected == 0) {
-                return new Response("User not found! Try again!", false);
+                return new Response(Main.getLanguage().UsernameNotFoundError, false);
             }
 
-            return new Response("User successfully deleted!", true);
+            return new Response(Main.getLanguage().UserDeleted, true);
         } catch (Exception e) {
             return new Response(e.getMessage(), false);
         }
@@ -199,9 +199,9 @@ public class UserSql {
             int rowsAffected = statement.executeUpdate();
             statement.close();
             if (rowsAffected == 0) {
-                return new Response("User not found! Try again!", false);
+                return new Response(Main.getLanguage().UsernameNotFoundError, false);
             }
-            return new Response("Successfully changed avatar!", true);
+            return new Response(Main.getLanguage().AvatarChanged, true);
         } catch (Exception e) {
             return new Response(e.getMessage(), false);
         }

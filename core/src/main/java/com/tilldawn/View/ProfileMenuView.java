@@ -36,16 +36,16 @@ public class ProfileMenuView implements Screen {
     public ProfileMenuView(ProfileMenuController controller, Skin skin) {
         this.controller = controller;
         this.table = new Table();
-        this.usernameLabel = new Label("Username", skin);
+        this.usernameLabel = new Label(Main.getLanguage().Username, skin);
         this.username = new TextField(Main.getMain().getCurrentUser().getUsername(), skin);
-        this.passwordLabel = new Label("Password", skin);
+        this.passwordLabel = new Label(Main.getLanguage().Password, skin);
         this.password = new TextField("", skin);
-        this.changeAvatar = new TextButton("Change Avatar", skin);
-        this.deleteAccount = new TextButton("Delete Account", skin);
-        this.changeInfo = new TextButton("Change Info", skin);
+        this.changeAvatar = new TextButton(Main.getLanguage().ChangeAvatar, skin);
+        this.deleteAccount = new TextButton(Main.getLanguage().DeleteAccount, skin);
+        this.changeInfo = new TextButton(Main.getLanguage().ChangeInfo, skin);
         this.changingAvatar = false;
         this.skin = skin;
-        this.apply = new TextButton("Apply", skin);
+        this.apply = new TextButton(Main.getLanguage().Apply, skin);
         this.chooseAvatar = null;
         this.chooseLocalAvatar = null;
         this.avatarPreview = null;
@@ -58,7 +58,7 @@ public class ProfileMenuView implements Screen {
         this.changingAvatar = changingAvatar;
         this.chooseAvatar = new Table();
         Main.getMain().getCurrentUser().getAvatar().getAvatars(this.chooseAvatar);
-        this.chooseLocalAvatar = new TextButton("Choose Local Avatar", skin);
+        this.chooseLocalAvatar = new TextButton(Main.getLanguage().ChooseLocalAvatar, skin);
         this.avatarPreview = new Avatar(controller.getPath()).getActor(skin);
         this.usernameLabel = null;
         this.username = null;
@@ -68,7 +68,7 @@ public class ProfileMenuView implements Screen {
         this.deleteAccount = null;
         this.changeInfo = null;
         this.table = new Table(skin);
-        this.apply = new TextButton("Apply", skin);
+        this.apply = new TextButton(Main.getLanguage().Apply, skin);
     }
 
     @Override

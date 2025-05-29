@@ -32,16 +32,16 @@ public class ForgotPasswordMenuView implements Screen {
 
     public ForgotPasswordMenuView(ForgotPasswordMenuController controller, Skin skin) {
         this.controller = controller;
-        this.findUsername = new TextButton("Find User", skin);
+        this.findUsername = new TextButton(Main.getLanguage().FindUser, skin);
         this.usernameField = new TextField("", skin);
-        this.usernameLabel = new Label("Username: ", skin);
-        this.authorize = new TextButton("Authorize answer", skin);
+        this.usernameLabel = new Label(Main.getLanguage().Username + ": ", skin);
+        this.authorize = new TextButton(Main.getLanguage().AuthorizeAnswer, skin);
         this.table = new Table();
         this.securityQuestion = new Label("security_question_being_loaded", skin);
         this.securityAnswerField = new TextField("", skin);
-        this.newPassword = new Label("New Password: ", skin);
+        this.newPassword = new Label(Main.getLanguage().NewPassword + ": ", skin);
         this.newPasswordField = new TextField("", skin);
-        this.changePassword = new TextButton("Change password", skin);
+        this.changePassword = new TextButton(Main.getLanguage().ChangePassword, skin);
         this.skin = skin;
         this.state = 0;
         controller.setView(this);
@@ -49,16 +49,16 @@ public class ForgotPasswordMenuView implements Screen {
 
     public ForgotPasswordMenuView(ForgotPasswordMenuController controller, Skin skin, Integer state) {
         this.controller = controller;
-        this.findUsername = new TextButton("Find User", skin);
+        this.findUsername = new TextButton(Main.getLanguage().FindUser, skin);
         this.usernameField = new TextField("", skin);
-        this.usernameLabel = new Label("Username: ", skin);
-        this.authorize = new TextButton("Authorize answer", skin);
+        this.usernameLabel = new Label(Main.getLanguage().Username + ": ", skin);
+        this.authorize = new TextButton(Main.getLanguage().AuthorizeAnswer, skin);
         this.table = new Table();
         this.securityQuestion = new Label("security_question_being_loaded", skin);
         this.securityAnswerField = new TextField("", skin);
-        this.newPassword = new Label("New Password: ", skin);
+        this.newPassword = new Label(Main.getLanguage().NewPassword + ": ", skin);
         this.newPasswordField = new TextField("", skin);
-        this.changePassword = new TextButton("Change password", skin);
+        this.changePassword = new TextButton(Main.getLanguage().ChangePassword, skin);
         this.skin = skin;
         this.state = state;
         controller.setView(this);

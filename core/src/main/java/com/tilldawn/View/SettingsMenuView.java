@@ -8,9 +8,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.SettingMenuController;
 import com.tilldawn.Main;
+import com.tilldawn.Model.Language;
 import com.tilldawn.Model.MusicTracks;
-import com.tilldawn.Model.SecurityQuestions;
-import com.tilldawn.Model.User;
 
 import java.util.Arrays;
 
@@ -20,6 +19,8 @@ public class SettingsMenuView implements Screen {
     private final Slider musicVolume;
     private final Label musicTrackLabel;
     private final SelectBox<String> musicTrack;
+    private final Label languageLabel;
+    private final SelectBox<String> language;
     private final CheckBox sfx;
     private final CheckBox blackAndWhite;
     private final CheckBox autoReload;
@@ -31,8 +32,9 @@ public class SettingsMenuView implements Screen {
     public SettingsMenuView(SettingMenuController controller, Skin skin) {
         this.controller = controller;
 
-        this.musicVolumeLabel = new Label("Music Volume", skin);
-        this.musicTrackLabel = new Label("Music Track", skin);
+        this.musicVolumeLabel = new Label(Main.getLanguage().MusicVolume, skin);
+        this.languageLabel = new Label("Language", skin);
+        this.musicTrackLabel = new Label(Main.getLanguage().MusicTrack, skin);
         this.musicTrack = new SelectBox<String>(skin);
         this.musicTrack.setItems(Arrays.stream(MusicTracks.values())
             .map(MusicTracks::getTrackName)
@@ -40,11 +42,16 @@ public class SettingsMenuView implements Screen {
         this.musicTrack.setSelected(Main.getMain().getMusic().getTrackName());
         this.musicVolume = new Slider(0, 1f, 0.01f, false, skin);
         this.musicVolume.setValue(Main.getMain().getMusicVolume());
-        this.sfx = new CheckBox("SFXs", skin);
-        this.blackAndWhite = new CheckBox("Black and White filter", skin);
-        this.controlSettings = new TextButton("Control Settings", skin);
-        this.autoReload = new CheckBox("Auto Reload", skin);
-        this.mainMenu = new TextButton("Main Menu", skin);
+        this.language = new SelectBox<String>(skin);
+        this.language.setItems(Arrays.stream(Language.values())
+            .map(Language::getName)
+            .toArray(String[]::new));
+        this.language.setSelected(Main.getMain().getLang().getName());
+        this.sfx = new CheckBox(Main.getLanguage().SFXs, skin);
+        this.blackAndWhite = new CheckBox(Main.getLanguage().Grayscale, skin);
+        this.controlSettings = new TextButton(Main.getLanguage().ControlSetting, skin);
+        this.autoReload = new CheckBox(Main.getLanguage().AutoReload, skin);
+        this.mainMenu = new TextButton(Main.getLanguage().MainMenu, skin);
         this.table = new Table();
 
         controller.setView(this);
@@ -58,6 +65,9 @@ public class SettingsMenuView implements Screen {
         table.setFillParent(true);
         table.center();
 
+        table.add(languageLabel).width(200).padRight(30);
+        table.add(language).colspan(2).width(500);
+        table.row().pad(10, 0 , 10, 0);
         table.add(musicVolumeLabel).width(200).padRight(30);
         table.add(musicVolume).colspan(2).width(500);
         table.row().pad(10, 0 , 10, 0);
@@ -127,6 +137,10 @@ public class SettingsMenuView implements Screen {
 
     public SelectBox<String> getMusicTrack() {
         return musicTrack;
+    }
+
+    public SelectBox<String> getLanguage() {
+        return language;
     }
 
     public Slider getMusicVolume() {

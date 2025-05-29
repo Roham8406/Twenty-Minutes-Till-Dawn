@@ -34,6 +34,7 @@ public class Main extends Game {
     private ShaderProgram shader;
     private FrameBuffer fbo;
     private TextureRegion fboRegion;
+    private Language language = Language.English;
 
 
     @Override
@@ -206,5 +207,18 @@ public class Main extends Game {
         Main.getBatch().draw(Main.getMain().fboRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Main.getBatch().end();
         Main.getBatch().setShader(null);
+    }
+
+    public Language getLang() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = Language.findLanguage(language);
+    }
+
+    public static Language getLanguage() {
+        if (main == null) return Language.English;
+        return getMain().getLang();
     }
 }

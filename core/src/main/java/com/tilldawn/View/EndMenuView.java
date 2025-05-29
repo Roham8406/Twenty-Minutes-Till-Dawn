@@ -28,13 +28,13 @@ public class EndMenuView implements Screen {
     public EndMenuView(EndMenuController controller, Skin skin, boolean won, Player player) {
         this.controller = controller;
         this.isWon = won;
-        this.won = new TextButton(won?"Congrats you survived":"Loser....", skin);
-        this.kills = new TextButton("Kills: " + player.getKills(), skin);
+        this.won = new TextButton(won?Main.getLanguage().Congrats:Main.getLanguage().Loser, skin);
+        this.kills = new TextButton(Main.getLanguage().Kills + ": " + player.getKills(), skin);
         this.playTime = Main.getMain().getGame().getTimer().getDuration()
             - Main.getMain().getGame().getTimer().getRemaining();
         this.playtime = new TextButton("" + Math.floor(playTime), skin);
-        this.xp = new TextButton("Score: " + player.getKills() * this.playTime, skin);
-        this.mainMenu = new TextButton("Click to end.", skin);
+        this.xp = new TextButton(Main.getLanguage().Score + ": " + player.getKills() * this.playTime, skin);
+        this.mainMenu = new TextButton(Main.getLanguage().ClickToEnd, skin);
         this.player = player;
 
         this.table = new Table();

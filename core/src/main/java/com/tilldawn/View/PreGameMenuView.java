@@ -47,11 +47,11 @@ public class PreGameMenuView implements Screen {
         this.revolver = WeaponType.Revolver.getPortraitButton();
         this.shotgun = WeaponType.Shotgun.getPortraitButton();
         this.smg = WeaponType.Smg.getPortraitButton();
-        this.time2 = new TextButton("2 Minutes", skin);
-        this.time5 = new TextButton("5 Minutes", skin);
-        this.time10 = new TextButton("10 Minutes", skin);
-        this.time20 = new TextButton("20 Minutes", skin);
-        this.start = new TextButton("Start", skin);
+        this.time2 = new TextButton("2 " + Main.getLanguage().Minutes, skin);
+        this.time5 = new TextButton("5 " + Main.getLanguage().Minutes, skin);
+        this.time10 = new TextButton("10 " + Main.getLanguage().Minutes, skin);
+        this.time20 = new TextButton("20 " + Main.getLanguage().Minutes, skin);
+        this.start = new TextButton(Main.getLanguage().Start, skin);
         this.table = new Table();
         this.skin = skin;
         this.controller = controller;

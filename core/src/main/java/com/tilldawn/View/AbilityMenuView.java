@@ -29,12 +29,12 @@ public class AbilityMenuView implements Screen {
     public AbilityMenuView(AbilityMenuController controller, Skin skin, GameController gameController, Integer level) {
         this.controller = controller;
         this.gameController = gameController;
-        this.vitality = new TextButton("Vitality", skin);
-        this.damager = new TextButton("Damager", skin);
-        this.procrease = new TextButton("Procrease", skin);
-        this.amocrease = new TextButton("Amocrease", skin);
-        this.speedy = new TextButton("Speedy", skin);
-        this.levelUp = new TextButton("Next Level: " + level, skin);
+        this.vitality = new TextButton(Main.getLanguage().Vitality, skin);
+        this.damager = new TextButton(Main.getLanguage().Damager, skin);
+        this.procrease = new TextButton(Main.getLanguage().Procrease, skin);
+        this.amocrease = new TextButton(Main.getLanguage().Amocrease, skin);
+        this.speedy = new TextButton(Main.getLanguage().Speedy, skin);
+        this.levelUp = new TextButton(Main.getLanguage().NextLevel + ": " + level, skin);
         this.table = new Table();
 
         controller.setView(this);
