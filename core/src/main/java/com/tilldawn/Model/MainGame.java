@@ -3,6 +3,7 @@ package com.tilldawn.Model;
 import com.tilldawn.Main;
 import com.tilldawn.Model.enemy.Enemy;
 import com.tilldawn.Model.enemy.Tree;
+import com.tilldawn.Model.enemy.Wall;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,6 +18,7 @@ public class MainGame {
     private boolean autoReload ;
     private Countdown timer;
     private ArrayList<Tree> trees = new ArrayList<>();
+    private ArrayList<Wall> walls = new ArrayList<>();
     private ArrayList<Float> lastSpawn = new ArrayList<>(3);
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private ArrayList<EnemyBullet> bullets = new ArrayList<>();
@@ -42,6 +44,10 @@ public class MainGame {
         for (int i = 0; i < treesNumber; i++) {
             trees.add(new Tree(rand.nextInt(0,3776), rand.nextInt(0, 2680), rand.nextFloat(0, 5)));
         }
+        walls.add(new Wall(1888,0, rand.nextFloat(0, 5), false));
+        walls.add(new Wall(0,1344, rand.nextFloat(0, 5), true));
+        walls.add(new Wall(1888,2688, rand.nextFloat(0, 5), false));
+        walls.add(new Wall(3776,1344, rand.nextFloat(0, 5), true));
     }
 
     public Player getHero() {
@@ -70,6 +76,10 @@ public class MainGame {
 
     public ArrayList<Tree> getTrees() {
         return trees;
+    }
+
+    public ArrayList<Wall> getWalls() {
+        return walls;
     }
 
     public ArrayList<Float> getLastSpawn() {

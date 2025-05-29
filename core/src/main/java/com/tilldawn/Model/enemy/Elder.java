@@ -10,10 +10,12 @@ import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
 import com.tilldawn.Model.Countdown;
 import com.tilldawn.Model.EnemyBullet;
+import com.tilldawn.View.GameView;
 
 public class Elder extends Enemy{
     private Float lastDash;
     private boolean dashing;
+    private static boolean spawn = false;
 
     public Elder(float x, float y, float pos) {
         this.hp = 400;
@@ -28,10 +30,15 @@ public class Elder extends Enemy{
     }
     public static Integer spawnCount() {
         Countdown countdown = Main.getMain().getGame().getTimer();
-        if (Main.getMain().getGame().getLastSpawn().get(0) != countdown.getDuration()) {
+        if (spawn) {
+            spawn = false;
+            return 1;
+        }
+        if (Main.getMain().getGame().getLastSpawn().get(2) != countdown.getDuration() ||
+            countdown.getRemaining() * 2 > countdown.getDuration()) {
             return 0;
         }
-        Main.getMain().getGame().getLastSpawn().set(0, countdown.getRemaining() - 2);
+        Main.getMain().getGame().getLastSpawn().set(2, countdown.getRemaining());
         return 1;
     }
 
@@ -62,11 +69,21 @@ public class Elder extends Enemy{
     public void die() {
         if (hp > 0) return;
         super.die();
+        Timer.schedule(new Timer.Task(){
+            @Override
+            public void run() {
+                ((GameView)Main.getMain().getScreen()).getController().getWorldController().endBossFight();
+            }
+        }, 1);
     }
 
     public boolean isCollisioned(float posX, float posY) {
         return Math.abs(posX - sprite.getX()) < 80 &&
             Math.abs(posY - sprite.getY()) < 70;
+    }
+
+    public static void setSpawn() {
+        spawn = true;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.tilldawn.Control;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -20,7 +19,7 @@ public class WorldController {
     private PlayerController playerController;
     private Sprite backgroundFilter;
     private Texture heartTexture;
-    private Texture backgroundTexture;
+    private TextureRegion backgroundTexture;
     private Texture ammoTexture;
     private TextureRegion[][] shottedFrames;
     private Animation<TextureRegion> shottedAnimation;
@@ -36,10 +35,14 @@ public class WorldController {
     private float backgroundY = 0;
     private ArrayList<AnimatedSprite> heartSprites = new ArrayList<>();
     private Sprite progressBar;
+    private boolean bossFight;
     GameController gameController;
 
     public WorldController(PlayerController playerController, GameController gameController) {
-        this.backgroundTexture = new Texture("background.png");
+        Texture backgroundTexture = new Texture("background.png");
+        backgroundTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        this.backgroundTexture = new TextureRegion(backgroundTexture);
+        this.backgroundTexture.setRegion(0, 0, backgroundTexture.getWidth() * 3, backgroundTexture.getHeight() * 3);
         this.playerController = playerController;
         this.gameController = gameController;
         Texture spriteTexture = new Texture(Gdx.files.internal("T/T_TentacleAttackIndicator_0.png"));
@@ -84,12 +87,23 @@ public class WorldController {
     public void update(float delta) {
         backgroundX = playerController.getPlayer().getPosX();
         backgroundY = playerController.getPlayer().getPosY();
-        Main.getBatch().draw(backgroundTexture, backgroundX, backgroundY);
+        Main.getBatch().draw(backgroundTexture, backgroundX - backgroundTexture.getRegionWidth()/2f, backgroundY - backgroundTexture.getRegionHeight()/2f,
+            backgroundTexture.getRegionWidth(), backgroundTexture.getRegionHeight());
         for (Tree tree : Main.getMain().getGame().getTrees()) {
             tree.getSprite(backgroundX, backgroundY).draw(Main.getBatch());
             ((AnimatedSprite)tree.getSprite(backgroundX, backgroundY)).update(delta);
             if (!Main.getMain().getGame().getHero().isInvincible()) {
                 if (tree.isCollisioned(backgroundX, backgroundY)) {
+                    hurt();
+                }
+            }
+        }
+        for (Wall wall : Main.getMain().getGame().getWalls()) {
+            Sprite sprite = wall.getSprite(backgroundX, backgroundY);
+            sprite.draw(Main.getBatch());
+            ((AnimatedSprite)sprite).update(delta);
+            if (!Main.getMain().getGame().getHero().isInvincible()) {
+                if (wall.isCollisioned(backgroundX, backgroundY)) {
                     hurt();
                 }
             }
@@ -158,79 +172,82 @@ public class WorldController {
         Random random = new Random();
         int tentacleCount = TentacleMonster.spawnCount();
         for (int i = 0; i < tentacleCount; i++) {
-            float x,y;
-            switch (random.nextInt(4)) {
-                case 0: {
-                    x = -playerController.getPlayer().getPosX() + random.nextFloat(Gdx.graphics.getWidth());
-                    y = -playerController.getPlayer().getPosY() + Gdx.graphics.getHeight();
-                } break;
-                case 1: {
-                    x = -playerController.getPlayer().getPosX() + random.nextFloat(Gdx.graphics.getWidth());
-                    y = -playerController.getPlayer().getPosY() - 0;
-                } break;
-                case 2: {
-                    x = -playerController.getPlayer().getPosX() + Gdx.graphics.getWidth();
-                    y = -playerController.getPlayer().getPosY() + random.nextFloat(Gdx.graphics.getHeight());
-                } break;
-                default: {
-                    x = -playerController.getPlayer().getPosX() - 0;
-                    y = -playerController.getPlayer().getPosY() + random.nextFloat(Gdx.graphics.getHeight());
-                }
-            }
-            TentacleMonster tentacleMonster = new TentacleMonster(x,y,delta);
+            Pair pair = calcPos(random);
+            TentacleMonster tentacleMonster = new TentacleMonster(pair.x,pair.y,delta);
             Main.getMain().getGame().getEnemies().add(tentacleMonster);
         }
 
         int eyeBatCount = EyeBat.spawnCount();
         for (int i = 0; i < eyeBatCount; i++) {
-            float x,y;
-            switch (random.nextInt(4)) {
-                case 0: {
-                    x = -playerController.getPlayer().getPosX() + random.nextFloat(Gdx.graphics.getWidth());
-                    y = -playerController.getPlayer().getPosY() + Gdx.graphics.getHeight();
-                } break;
-                case 1: {
-                    x = -playerController.getPlayer().getPosX() + random.nextFloat(Gdx.graphics.getWidth());
-                    y = -playerController.getPlayer().getPosY() - 0;
-                } break;
-                case 2: {
-                    x = -playerController.getPlayer().getPosX() + Gdx.graphics.getWidth();
-                    y = -playerController.getPlayer().getPosY() + random.nextFloat(Gdx.graphics.getHeight());
-                } break;
-                default: {
-                    x = -playerController.getPlayer().getPosX() - 0;
-                    y = -playerController.getPlayer().getPosY() + random.nextFloat(Gdx.graphics.getHeight());
-                }
-            }
-            EyeBat eyeBat = new EyeBat(x,y,delta);
+            Pair pair = calcPos(random);
+            EyeBat eyeBat = new EyeBat(pair.x,pair.y,delta);
             Main.getMain().getGame().getEnemies().add(eyeBat);
         }
 
-        int elderCount = Elder.spawnCount();
-        for (int i = 0; i < elderCount; i++) {
-            float x,y;
-            switch (random.nextInt(4)) {
-                case 0: {
-                    x = -playerController.getPlayer().getPosX() + random.nextFloat(Gdx.graphics.getWidth());
-                    y = -playerController.getPlayer().getPosY() + Gdx.graphics.getHeight();
-                } break;
-                case 1: {
-                    x = -playerController.getPlayer().getPosX() + random.nextFloat(Gdx.graphics.getWidth());
-                    y = -playerController.getPlayer().getPosY() - 0;
-                } break;
-                case 2: {
-                    x = -playerController.getPlayer().getPosX() + Gdx.graphics.getWidth();
-                    y = -playerController.getPlayer().getPosY() + random.nextFloat(Gdx.graphics.getHeight());
-                } break;
-                default: {
-                    x = -playerController.getPlayer().getPosX() - 0;
-                    y = -playerController.getPlayer().getPosY() + random.nextFloat(Gdx.graphics.getHeight());
-                }
-            }
-            Elder elder = new Elder(x,y,delta);
-            Main.getMain().getGame().getEnemies().add(elder);
-        }
+        if (Elder.spawnCount() == 1) bossFight(random, delta);
+        if (bossFight) squeezeWalls(delta);
     }
+
+    public void bossFight(Random random, float delta) {
+        Pair pair = calcPos(random);
+        Elder elder = new Elder(pair.x,pair.y,delta);
+        Main.getMain().getGame().getEnemies().add(elder);
+        ArrayList<Wall> walls = Main.getMain().getGame().getWalls();
+        pair = new Pair(Main.getMain().getGame().getHero().getPosX(), Main.getMain().getGame().getHero().getPosY());
+        pair.y *= -1;
+        pair.x *= -1;
+        walls.get(0).setX(pair.x + Gdx.graphics.getWidth()/2f);
+        walls.get(1).setX(pair.x);
+        walls.get(2).setX(pair.x + Gdx.graphics.getWidth()/2f);
+        walls.get(3).setX(pair.x + Gdx.graphics.getWidth());
+        walls.get(0).setY(pair.y);
+        walls.get(1).setY(pair.y + Gdx.graphics.getHeight()/2f);
+        walls.get(2).setY(pair.y + Gdx.graphics.getHeight());
+        walls.get(3).setY(pair.y + Gdx.graphics.getHeight()/2f);
+        walls.get(0).setScaleX(Gdx.graphics.getWidth()/64f);
+        walls.get(1).setScaleY(Gdx.graphics.getHeight()/32f);
+        walls.get(3).setScaleY(Gdx.graphics.getHeight()/32f);
+        walls.get(2).setScaleX(Gdx.graphics.getWidth()/64f);
+        bossFight = true;
+    }
+
+    private void squeezeWalls(float delta) {
+        ArrayList<Wall> walls = Main.getMain().getGame().getWalls();
+        float step = delta / Main.getMain().getGame().getTimer().getDuration() * 540;
+        walls.get(0).setAbsY(walls.get(0).getY() + step);
+        walls.get(1).setAbsX(walls.get(1).getX() + step);
+        walls.get(2).setAbsY(walls.get(2).getY() - step);
+        walls.get(3).setAbsX(walls.get(3).getX() - step);
+        walls.get(0).setScaleX(walls.get(0).getScaleX() - step/32f);
+        walls.get(2).setScaleX(walls.get(2).getScaleX() - step/32f);
+        walls.get(1).setScaleY(walls.get(1).getScaleY() - step/16f);
+        walls.get(3).setScaleY(walls.get(3).getScaleY() - step/16f);
+    }
+
+    private Pair calcPos(Random random) {
+        float x,y;
+        switch (random.nextInt(4)) {
+            case 0: {
+                x = -playerController.getPlayer().getPosX() + random.nextFloat(Gdx.graphics.getWidth());
+                y = -playerController.getPlayer().getPosY() + Gdx.graphics.getHeight();
+            } break;
+            case 1: {
+                x = -playerController.getPlayer().getPosX() + random.nextFloat(Gdx.graphics.getWidth());
+                y = -playerController.getPlayer().getPosY() - 0;
+            } break;
+            case 2: {
+                x = -playerController.getPlayer().getPosX() + Gdx.graphics.getWidth();
+                y = -playerController.getPlayer().getPosY() + random.nextFloat(Gdx.graphics.getHeight());
+            } break;
+            default: {
+                x = -playerController.getPlayer().getPosX() - 0;
+                y = -playerController.getPlayer().getPosY() + random.nextFloat(Gdx.graphics.getHeight());
+            }
+        }
+        return new Pair(x, y);
+    }
+
+
 
     private void enemiesAttack(float delta) {
         for (Enemy enemy : Main.getMain().getGame().getEnemies()) {
@@ -238,11 +255,11 @@ public class WorldController {
         }
     }
 
-    private void hurt() {
-        Main.getMain().getGame().getHero().removeHp(1);
+    public void hurt() {
+//        Main.getMain().getGame().getHero().removeHp(1);
         Main.getMain().getGame().getHero().setInvincible(true);
         if (Main.getMain().isSfx()) Sfx.Hurt.play();
-        killHeart();
+//        killHeart();
         Timer.schedule(new Timer.Task(){
             @Override
             public void run() {
@@ -294,5 +311,25 @@ public class WorldController {
 
     public void reviveHeart() {
         heartSprites.get(Main.getMain().getGame().getHero().getPlayerHealth() - 1).edit(heartAnimation);
+    }
+
+    public void endBossFight() {
+        ArrayList<Wall> walls = Main.getMain().getGame().getWalls();
+        walls.clear();
+        Random rand = new Random();
+        walls.add(new Wall(1888,0, rand.nextFloat(0, 5), false));
+        walls.add(new Wall(0,1344, rand.nextFloat(0, 5), true));
+        walls.add(new Wall(1888,2688, rand.nextFloat(0, 5), false));
+        walls.add(new Wall(3776,1344, rand.nextFloat(0, 5), true));
+    }
+}
+
+class Pair {
+    public float x;
+    public float y;
+
+    public Pair(float x, float y) {
+        this.x = x;
+        this.y = y;
     }
 }

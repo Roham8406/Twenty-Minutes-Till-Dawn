@@ -114,7 +114,7 @@ public class WeaponController {
                 Main.getMain().getGame().getBullets().remove(b);
                 if (!Main.getMain().getGame().getHero().isInvincible()) {
                     worldController.shotted();
-                    hurt();
+                    worldController.hurt();
                 }
             }
         }
@@ -122,18 +122,5 @@ public class WeaponController {
 
     public Sprite getSprite() {
         return weapon.getSprite();
-    }
-
-    private void hurt() {
-        Main.getMain().getGame().getHero().removeHp(1);
-        Main.getMain().getGame().getHero().setInvincible(true);
-        if (Main.getMain().isSfx()) Sfx.Hurt.play();
-        worldController.killHeart();
-        Timer.schedule(new Timer.Task(){
-            @Override
-            public void run() {
-                Main.getMain().getGame().getHero().setInvincible(false);
-            }
-        }, 3);
     }
 }

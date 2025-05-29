@@ -2,10 +2,10 @@ package com.tilldawn.Control;
 
 import com.tilldawn.Main;
 import com.tilldawn.Model.GameAssetManager;
-import com.tilldawn.View.AbilityMenuView;
-import com.tilldawn.View.EndMenuView;
-import com.tilldawn.View.MainMenuView;
-import com.tilldawn.View.PauseMenuView;
+import com.tilldawn.Model.enemy.Elder;
+import com.tilldawn.View.*;
+
+import java.util.Random;
 
 public class PauseMenuController extends MenuController {
     private PauseMenuView view;
@@ -48,7 +48,7 @@ public class PauseMenuController extends MenuController {
                 view.getGiveUp().setChecked(false);
             }
             if (view.getBossFight().isChecked()) {
-                //todo boss fight
+                Elder.setSpawn();
                 view.getBossFight().setChecked(false);
             }
             if (view.getHpIncrement().isChecked()) {
