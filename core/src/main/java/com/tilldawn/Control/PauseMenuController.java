@@ -31,10 +31,8 @@ public class PauseMenuController extends MenuController {
             if (view.getBlackAndWhite().isChecked()) {
                 if (Main.getMain().isBlackAndWhite()) {
                     Main.getMain().setBlackAndWhite(false);
-                    //todo delete filter
                 } else {
                     Main.getMain().setBlackAndWhite(true);
-                    //todo add filter
                 }
                 view.getBlackAndWhite().setChecked(false);
             }

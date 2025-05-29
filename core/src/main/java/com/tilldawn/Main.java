@@ -3,7 +3,12 @@ package com.tilldawn;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Model.*;
 import com.tilldawn.View.MainMenuView;
@@ -26,9 +31,25 @@ public class Main extends Game {
     private Integer time = 2;
     private GameCharacter gameCharacter = GameCharacter.Shana;
     private MainGame mainGame;
+    private ShaderProgram shader;
+    private FrameBuffer fbo;
+    private TextureRegion fboRegion;
+
 
     @Override
     public void create() {
+        ShaderProgram.pedantic = false; // ignore strict GLSL checks
+
+        shader = new ShaderProgram(
+            Gdx.files.internal("Glsl/grayscale.vert"),
+            Gdx.files.internal("Glsl/grayscale.frag")
+        );
+
+        fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
+        fboRegion = new TextureRegion(fbo.getColorBufferTexture());
+        fboRegion.flip(false, true); // flip Y
+
+
         main = this;
         batch = new SpriteBatch();
         Main.getMain().playMusic();
@@ -162,5 +183,28 @@ public class Main extends Game {
 
     public void setGame(MainGame mainGame) {
         this.mainGame = mainGame;
+    }
+
+    public void startBatch() {
+        Main.getMain().fbo.begin();
+        if (blackAndWhite) {
+            Gdx.gl.glClearColor(1, 1, 1, 1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        }
+        Main.getBatch().begin();
+    }
+
+    public void endBatch() {
+        Main.getBatch().end();
+        Main.getMain().fbo.end();
+        if (blackAndWhite) {
+            Gdx.gl.glClearColor(0, 0, 0, 1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            Main.getBatch().setShader(Main.getMain().shader);
+        }
+        Main.getBatch().begin();
+        Main.getBatch().draw(Main.getMain().fboRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Main.getBatch().end();
+        Main.getBatch().setShader(null);
     }
 }

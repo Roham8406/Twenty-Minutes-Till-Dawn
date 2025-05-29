@@ -9,6 +9,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.Model.User;
+import com.badlogic.gdx.graphics.GL20;
+
 
 public class MainMenuView implements Screen {
     private Stage stage;
@@ -75,11 +77,11 @@ public class MainMenuView implements Screen {
 
     @Override
     public void render(float delta) {
+        Main.getMain().startBatch();
         ScreenUtils.clear(0.9f, 0.4f, 0.4f, 1);
-        Main.getBatch().begin();
-        Main.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
+        Main.getMain().endBatch();
         controller.handleMainMenuButtons();
     }
 

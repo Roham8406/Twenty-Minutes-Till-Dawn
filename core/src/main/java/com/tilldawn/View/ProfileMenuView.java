@@ -108,11 +108,11 @@ public class ProfileMenuView implements Screen {
 
     @Override
     public void render(float delta) {
+        Main.getMain().startBatch();
         ScreenUtils.clear(0.2f, 0.5f, 0.4f, 1);
-        Main.getBatch().begin();
-        Main.getBatch().end();
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
+        Main.getMain().endBatch();
         controller.handleMainMenuButtons();
     }
 
