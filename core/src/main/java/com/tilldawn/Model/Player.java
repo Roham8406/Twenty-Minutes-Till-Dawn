@@ -135,7 +135,7 @@ public class Player {
     }
 
     public Animation<TextureRegion> getCharacterAnimation() {
-        return gameCharacter.getCharacterAnimation();
+        return isPlayerRunning ? gameCharacter.getRunningAnimation() : gameCharacter.getCharacterAnimation();
     }
 
     public void incrementXp(GameController gameController) {

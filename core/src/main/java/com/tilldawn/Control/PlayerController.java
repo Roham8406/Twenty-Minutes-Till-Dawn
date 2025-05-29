@@ -30,17 +30,26 @@ public class PlayerController {
 
 
     public void handlePlayerInput(){
+        boolean flag = true;
         if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("up"))){
             player.setPosY(player.getPosY() - player.getSpeed());
+            player.setPlayerRunning(true);
+            flag = false;
         }
         if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("right"))){
             player.setPosX(player.getPosX() - player.getSpeed());
+            player.setPlayerRunning(true);
+            flag = false;
         }
         if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("down"))){
             player.setPosY(player.getPosY() + player.getSpeed());
+            player.setPlayerRunning(true);
+            flag = false;
         }
         if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("left"))){
             player.setPosX(player.getPosX() + player.getSpeed());
+            player.setPlayerRunning(true);
+            flag = false;
             player.getPlayerSprite().flip(true, false);
         }
         if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("reload"))){
@@ -52,6 +61,9 @@ public class PlayerController {
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             Main.getMain().getScreen().dispose();
             Main.getMain().setScreen(new PauseMenuView(new PauseMenuController(), GameAssetManager.getGameAssetManager().getSkin(), gameController));
+        }
+        if (flag && player.isPlayerRunning()) {
+            player.setPlayerRunning(false);
         }
     }
 

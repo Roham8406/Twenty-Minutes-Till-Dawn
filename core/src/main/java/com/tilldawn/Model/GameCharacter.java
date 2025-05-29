@@ -22,6 +22,7 @@ public enum GameCharacter {
     private Texture texture;
     TextureRegion[][] textureFrames;
     Animation<TextureRegion> characterAnimation;
+    Animation<TextureRegion> runningAnimation;
 
 
     GameCharacter(String name, String portrait, String frames, Integer speed, Integer health) {
@@ -38,6 +39,15 @@ public enum GameCharacter {
             textureFrames = TextureRegion.split(texture, 32, 32);
             characterAnimation = new Animation<>(0.1f, textureFrames[0][0], textureFrames[0][1], textureFrames[0][2],
                 textureFrames[0][2], textureFrames[0][3], textureFrames[0][4], textureFrames[0][5]);
+            switch (this) {
+                case Shana:
+                case Diamond:
+                case Dasher:
+                case Lilith:
+                case Scarlet:
+                    runningAnimation = new Animation<>(0.1f, textureFrames[1][0], textureFrames[1][1],
+                        textureFrames[1][2], textureFrames[1][3]);
+            }
         }
     }
 
@@ -49,6 +59,10 @@ public enum GameCharacter {
     public Animation<TextureRegion> getCharacterAnimation() {
         init();
         return characterAnimation;
+    }
+
+    public Animation<TextureRegion> getRunningAnimation() {
+        return runningAnimation;
     }
 
     public ImageButton getPortraitButton() {
