@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
@@ -18,6 +19,7 @@ public abstract class Enemy {
     protected float y;
     protected float lastSpawn;
     protected boolean dead;
+    protected Vector2 velocity = new Vector2(0, 0).nor();;
     protected TextureRegion[][] textureFrames;
     protected Animation<TextureRegion> animationFrames;
     protected Texture seed = new Texture("T/T_LunaBlackHoleDamage_0.png");
@@ -28,6 +30,11 @@ public abstract class Enemy {
         if (this.hp <= 0) {
             die();
         }
+    }
+
+
+    public Vector2 getVelocity() {
+        return velocity;
     }
 
     public void die() {
@@ -71,5 +78,10 @@ public abstract class Enemy {
 
     public float getHeight() {
         return 1;
+    }
+
+    public void goBack(Vector2 direction) {
+        x -= direction.x*20;
+        y -= direction.y*20;
     }
 }

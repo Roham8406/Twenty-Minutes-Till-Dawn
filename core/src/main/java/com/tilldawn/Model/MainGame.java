@@ -44,10 +44,10 @@ public class MainGame {
         for (int i = 0; i < treesNumber; i++) {
             trees.add(new Tree(rand.nextInt(0,3776), rand.nextInt(0, 2680), rand.nextFloat(0, 5)));
         }
-        walls.add(new Wall(1888,0, rand.nextFloat(0, 5), false));
-        walls.add(new Wall(0,1344, rand.nextFloat(0, 5), true));
-        walls.add(new Wall(1888,2688, rand.nextFloat(0, 5), false));
-        walls.add(new Wall(3776,1344, rand.nextFloat(0, 5), true));
+        walls.add(new Wall(1888,0, rand.nextFloat(0, 5), false, true));
+        walls.add(new Wall(0,1344, rand.nextFloat(0, 5), true, true));
+        walls.add(new Wall(1888,2688, rand.nextFloat(0, 5), false, false));
+        walls.add(new Wall(3776,1344, rand.nextFloat(0, 5), true, false));
     }
 
     public Player getHero() {

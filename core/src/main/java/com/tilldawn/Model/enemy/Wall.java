@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.tilldawn.Model.AnimatedSprite;
 
 
@@ -18,8 +19,10 @@ public class Wall {
     private TextureRegion[][] textureFrames;
     private Animation<TextureRegion> animationFrames;
     private boolean horizontal;
+    private boolean nearOrigin;
 
-    public Wall(int x, int y, float pos, boolean horizontal){
+    public Wall(int x, int y, float pos, boolean horizontal, boolean nearOrigin) {
+        this.nearOrigin = nearOrigin;
         setX(x);
         setY(y);
         this.horizontal = horizontal;
@@ -77,6 +80,22 @@ public class Wall {
 
     public float getY() {
         return y;
+    }
+
+    public Vector2 getGoBack() {
+        if (nearOrigin) {
+            if (!horizontal) {
+                return new Vector2(0, 10);
+            } else {
+                return new Vector2(10, 0);
+            }
+        } else  {
+            if (!horizontal) {
+                return new Vector2(0, -10);
+            } else {
+                return new Vector2(-10, 0);
+            }
+        }
     }
 
     public boolean isCollisioned(float posX, float posY) {

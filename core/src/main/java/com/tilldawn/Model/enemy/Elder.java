@@ -49,6 +49,7 @@ public class Elder extends Enemy{
                 -Main.getMain().getGame().getHero().getPosX() + Gdx.graphics.getWidth() / 2f - x,
                 -Main.getMain().getGame().getHero().getPosY() + Gdx.graphics.getHeight() / 2f - y
             ).nor();
+            velocity = direction;
             x += direction.x * (dashing ? 6 : 2);
             y += direction.y * (dashing ? 6 : 2);
             flipped = direction.x < 0;

@@ -73,19 +73,20 @@ public class WeaponController {
             b.getSprite().draw(Main.getBatch());
             Vector2 direction = new Vector2(
                 Gdx.graphics.getWidth()/2f - b.getX(),
-                Gdx.graphics.getHeight()/2f - b.getY()
+                -Gdx.graphics.getHeight()/2f + b.getY()
             ).nor();
 
             for (Enemy enemy : Main.getMain().getGame().getEnemies().toArray(new Enemy[Main.getMain().getGame().getEnemies().size()])) {
                 if (enemy.isDead()) continue;
                 if (enemy.isCollisioned(b.getSprite().getX(), b.getSprite().getY())) {
                     enemy.removeHp(b.getDamage());
+                    enemy.goBack(direction);
                     bullets.remove(b);
                 }
             }
 
             b.setPosX(b.getPosX() + direction.x * 5);
-            b.setPosY(b.getPosY() - direction.y * 5);
+            b.setPosY(b.getPosY() + direction.y * 5);
             b.updatePos();
             b.decrementTile();
             if (b.isRangeEnded()) {

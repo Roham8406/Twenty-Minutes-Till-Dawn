@@ -102,8 +102,12 @@ public class WorldController {
             Sprite sprite = wall.getSprite(backgroundX, backgroundY);
             sprite.draw(Main.getBatch());
             ((AnimatedSprite)sprite).update(delta);
-            if (!Main.getMain().getGame().getHero().isInvincible()) {
-                if (wall.isCollisioned(backgroundX, backgroundY)) {
+            if (wall.isCollisioned(backgroundX, backgroundY)) {
+                playerController.getPlayer().setPosX(
+                    playerController.getPlayer().getPosX() - wall.getGoBack().x*3);
+                playerController.getPlayer().setPosY(
+                    playerController.getPlayer().getPosY() - wall.getGoBack().y*3);
+                if (!Main.getMain().getGame().getHero().isInvincible()) {
                     hurt();
                 }
             }
@@ -134,6 +138,11 @@ public class WorldController {
                     playerController.getPlayer().incrementXp(gameController);
                     Main.getMain().getGame().getEnemies().remove(enemy);
                 } else {
+                    playerController.getPlayer().setPosX(
+                        playerController.getPlayer().getPosX() - enemy.getVelocity().x * 10);
+                    playerController.getPlayer().setPosY(
+                        playerController.getPlayer().getPosY() - enemy.getVelocity().y * 10);
+                    enemy.goBack(enemy.getVelocity());
                     if (!Main.getMain().getGame().getHero().isInvincible()) {
                         hurt();
                     } else {
@@ -317,10 +326,10 @@ public class WorldController {
         ArrayList<Wall> walls = Main.getMain().getGame().getWalls();
         walls.clear();
         Random rand = new Random();
-        walls.add(new Wall(1888,0, rand.nextFloat(0, 5), false));
-        walls.add(new Wall(0,1344, rand.nextFloat(0, 5), true));
-        walls.add(new Wall(1888,2688, rand.nextFloat(0, 5), false));
-        walls.add(new Wall(3776,1344, rand.nextFloat(0, 5), true));
+        walls.add(new Wall(1888,0, rand.nextFloat(0, 5), false, true));
+        walls.add(new Wall(0,1344, rand.nextFloat(0, 5), true, true));
+        walls.add(new Wall(1888,2688, rand.nextFloat(0, 5), false, false));
+        walls.add(new Wall(3776,1344, rand.nextFloat(0, 5), true, false));
     }
 }
 

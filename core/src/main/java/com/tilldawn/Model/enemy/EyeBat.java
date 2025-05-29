@@ -48,6 +48,7 @@ public class EyeBat extends Enemy{
             ).nor();
             x += direction.x * 1;
             y += direction.y * 1;
+            velocity = direction;
             flipped = direction.x < 0;
             if (lastShot - 3 > Main.getMain().getGame().getTimer().getRemaining()) {
                 Main.getMain().getGame().getBullets().add(new EnemyBullet(x, y));
