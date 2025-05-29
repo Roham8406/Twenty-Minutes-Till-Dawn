@@ -13,6 +13,7 @@ public abstract class Enemy {
     protected Integer hp;
     protected Texture texture;
     protected Sprite sprite;
+    protected boolean flipped;
     protected float x;
     protected float y;
     protected float lastSpawn;
@@ -53,6 +54,7 @@ public abstract class Enemy {
     public Sprite getSprite(float offsetX, float offsetY) {
         sprite.setX(x + offsetX);
         sprite.setY(y + offsetY);
+        if (flipped) sprite.flip(true, false);
         return sprite;
     }
 
@@ -61,5 +63,13 @@ public abstract class Enemy {
     public boolean isCollisioned(float posX, float posY) {
         return Math.abs(posX + this.x - Gdx.graphics.getWidth()/2f) < 28 &&
             Math.abs(posY + this.y - Gdx.graphics.getHeight()/2f) < 50;
+    }
+
+    public float getWidth() {
+        return 1;
+    }
+
+    public float getHeight() {
+        return 1;
     }
 }

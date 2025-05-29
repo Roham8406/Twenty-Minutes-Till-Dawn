@@ -50,6 +50,7 @@ public class TentacleMonster extends Enemy{
             ).nor();
             x += direction.x * 1;
             y += direction.y * 1;
+            flipped = direction.x < 0;
         }
     }
 

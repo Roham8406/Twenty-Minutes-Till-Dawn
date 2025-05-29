@@ -11,10 +11,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
 import com.tilldawn.Model.Sfx;
-import com.tilldawn.Model.enemy.Enemy;
-import com.tilldawn.Model.enemy.EyeBat;
-import com.tilldawn.Model.enemy.TentacleMonster;
-import com.tilldawn.Model.enemy.Tree;
+import com.tilldawn.Model.enemy.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -105,6 +102,7 @@ public class WorldController {
             new Enemy[Main.getMain().getGame().getEnemies().size()]
         )) {
             Sprite sprite = enemy.getSprite(backgroundX, backgroundY);
+            sprite.setScale(enemy.getWidth(), enemy.getHeight());
             sprite.draw(Main.getBatch());
             ((AnimatedSprite) sprite).update(delta);
             if (!enemy.isDead()) {
@@ -206,6 +204,31 @@ public class WorldController {
             }
             EyeBat eyeBat = new EyeBat(x,y,delta);
             Main.getMain().getGame().getEnemies().add(eyeBat);
+        }
+
+        int elderCount = Elder.spawnCount();
+        for (int i = 0; i < elderCount; i++) {
+            float x,y;
+            switch (random.nextInt(4)) {
+                case 0: {
+                    x = -playerController.getPlayer().getPosX() + random.nextFloat(Gdx.graphics.getWidth());
+                    y = -playerController.getPlayer().getPosY() + Gdx.graphics.getHeight();
+                } break;
+                case 1: {
+                    x = -playerController.getPlayer().getPosX() + random.nextFloat(Gdx.graphics.getWidth());
+                    y = -playerController.getPlayer().getPosY() - 0;
+                } break;
+                case 2: {
+                    x = -playerController.getPlayer().getPosX() + Gdx.graphics.getWidth();
+                    y = -playerController.getPlayer().getPosY() + random.nextFloat(Gdx.graphics.getHeight());
+                } break;
+                default: {
+                    x = -playerController.getPlayer().getPosX() - 0;
+                    y = -playerController.getPlayer().getPosY() + random.nextFloat(Gdx.graphics.getHeight());
+                }
+            }
+            Elder elder = new Elder(x,y,delta);
+            Main.getMain().getGame().getEnemies().add(elder);
         }
     }
 
