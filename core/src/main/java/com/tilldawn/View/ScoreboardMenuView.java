@@ -77,7 +77,7 @@ public class ScoreboardMenuView implements Screen {
                 Texture texture = new Texture(pixmap);
                 Drawable background = new TextureRegionDrawable(new TextureRegion(texture));
                 Label.LabelStyle style = new Label.LabelStyle();
-                style.font = new BitmapFont();
+                style.font = new BitmapFont(Gdx.files.internal("Fonts/Harrington.fnt"));
                 style.fontColor = Color.WHITE;
                 style.background = background;
 

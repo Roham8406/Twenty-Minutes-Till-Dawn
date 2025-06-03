@@ -50,7 +50,7 @@ public class WorldController {
         this.timer.setBounds(440,Gdx.graphics.getHeight()-62,Gdx.graphics.getWidth()-880,60);
         this.ammoTexture = new Texture(Gdx.files.internal("T/T_AmmoIcon.png"));
         setAmmo();
-        this.font = new BitmapFont();
+        this.font = new BitmapFont(Gdx.files.internal("Fonts/Harrington.fnt"));
         this.heartTexture = new Texture("T/T_HeartAnimation.png");
         this.heartFrames = TextureRegion.split(heartTexture, 32, 32);
         this.heartAnimation = new Animation<>(0.2f, heartFrames[0][0], heartFrames[0][1], heartFrames[0][2]);
