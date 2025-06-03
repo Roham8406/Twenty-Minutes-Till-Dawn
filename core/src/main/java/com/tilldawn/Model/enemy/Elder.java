@@ -21,13 +21,21 @@ public class Elder extends Enemy{
         this.hp = 400;
         this.x = x;
         this.y = y;
+        init();
+        lastDash = Main.getMain().getGame().getTimer().getRemaining();
+    }
+
+    @Override
+    protected void init(){
+        super.init();
+        if (texture != null) return;
         texture = new Texture("T/T_ShubNiggurath.png");
         textureFrames = TextureRegion.split(texture, 96, 96);
         animationFrames = new Animation<>(0.3f, textureFrames[0][0], textureFrames[0][1],
             textureFrames[0][2]);
         sprite = new AnimatedSprite(animationFrames);
-        lastDash = Main.getMain().getGame().getTimer().getRemaining();
     }
+
     public static Integer spawnCount() {
         Countdown countdown = Main.getMain().getGame().getTimer();
         if (spawn) {
@@ -79,6 +87,7 @@ public class Elder extends Enemy{
     }
 
     public boolean isCollisioned(float posX, float posY) {
+        init();
         return Math.abs(posX - sprite.getX()) < 80 &&
             Math.abs(posY - sprite.getY()) < 70;
     }

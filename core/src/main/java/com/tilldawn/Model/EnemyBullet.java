@@ -5,9 +5,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.tilldawn.Main;
 
-public class EnemyBullet {
-    private Texture texture = new Texture(GameAssetManager.getGameAssetManager().getBullet());
-    private Sprite sprite = new Sprite(texture);
+import java.io.Serializable;
+
+public class EnemyBullet implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private transient Texture texture = new Texture(GameAssetManager.getGameAssetManager().getBullet());
+    private transient Sprite sprite;
     private int damage = 1;
     private int projectTile = 1;
     private float x;
@@ -17,24 +20,33 @@ public class EnemyBullet {
     private int range = 120;
 
     public EnemyBullet(float x, float y){
-        sprite.setSize(20 , 20);
         this.x = x;
         this.y = y;
         this.posX = x;
         this.posY = y;
+        init();
+    }
+
+    private void init(){
+        if (sprite != null) return;
+        sprite = new Sprite(texture);
+        sprite.setSize(20 , 20);
         updatePos();
     }
 
     public void updatePos(){
+        init();
         sprite.setX(posX + Main.getMain().getGame().getHero().getPosX());
         sprite.setY(posY + Main.getMain().getGame().getHero().getPosY());
     }
 
     public Texture getTexture() {
+        init();
         return texture;
     }
 
     public Sprite getSprite() {
+        init();
         return sprite;
     }
 
@@ -63,6 +75,7 @@ public class EnemyBullet {
     }
 
     public boolean isCollisioned(float posX, float posY) {
+        init();
         return Math.abs(posX - sprite.getX()) < 80 &&
             Math.abs(posY - sprite.getY()) < 70;
     }

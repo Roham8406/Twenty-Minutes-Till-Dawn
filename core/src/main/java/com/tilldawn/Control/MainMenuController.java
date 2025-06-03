@@ -3,6 +3,7 @@ package com.tilldawn.Control;
 import com.tilldawn.Main;
 import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.View.*;
+import com.tilldawn.service.SaveService;
 
 public class MainMenuController extends MenuController {
     private MainMenuView view;
@@ -38,6 +39,8 @@ public class MainMenuController extends MenuController {
                     Main.getMain().getScreen().dispose();
                     Main.getMain().setScreen(new LoginMenuView(new LoginMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
                 }
+            } else if (view.getLoadGame().isChecked()) {
+                view.alert(SaveService.getInstance().loadObject().getMessage(), 4);
             }
         }
     }

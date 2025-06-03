@@ -16,6 +16,12 @@ public class TentacleMonster extends Enemy{
         this.hp = 25;
         this.x = x;
         this.y = y;
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        if (texture != null) return;
         texture = new Texture("T/T_TentacleEnemy.png");
         textureFrames = TextureRegion.split(texture, 64, 64);
         animationFrames = new Animation<>(0.3f, textureFrames[0][0], textureFrames[0][1],
@@ -32,6 +38,7 @@ public class TentacleMonster extends Enemy{
             }
         }, 1);
     }
+
     public static Integer spawnCount() {
         Countdown countdown = Main.getMain().getGame().getTimer();
         if (Main.getMain().getGame().getLastSpawn().get(0) - 3 < countdown.getRemaining()) {
@@ -56,6 +63,7 @@ public class TentacleMonster extends Enemy{
     }
 
     public boolean isCollisioned(float posX, float posY) {
+        init();
         return Math.abs(posX - sprite.getX()) < 28 &&
             Math.abs(posY - sprite.getY()) < 50;
     }

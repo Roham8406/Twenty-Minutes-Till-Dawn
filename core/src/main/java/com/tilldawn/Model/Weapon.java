@@ -8,9 +8,13 @@ import com.tilldawn.Control.WeaponController;
 import com.tilldawn.Main;
 import com.tilldawn.View.GameView;
 
-public class Weapon {
-    private Sprite sprite;
-    private AnimatedSprite reloadingSprite;
+import java.io.Serializable;
+
+public class Weapon implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private transient Sprite sprite;
+    private transient AnimatedSprite reloadingSprite;
     WeaponType weaponType;
     private int ammo;
     private Integer damage = 0;
@@ -26,6 +30,7 @@ public class Weapon {
     }
 
     public void reload() {
+        if (reloading) return;
         if (Main.getMain().isSfx()) Sfx.Reload.play();
         reloading = true;
         this.ammo = weaponType.getAmmoMax() + maxAmmo;
@@ -42,12 +47,12 @@ public class Weapon {
     private void init(){
         if (sprite == null){
             sprite = new Sprite(weaponType.getDefaultTexture());
-            sprite.setX((float) Gdx.graphics.getWidth() / 2  - 25);
+            sprite.setX((float) Gdx.graphics.getWidth() / 2 - 25);
             sprite.setY((float) Gdx.graphics.getHeight() / 2 - 25);
             sprite.setSize(50,50);
             reloadingSprite = new AnimatedSprite(weaponType.getReloadAnimation());
-            reloadingSprite.setX((float) Gdx.graphics.getWidth() / 2  - 25);
-            reloadingSprite.setY((float) Gdx.graphics.getHeight() / 2 - 25);
+            reloadingSprite.setX((float) Gdx.graphics.getWidth() / 2  - 12.5f);
+            reloadingSprite.setY((float) Gdx.graphics.getHeight() / 2 - 12.5f);
             reloadingSprite.setSize(50,50);
         }
     }

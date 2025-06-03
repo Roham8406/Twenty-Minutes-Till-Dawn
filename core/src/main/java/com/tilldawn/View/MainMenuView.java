@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Main;
@@ -25,6 +27,7 @@ public class MainMenuView implements Screen {
     private final Table header;
     private final MainMenuController controller;
     private final boolean isSigned;
+    private Skin skin;
 
     public MainMenuView(MainMenuController controller, Skin skin) {
         this.controller = controller;
@@ -45,6 +48,7 @@ public class MainMenuView implements Screen {
         this.profile = new TextButton(Main.getLanguage().ProfileMenu, skin);
         this.loadGame = new TextButton(Main.getLanguage().LoadGame, skin);
 
+        this.skin = skin;
         controller.setView(this);
     }
 
@@ -140,5 +144,24 @@ public class MainMenuView implements Screen {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public void alert(String message, Integer timer) {
+        final Table alertBox = new Table(skin);
+        alertBox.setSize(1000, 50);
+        alertBox.setPosition(Gdx.graphics.getWidth() / 2f,0, Align.bottom);
+
+        Label label = new Label(message, skin);
+        alertBox.add(label);
+        alertBox.setBackground("progress-bar-health-knob");
+        stage.addActor(alertBox);
+
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                alertBox.remove();
+            }
+        }, timer);
+
     }
 }

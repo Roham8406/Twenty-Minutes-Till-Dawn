@@ -12,12 +12,16 @@ import com.tilldawn.Main;
 import com.tilldawn.View.AbilityMenuView;
 import com.tilldawn.View.EndMenuView;
 
-public class Player {
-    private TextureRegion playerTexture;
-    private Sprite playerSprite;
+import java.io.Serializable;
+
+public class Player implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private transient TextureRegion playerTexture;
+    private transient Sprite playerSprite;
     private float posX = 0;
     private float posY = 0;
-    private CollisionRect rect ;
+//    private CollisionRect rect ;
     private float time = 0;
     private float speed;
     private int hp;
@@ -36,33 +40,30 @@ public class Player {
     private boolean isPlayerRunning = false;
 
     public Player(GameCharacter gameCharacter){
-        playerTexture = gameCharacter.getDefaultTexture();
-        playerSprite = new Sprite(playerTexture);
-        playerSprite.setPosition((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight() / 2);
-        playerSprite.setSize(playerTexture.getRegionWidth() * 3, playerTexture.getRegionHeight() * 3);
-        rect = new CollisionRect((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight(), playerTexture.getRegionWidth() * 3, playerTexture.getRegionHeight() * 3);
+        //        rect = new CollisionRect((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight(), playerTexture.getRegionWidth() * 3, playerTexture.getRegionHeight() * 3);
         this.gameCharacter = gameCharacter;
         hp = gameCharacter.getHealth();
         maxHp = gameCharacter.getHealth();
         speed = gameCharacter.getSpeed();
         isInvincible = false;
         level = 1;
+        initTexture();
     }
 
-    public TextureRegion getPlayerTexture() {
-        return playerTexture;
-    }
-
-    public void setPlayerTexture(TextureRegion playerTexture) {
-        this.playerTexture = playerTexture;
+    private void initTexture() {
+        if (playerTexture != null) return;
+        playerTexture = gameCharacter.getDefaultTexture();
+        playerSprite = new Sprite(playerTexture);
+        playerSprite.setSize(playerTexture.getRegionWidth() * 3, playerTexture.getRegionHeight() * 3);
+        playerSprite.setPosition((float) Gdx.graphics.getWidth() / 2 - playerSprite.getWidth()/2,
+            (float) Gdx.graphics.getHeight() / 2 - playerSprite.getHeight()/2);
+        playerSprite.setPosition((float) Gdx.graphics.getWidth() / 2,
+            (float) Gdx.graphics.getHeight() / 2);
     }
 
     public Sprite getPlayerSprite() {
+        initTexture();
         return playerSprite;
-    }
-
-    public void setPlayerSprite(Sprite playerSprite) {
-        this.playerSprite = playerSprite;
     }
 
     public float getPosX() {
@@ -86,11 +87,12 @@ public class Player {
     }
 
     public CollisionRect getRect() {
-        return rect;
+//        return rect;
+        return null;
     }
 
     public void setRect(CollisionRect rect) {
-        this.rect = rect;
+//        this.rect = rect;
     }
 
 
@@ -135,6 +137,7 @@ public class Player {
     }
 
     public Animation<TextureRegion> getCharacterAnimation() {
+        initTexture();
         return isPlayerRunning ? gameCharacter.getRunningAnimation() : gameCharacter.getCharacterAnimation();
     }
 

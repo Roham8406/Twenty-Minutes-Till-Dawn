@@ -4,7 +4,10 @@ import com.tilldawn.Control.EndMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.View.EndMenuView;
 
-public class Countdown {
+import java.io.Serializable;
+
+public class Countdown implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final float duration;
     private float remaining;
     private boolean running;

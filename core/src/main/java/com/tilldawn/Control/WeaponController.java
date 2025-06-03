@@ -1,9 +1,6 @@
 package com.tilldawn.Control;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -12,11 +9,8 @@ import com.tilldawn.Main;
 import com.tilldawn.Model.*;
 import com.tilldawn.Model.enemy.Enemy;
 
-import java.util.ArrayList;
-
 public class WeaponController {
     private final Weapon weapon;
-    private final ArrayList<Bullet> bullets = new ArrayList<>();
     private final WorldController worldController;
 
     public WeaponController(WorldController worldController, Weapon weapon){
@@ -54,7 +48,9 @@ public class WeaponController {
                 Timer.schedule(new Timer.Task(){
                     @Override
                     public void run() {
-                        bullets.add(new Bullet(x, y, weapon.getProjectTile(), weapon.getDamage()));
+                        Main.getMain().getGame().getBullets().add(
+                            new Bullet(x, y, weapon.getProjectTile(), weapon.getDamage())
+                        );
                     }
                 }, 0.2f * i);
             }
@@ -69,7 +65,9 @@ public class WeaponController {
     }
 
     public void updateBullets() {
-        for(Bullet b : bullets.toArray(new Bullet[bullets.size()])) {
+        for(Bullet b : Main.getMain().getGame().getBullets().toArray(
+            new Bullet[Main.getMain().getGame().getBullets().size()]
+        )) {
             b.getSprite().draw(Main.getBatch());
             Vector2 direction = new Vector2(
                 Gdx.graphics.getWidth()/2f - b.getX(),
@@ -81,7 +79,7 @@ public class WeaponController {
                 if (enemy.isCollisioned(b.getSprite().getX(), b.getSprite().getY())) {
                     enemy.removeHp(b.getDamage());
                     enemy.goBack(direction);
-                    bullets.remove(b);
+                    Main.getMain().getGame().getBullets().remove(b);
                 }
             }
 
@@ -90,11 +88,11 @@ public class WeaponController {
             b.updatePos();
             b.decrementTile();
             if (b.isRangeEnded()) {
-                bullets.remove(b);
+                Main.getMain().getGame().getBullets().remove(b);
             }
         }
-        for(EnemyBullet b : Main.getMain().getGame().getBullets().toArray(
-            new EnemyBullet[Main.getMain().getGame().getBullets().size()]
+        for(EnemyBullet b : Main.getMain().getGame().getEnemyBullets().toArray(
+            new EnemyBullet[Main.getMain().getGame().getEnemyBullets().size()]
         )) {
             b.getSprite().draw(Main.getBatch());
             Vector2 direction = new Vector2(
@@ -108,11 +106,11 @@ public class WeaponController {
             b.updatePos();
             b.decrementTile();
             if (b.isRangeEnded()) {
-                Main.getMain().getGame().getBullets().remove(b);
+                Main.getMain().getGame().getEnemyBullets().remove(b);
             }
 
             if (b.isCollisioned(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f)) {
-                Main.getMain().getGame().getBullets().remove(b);
+                Main.getMain().getGame().getEnemyBullets().remove(b);
                 if (!Main.getMain().getGame().getHero().isInvincible()) {
                     worldController.shotted();
                     worldController.hurt();

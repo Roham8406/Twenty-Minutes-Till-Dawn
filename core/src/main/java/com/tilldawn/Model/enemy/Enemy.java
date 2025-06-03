@@ -10,20 +10,23 @@ import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
 
-public abstract class Enemy {
+import java.io.Serializable;
+
+public abstract class Enemy implements Serializable {
+    private static final long serialVersionUID = 1L;
     protected Integer hp;
-    protected Texture texture;
-    protected Sprite sprite;
+    protected transient Texture texture;
+    protected transient Sprite sprite;
     protected boolean flipped;
     protected float x;
     protected float y;
     protected float lastSpawn;
     protected boolean dead;
     protected Vector2 velocity = new Vector2(0, 0).nor();;
-    protected TextureRegion[][] textureFrames;
-    protected Animation<TextureRegion> animationFrames;
-    protected Texture seed = new Texture("T/T_LunaBlackHoleDamage_0.png");
-    protected Texture death = new Texture("T/T_DeathFX.png");
+    protected transient TextureRegion[][] textureFrames;
+    protected transient Animation<TextureRegion> animationFrames;
+    protected transient Texture seed = new Texture("T/T_LunaBlackHoleDamage_0.png");
+    protected transient Texture death = new Texture("T/T_DeathFX.png");
 
     public void removeHp(int hp){
         this.hp -= hp;
@@ -59,6 +62,7 @@ public abstract class Enemy {
     }
 
     public Sprite getSprite(float offsetX, float offsetY) {
+        init();
         sprite.setX(x + offsetX);
         sprite.setY(y + offsetY);
         if (flipped) sprite.flip(true, false);
@@ -68,6 +72,7 @@ public abstract class Enemy {
     public abstract void attack();
 
     public boolean isCollisioned(float posX, float posY) {
+        init();
         return Math.abs(posX + this.x - Gdx.graphics.getWidth()/2f) < 28 &&
             Math.abs(posY + this.y - Gdx.graphics.getHeight()/2f) < 50;
     }
@@ -83,5 +88,9 @@ public abstract class Enemy {
     public void goBack(Vector2 direction) {
         x -= direction.x*20;
         y -= direction.y*20;
+    }
+
+    protected void init() {
+
     }
 }

@@ -56,8 +56,12 @@ public class WorldController {
         this.heartAnimation = new Animation<>(0.2f, heartFrames[0][0], heartFrames[0][1], heartFrames[0][2]);
         this.deadHeart = new Animation<>(0.2f, heartFrames[0][3], heartFrames[0][3]);
         for (int i = 0; i < Main.getMain().getGame().getHero().getMaxHp(); i++) {
-            heartSprites.add(new AnimatedSprite(heartAnimation));
-            heartSprites.get(i).setPosition(470 + 30*i, timer.getY() + 15);
+            if (i < Main.getMain().getGame().getHero().getPlayerHealth()) {
+                heartSprites.add(new AnimatedSprite(heartAnimation));
+            } else {
+                heartSprites.add(new AnimatedSprite(deadHeart));
+            }
+            heartSprites.get(i).setPosition(470 + 30 * i, timer.getY() + 15);
         }
         Texture shottedTexture = new Texture("T/T_CurseFX.png");
         this.shottedFrames = TextureRegion.split(shottedTexture, 32, 32);

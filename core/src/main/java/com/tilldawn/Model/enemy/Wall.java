@@ -8,16 +8,20 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.tilldawn.Model.AnimatedSprite;
 
+import java.io.Serializable;
+import java.util.Random;
 
-public class Wall {
-    private Texture texture;
-    private Sprite sprite;
+
+public class Wall implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private transient Texture texture;
+    private transient Sprite sprite;
     private float x;
     private float y;
     private float scaleX;
     private float scaleY;
-    private TextureRegion[][] textureFrames;
-    private Animation<TextureRegion> animationFrames;
+    private transient TextureRegion[][] textureFrames;
+    private transient Animation<TextureRegion> animationFrames;
     private boolean horizontal;
     private boolean nearOrigin;
 
@@ -26,14 +30,19 @@ public class Wall {
         setX(x);
         setY(y);
         this.horizontal = horizontal;
+        scaleX = horizontal ? 0.5f : 59;
+        scaleY = horizontal ? 84 : 1;
+        init();
+    }
+
+    private void init() {
+        if (texture != null) return;
         texture = new Texture("T/T_ElectricWall.png");
         textureFrames = TextureRegion.split(texture, 64, 32);
         animationFrames = new Animation<>(0.2f, textureFrames[0][0], textureFrames[0][1],
             textureFrames[0][2], textureFrames[0][3], textureFrames[0][4], textureFrames[0][5]);
         sprite = new AnimatedSprite(animationFrames);
-        ((AnimatedSprite)sprite).update(pos);
-        scaleX = horizontal ? 0.5f : 59;
-        scaleY = horizontal ? 84 : 1;
+        ((AnimatedSprite)sprite).update(new Random().nextFloat());
     }
 
     public void setScaleX(float scaleX) {
@@ -53,10 +62,12 @@ public class Wall {
     }
 
     public TextureRegion getTexture() {
+        init();
         return textureFrames[0][0];
     }
 
     public Sprite getSprite(float offsetX, float offsetY) {
+        init();
         sprite.setX(x + offsetX);
         sprite.setY(y + offsetY);
         if (horizontal) {

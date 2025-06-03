@@ -11,10 +11,12 @@ import com.tilldawn.Main;
 import com.tilldawn.View.ControlSettingsMenuView;
 import com.tilldawn.View.SettingsMenuView;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Control {
+public class Control implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final Map<String, Integer> keys = new HashMap<>();
 
     public Control() {

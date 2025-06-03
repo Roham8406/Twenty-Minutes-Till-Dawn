@@ -4,8 +4,7 @@ import com.tilldawn.Main;
 import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.Model.enemy.Elder;
 import com.tilldawn.View.*;
-
-import java.util.Random;
+import com.tilldawn.service.SaveService;
 
 public class PauseMenuController extends MenuController {
     private PauseMenuView view;
@@ -23,7 +22,7 @@ public class PauseMenuController extends MenuController {
                 view.getResume().setChecked(false);
             }
             if (view.getSave().isChecked()) {
-                //todo save
+                view.alert(SaveService.getInstance().save().getMessage(), 5);
                 Main.getMain().getScreen().dispose();
                 Main.getMain().setScreen(new MainMenuView(new MainMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
                 view.getSave().setChecked(false);

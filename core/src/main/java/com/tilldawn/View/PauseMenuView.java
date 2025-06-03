@@ -5,12 +5,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.AbilityMenuController;
 import com.tilldawn.Control.GameController;
@@ -36,8 +35,10 @@ public class PauseMenuView implements Screen {
     public Table table;
     private final GameController gameController;
     private final PauseMenuController controller;
+    private final Skin skin;
 
     public PauseMenuView(PauseMenuController controller, Skin skin, GameController gameController) {
+        this.skin = skin;
         this.controller = controller;
         this.gameController = gameController;
         this.resume = new TextButton(Main.getLanguage().Resume, skin);
@@ -177,5 +178,24 @@ public class PauseMenuView implements Screen {
 
     public TextButton getSave() {
         return save;
+    }
+
+    public void alert(String message, Integer timer) {
+        final Table alertBox = new Table(skin);
+        alertBox.setSize(1000, 50);
+        alertBox.setPosition(Gdx.graphics.getWidth() / 2f,0, Align.bottom);
+
+        Label label = new Label(message, skin);
+        alertBox.add(label);
+        alertBox.setBackground("progress-bar-health-knob");
+        stage.addActor(alertBox);
+
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                alertBox.remove();
+            }
+        }, timer);
+
     }
 }

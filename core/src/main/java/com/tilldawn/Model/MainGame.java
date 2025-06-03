@@ -5,15 +5,16 @@ import com.tilldawn.Model.enemy.Enemy;
 import com.tilldawn.Model.enemy.Tree;
 import com.tilldawn.Model.enemy.Wall;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MainGame {
+public class MainGame implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Player hero;
     private int duration;
     private boolean autoAim;
     private Weapon weapon;
-    private User user;
     private Control control;
     private boolean autoReload ;
     private Countdown timer;
@@ -21,7 +22,10 @@ public class MainGame {
     private ArrayList<Wall> walls = new ArrayList<>();
     private ArrayList<Float> lastSpawn = new ArrayList<>(3);
     private ArrayList<Enemy> enemies = new ArrayList<>();
-    private ArrayList<EnemyBullet> bullets = new ArrayList<>();
+    private ArrayList<EnemyBullet> enemyBullets = new ArrayList<>();
+    private final ArrayList<Bullet> bullets = new ArrayList<>();
+
+
     private Integer vitality = 0;
     private Integer amocrease = 0;
     private Integer damager = 0;
@@ -32,7 +36,6 @@ public class MainGame {
         hero = new Player(Main.getMain().getGameCharacter());
         duration = Main.getMain().getTime();
         weapon = new Weapon(Main.getMain().getWeaponType());
-        user = Main.getMain().getCurrentUser();
         control = Main.getMain().getControl();
         autoReload = Main.getMain().isAutoReload();
         timer = new Countdown(Main.getMain().getTime());
@@ -56,10 +59,6 @@ public class MainGame {
 
     public Weapon getWeapon() {
         return weapon;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public Control getControl() {
@@ -94,7 +93,11 @@ public class MainGame {
         return enemies;
     }
 
-    public ArrayList<EnemyBullet> getBullets() {
+    public ArrayList<EnemyBullet> getEnemyBullets() {
+        return enemyBullets;
+    }
+
+    public ArrayList<Bullet> getBullets() {
         return bullets;
     }
 
