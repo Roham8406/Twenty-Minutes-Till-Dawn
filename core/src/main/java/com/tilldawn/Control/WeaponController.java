@@ -83,8 +83,8 @@ public class WeaponController {
                 }
             }
 
-            b.setPosX(b.getPosX() + direction.x * 5);
-            b.setPosY(b.getPosY() + direction.y * 5);
+            b.setPosX(b.getPosX() + direction.x * 10);
+            b.setPosY(b.getPosY() + direction.y * 10);
             b.updatePos();
             b.decrementTile();
             if (b.isRangeEnded()) {

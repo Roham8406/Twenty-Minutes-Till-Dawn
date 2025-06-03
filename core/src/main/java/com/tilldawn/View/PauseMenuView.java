@@ -60,11 +60,11 @@ public class PauseMenuView implements Screen {
         buttonTexture = new Texture(Gdx.files.internal("T/T_LargeChestAnimation_2.png"));
         drawable = new TextureRegionDrawable(new TextureRegion(buttonTexture));
         this.sth = new ImageButton(drawable);
-        this.amocrease = new TextButton(Main.getLanguage().Amocrease + " *" + Main.getMain().getGame().getAmocrease(), skin);
-        this.procrease = new TextButton(Main.getLanguage().Procrease + " *" + Main.getMain().getGame().getAmocrease(), skin);
-        this.speedy = new TextButton(Main.getLanguage().Speedy + " *" + Main.getMain().getGame().getSpeedy(), skin);
-        this.damager = new TextButton(Main.getLanguage().Damager + " *" + Main.getMain().getGame().getDamager(), skin);
-        this.vitality = new TextButton(Main.getLanguage().Vitality + " *" + Main.getMain().getGame().getVitality(), skin);
+        this.amocrease = new TextButton(Main.getMain().getGame().getAmocrease().toString(), skin);
+        this.procrease = new TextButton(Main.getMain().getGame().getAmocrease().toString(), skin);
+        this.speedy = new TextButton(Main.getMain().getGame().getSpeedy().toString(), skin);
+        this.damager = new TextButton(Main.getMain().getGame().getDamager().toString(), skin);
+        this.vitality = new TextButton(Main.getMain().getGame().getVitality().toString(), skin);
 
         this.table = new Table();
 
@@ -79,6 +79,18 @@ public class PauseMenuView implements Screen {
         table.setFillParent(true);
         table.center();
 
+        table.add(new Label(Main.getLanguage().Vitality, skin)).colspan(2).width(250).padRight(30);
+        table.add(new Label(Main.getLanguage().Procrease, skin)).colspan(2).width(250).padRight(30);
+        table.add(new Label(Main.getLanguage().Amocrease, skin)).colspan(2).width(250).padRight(30);
+        table.add(new Label(Main.getLanguage().Damager, skin)).colspan(2).width(250).padRight(30);
+        table.add(new Label(Main.getLanguage().Speedy, skin)).colspan(2).width(250);
+        table.row().pad(10, 0 , 10, 0);
+        table.add(vitality).colspan(2).width(250).padRight(30);
+        table.add(procrease).colspan(2).width(250).padRight(30);
+        table.add(amocrease).colspan(2).width(250).padRight(30);
+        table.add(damager).colspan(2).width(250).padRight(30);
+        table.add(speedy).colspan(2).width(250);
+        table.row().pad(10, 0 , 10, 0);
         table.add(resume).colspan(5).width(300).padRight(30);
         table.add(blackAndWhite).colspan(5).width(300);
         table.row().pad(10, 0 , 10, 0);
@@ -91,11 +103,11 @@ public class PauseMenuView implements Screen {
         table.add(bossFight).colspan(2).width(50).padRight(30);
         table.add(sth).colspan(2).width(50);
         table.row().pad(10, 0 , 10, 0);
-        table.add(vitality).colspan(2).width(250).padRight(30);
-        table.add(procrease).colspan(2).width(250).padRight(30);
-        table.add(amocrease).colspan(2).width(250).padRight(30);
-        table.add(damager).colspan(2).width(250).padRight(30);
-        table.add(speedy).colspan(2).width(250);
+        table.add(new Label("Num 1", skin)).colspan(2).width(50).padRight(30);
+        table.add(new Label("Num 2", skin)).colspan(2).width(50).padRight(30);
+        table.add(new Label("Num 3", skin)).colspan(2).width(50).padRight(30);
+        table.add(new Label("Num 4", skin)).colspan(2).width(50).padRight(30);
+        table.add(new Label("Num 5", skin)).colspan(2).width(50);
         table.row().pad(10, 0 , 10, 0);
 
         stage.addActor(table);

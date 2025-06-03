@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.tilldawn.Main;
 import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.Model.Player;
+import com.tilldawn.Model.enemy.Elder;
 import com.tilldawn.View.PauseMenuView;
 
 public class PlayerController {
@@ -56,13 +57,30 @@ public class PlayerController {
         if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("reload"))){
             Main.getMain().getGame().getWeapon().reload();
         }
-        if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("autoAim"))){
+        if (Gdx.input.isKeyJustPressed(Main.getMain().getGame().getControl().getKeys().get("autoAim"))){
             Main.getMain().getGame().triggerAutoAim();
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Main.getMain().getScreen().dispose();
             Main.getMain().setScreen(new PauseMenuView(new PauseMenuController(), GameAssetManager.getGameAssetManager().getSkin(), gameController));
         }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
+            Main.getMain().getGame().getTimer().update(60);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {
+            Main.getMain().getGame().getHero().incrementHp(gameController);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
+            Main.getMain().getGame().getHero().addLevel(gameController);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
+            Elder.setSpawn();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_5)) {
+            Main.getMain().getGame().getWeapon().fastReload();
+            Main.getMain().getGame().enableAutoReload();
+        }
+
         if (flag && player.isPlayerRunning()) {
             player.setPlayerRunning(false);
         }

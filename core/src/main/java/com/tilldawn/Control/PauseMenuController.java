@@ -31,33 +31,12 @@ public class PauseMenuController extends MenuController {
                 Main.getMain().setBlackAndWhite(!Main.getMain().isBlackAndWhite());
                 view.getBlackAndWhite().setChecked(false);
             }
-            if (view.getSth().isChecked()) {
-                Main.getMain().getGame().getWeapon().fastReload();
-                Main.getMain().getGame().enableAutoReload();
-                view.getSth().setChecked(false);
-            }
             if (view.getGiveUp().isChecked()) {
                 Main.getMain().getScreen().dispose();
                 Main.getMain().setScreen(new EndMenuView(new EndMenuController(),
                     GameAssetManager.getGameAssetManager().getSkin(), false,
                     Main.getMain().getGame().getHero()));
                 view.getGiveUp().setChecked(false);
-            }
-            if (view.getBossFight().isChecked()) {
-                Elder.setSpawn();
-                view.getBossFight().setChecked(false);
-            }
-            if (view.getHpIncrement().isChecked()) {
-                Main.getMain().getGame().getHero().incrementHp(view.getGameController());
-                view.getHpIncrement().setChecked(false);
-            }
-            if (view.getTimeDiscount().isChecked()) {
-                Main.getMain().getGame().getTimer().update(60);
-                view.getTimeDiscount().setChecked(false);
-            }
-            if (view.getLevelIncrement().isChecked()) {
-                Main.getMain().getGame().getHero().addLevel(view.getGameController());
-                view.getLevelIncrement().setChecked(false);
             }
         }
     }

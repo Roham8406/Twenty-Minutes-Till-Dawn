@@ -12,7 +12,9 @@ import com.tilldawn.Control.SettingMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.Model.MusicTracks;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class AbilityMenuView implements Screen {
     private Stage stage;
@@ -25,6 +27,7 @@ public class AbilityMenuView implements Screen {
     public Table table;
     private final GameController gameController;
     private final AbilityMenuController controller;
+    private final ArrayList<TextButton> abilities = new ArrayList<>();
 
     public AbilityMenuView(AbilityMenuController controller, Skin skin, GameController gameController, Integer level) {
         this.controller = controller;
@@ -36,6 +39,15 @@ public class AbilityMenuView implements Screen {
         this.speedy = new TextButton(Main.getLanguage().Speedy, skin);
         this.levelUp = new TextButton(Main.getLanguage().NextLevel + ": " + level, skin);
         this.table = new Table();
+        abilities.add(vitality);
+        abilities.add(damager);
+        abilities.add(procrease);
+        abilities.add(amocrease);
+        abilities.add(speedy);
+        Random random = new Random();
+        abilities.remove(random.nextInt(abilities.size()));
+        abilities.remove(random.nextInt(abilities.size()));
+        abilities.add(0, levelUp);
 
         controller.setView(this);
     }
@@ -48,18 +60,10 @@ public class AbilityMenuView implements Screen {
         table.setFillParent(true);
         table.center();
 
-        table.add(levelUp).width(600);
-        table.row().pad(10, 0 , 10, 0);
-        table.add(vitality).width(400);
-        table.row().pad(10, 0 , 10, 0);
-        table.add(procrease).width(400);
-        table.row().pad(10, 0 , 10, 0);
-        table.add(amocrease).width(400);
-        table.row().pad(10, 0 , 10, 0);
-        table.add(damager).width(400);
-        table.row().pad(10, 0 , 10, 0);
-        table.add(speedy).width(400);
-        table.row().pad(10, 0 , 10, 0);
+        for (TextButton ability : abilities) {
+            table.add(ability).width(600);
+            table.row().pad(10, 0 , 10, 0);
+        }
 
         stage.addActor(table);
     }
