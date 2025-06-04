@@ -29,7 +29,7 @@ public class ScoreboardMenuView implements Screen {
     private final TextButton kill;
     private final TextButton playtime;
     private final TextButton score;
-    private Skin skin;
+    private final Skin skin;
     private final TextButton mainMenu;
     public Table table;
     private String scoreName = "username";

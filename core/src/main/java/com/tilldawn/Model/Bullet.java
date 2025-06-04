@@ -74,10 +74,6 @@ public class Bullet implements Serializable {
         return y;
     }
 
-    public int getProjectTile() {
-        return projectTile;
-    }
-
     public void setPosX(float posX) {
         this.posX = posX;
     }

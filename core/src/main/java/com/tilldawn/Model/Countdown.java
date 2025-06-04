@@ -44,11 +44,6 @@ public class Countdown implements Serializable {
         running = true;
     }
 
-
-    public boolean isFinished() {
-        return remaining <= 0;
-    }
-
     @Override
     public String toString() {
         return (int) remaining / 60 + "' : " + (int) remaining % 60 + "\"";

@@ -108,10 +108,6 @@ public class EndMenuView implements Screen {
         return player;
     }
 
-    public boolean isWon() {
-        return isWon;
-    }
-
     public int getPlayTime() {
         return (int) Math.floor(playTime);
     }

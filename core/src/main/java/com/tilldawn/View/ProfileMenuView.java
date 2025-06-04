@@ -26,7 +26,7 @@ public class ProfileMenuView implements Screen {
     private final TextButton apply;
     public Table table;
     private final ProfileMenuController controller;
-    private boolean changingAvatar;
+    private final boolean changingAvatar;
     private final Skin skin;
 
     public ProfileMenuView(ProfileMenuController controller, Skin skin) {

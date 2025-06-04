@@ -29,8 +29,8 @@ public class PreGameMenuView implements Screen {
     private final TextButton time20;
     private final TextButton start;
     public Table table;
-    private Skin skin;
-    private PreGameMenuController controller;
+    private final Skin skin;
+    private final PreGameMenuController controller;
 
     public PreGameMenuView(PreGameMenuController controller, Skin skin) {
         this.shana = GameCharacter.Shana.getPortraitButton();

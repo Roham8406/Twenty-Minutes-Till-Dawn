@@ -28,7 +28,7 @@ public class MainMenuView implements Screen {
     private final Table header;
     private final MainMenuController controller;
     private final boolean isSigned;
-    private Skin skin;
+    private final Skin skin;
 
     public MainMenuView(MainMenuController controller, Skin skin) {
         this.controller = controller;

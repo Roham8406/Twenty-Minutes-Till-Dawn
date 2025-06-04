@@ -34,14 +34,14 @@ public class SettingsMenuView implements Screen {
         this.musicVolumeLabel = new Label(Main.getLanguage().MusicVolume, skin);
         this.languageLabel = new Label("Language", skin);
         this.musicTrackLabel = new Label(Main.getLanguage().MusicTrack, skin);
-        this.musicTrack = new SelectBox<String>(skin);
+        this.musicTrack = new SelectBox<>(skin);
         this.musicTrack.setItems(Arrays.stream(MusicTracks.values())
             .map(MusicTracks::getTrackName)
             .toArray(String[]::new));
         this.musicTrack.setSelected(Main.getMain().getMusic().getTrackName());
         this.musicVolume = new Slider(0, 1f, 0.01f, false, skin);
         this.musicVolume.setValue(Main.getMain().getMusicVolume());
-        this.language = new SelectBox<String>(skin);
+        this.language = new SelectBox<>(skin);
         this.language.setItems(Arrays.stream(Language.values())
             .map(Language::getName)
             .toArray(String[]::new));

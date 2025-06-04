@@ -210,9 +210,24 @@ public class UserSql {
 
 
     public ArrayList<User> sortScoreboard(String scoreName) {
-        if (!(scoreName.equals("score") || scoreName.equals("playtime") ||
-            scoreName.equals("kills") || scoreName.equals("username"))) {return null;}
-        String query = "SELECT * FROM `users` ORDER BY `" + scoreName + "` DESC LIMIT 10";
+        String sortBy;
+        switch (scoreName) {
+            case "score":
+                sortBy = "score";
+                break;
+            case "playtime":
+                sortBy = "playtime";
+                break;
+            case "kills":
+                sortBy = "kills";
+                break;
+            case "username":
+                sortBy = "username";
+                break;
+            default:
+                return null;
+        }
+        String query = "SELECT * FROM `users` ORDER BY `" + sortBy + "` DESC LIMIT 10";
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);

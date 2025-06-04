@@ -149,28 +149,8 @@ public class PauseMenuView implements Screen {
         return gameController;
     }
 
-    public ImageButton getLevelIncrement() {
-        return levelIncrement;
-    }
-
     public Stage getStage() {
         return stage;
-    }
-
-    public ImageButton getBossFight() {
-        return bossFight;
-    }
-
-    public ImageButton getHpIncrement() {
-        return hpIncrement;
-    }
-
-    public ImageButton getTimeDiscount() {
-        return timeDiscount;
-    }
-
-    public ImageButton getSth() {
-        return sth;
     }
 
     public TextButton getResume() {

@@ -116,10 +116,6 @@ public class AbilityMenuView implements Screen {
         return gameController;
     }
 
-    public TextButton getLevelUp() {
-        return levelUp;
-    }
-
     public TextButton getSpeedy() {
         return speedy;
     }
