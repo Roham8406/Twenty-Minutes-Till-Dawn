@@ -72,7 +72,6 @@ public class LoginMenuView implements Screen {
     @Override
     public void render(float delta) {
         Main.getMain().startBatch();
-        ScreenUtils.clear(0.2f, 0.5f, 0.4f, 1);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
         Main.getMain().endBatch();

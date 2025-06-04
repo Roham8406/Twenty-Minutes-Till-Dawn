@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Main;
+import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.Model.User;
 import com.badlogic.gdx.graphics.GL20;
 
@@ -57,6 +58,7 @@ public class MainMenuView implements Screen {
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
 
+
         table.setFillParent(true);
         table.top();
 
@@ -82,7 +84,6 @@ public class MainMenuView implements Screen {
     @Override
     public void render(float delta) {
         Main.getMain().startBatch();
-        ScreenUtils.clear(0.9f, 0.4f, 0.4f, 1);
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
         Main.getMain().endBatch();

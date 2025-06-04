@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Model.*;
 import com.tilldawn.View.MainMenuView;
@@ -187,26 +188,31 @@ public class Main extends Game {
     }
 
     public void startBatch() {
-        Main.getMain().fbo.begin();
+        fbo.begin();
         if (blackAndWhite) {
             Gdx.gl.glClearColor(1, 1, 1, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         }
-        Main.getBatch().begin();
+
+        Gdx.gl.glClearColor(0.4f, 0.6f, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.begin();
+        batch.draw(GameAssetManager.getGameAssetManager().getBackgroundTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
     }
 
     public void endBatch() {
-        Main.getBatch().end();
-        Main.getMain().fbo.end();
+        fbo.end();
         if (blackAndWhite) {
             Gdx.gl.glClearColor(0, 0, 0, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            Main.getBatch().setShader(Main.getMain().shader);
+            batch.setShader(shader);
         }
-        Main.getBatch().begin();
-        Main.getBatch().draw(Main.getMain().fboRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Main.getBatch().end();
-        Main.getBatch().setShader(null);
+
+        batch.draw(fboRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.end();
+        batch.setShader(null);
     }
 
     public Language getLang() {
