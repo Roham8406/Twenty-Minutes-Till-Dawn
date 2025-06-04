@@ -33,15 +33,6 @@ public class GameAssetManager {
         return skin;
     }
 
-    public Animation<TextureRegion> getCharacterAnimation() {
-        return Main.getMain().getGame().getHero().getCharacterAnimation();
-    }
-
-    public TextureRegion getDefaultTexture() {
-        return Main.getMain().getGameCharacter().getDefaultTexture();
-    }
-
-
     public String getBullet() {
         return bullet;
     }

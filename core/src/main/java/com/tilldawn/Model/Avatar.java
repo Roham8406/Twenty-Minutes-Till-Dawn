@@ -12,12 +12,12 @@ import com.badlogic.gdx.utils.Array;
 import java.util.Random;
 
 public class Avatar {
-    private String avatar;
-    private String avatar1 = "avatars/1.png";
-    private String avatar2 = "avatars/2.png";
-    private String avatar3 = "avatars/3.png";
-    private String avatar4 = "avatars/4.png";
-    private String avatar5 = "avatars/5.png";
+    private final String avatar;
+    private final String avatar1 = "avatars/1.png";
+    private final String avatar2 = "avatars/2.png";
+    private final String avatar3 = "avatars/3.png";
+    private final String avatar4 = "avatars/4.png";
+    private final String avatar5 = "avatars/5.png";
 
 
     public Avatar() {
@@ -55,7 +55,6 @@ public class Avatar {
 
     public void getAvatars(Table chooseAvatar) {
         String[] defaultAvatars = {avatar, avatar1, avatar2, avatar3, avatar4, avatar5};
-        Array<ImageButton> avatars = new Array<>();
         for (String defaultAvatar : defaultAvatars) {
             Texture buttonTexture = new Texture(Gdx.files.internal(defaultAvatar));
             TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(buttonTexture));

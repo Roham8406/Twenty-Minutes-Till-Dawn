@@ -165,7 +165,6 @@ public class UserSql {
                     return new Response(Main.getLanguage().UsernameNotFoundError, false);
                 }
                 Main.getMain().getCurrentUser().setUsername(username);
-                Main.getMain().getCurrentUser().setPassword(password);
                 return new Response(Main.getLanguage().InfoChanged, true);
             } catch (Exception e) {
                 return new Response(e.getMessage(), false);

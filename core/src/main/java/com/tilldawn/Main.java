@@ -81,10 +81,6 @@ public class Main extends Game {
         return batch;
     }
 
-    public static void setBatch(SpriteBatch batch) {
-        Main.batch = batch;
-    }
-
     public User getCurrentUser() {
         return currentUser;
     }

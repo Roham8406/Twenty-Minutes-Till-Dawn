@@ -4,7 +4,7 @@ public enum MusicTracks {
     Hitman("Hitman", "tracks/Hitman.mp3"),
     Adventure("Adventure", "tracks/Adventure.mp3");
 
-    private MusicTracks(String trackName, String path) {
+    MusicTracks(String trackName, String path) {
         this.trackName = trackName;
         this.path = path;
     }

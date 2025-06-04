@@ -11,18 +11,17 @@ import java.util.Random;
 
 public class MainGame implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Player hero;
-    private int duration;
+    private final Player hero;
     private boolean autoAim;
-    private Weapon weapon;
-    private Control control;
+    private final Weapon weapon;
+    private final Control control;
     private boolean autoReload;
-    private Countdown timer;
-    private ArrayList<Tree> trees = new ArrayList<>();
-    private ArrayList<Wall> walls = new ArrayList<>();
-    private ArrayList<Float> lastSpawn = new ArrayList<>(3);
-    private ArrayList<Enemy> enemies = new ArrayList<>();
-    private ArrayList<EnemyBullet> enemyBullets = new ArrayList<>();
+    private final Countdown timer;
+    private final ArrayList<Tree> trees = new ArrayList<>();
+    private final ArrayList<Wall> walls = new ArrayList<>();
+    private final ArrayList<Float> lastSpawn = new ArrayList<>(3);
+    private final ArrayList<Enemy> enemies = new ArrayList<>();
+    private final ArrayList<EnemyBullet> enemyBullets = new ArrayList<>();
     private final ArrayList<Bullet> bullets = new ArrayList<>();
 
 
@@ -34,7 +33,6 @@ public class MainGame implements Serializable {
 
     public MainGame() {
         hero = new Player(Main.getMain().getGameCharacter());
-        duration = Main.getMain().getTime();
         weapon = new Weapon(Main.getMain().getWeaponType());
         control = Main.getMain().getControl();
         autoReload = Main.getMain().isAutoReload();

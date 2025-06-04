@@ -8,12 +8,10 @@ import java.io.Serializable;
 
 public class EnemyBullet implements Serializable {
     private static final long serialVersionUID = 1L;
-    private transient Texture texture = new Texture(GameAssetManager.getGameAssetManager().getBullet());
+    private final transient Texture texture = new Texture(GameAssetManager.getGameAssetManager().getBullet());
     private transient Sprite sprite;
-    private int damage = 1;
-    private int projectTile = 1;
-    private float x;
-    private float y;
+    private final float x;
+    private final float y;
     private float posX;
     private float posY;
     private int range = 120;
@@ -49,10 +47,6 @@ public class EnemyBullet implements Serializable {
         return sprite;
     }
 
-    public int getDamage() {
-        return damage;
-    }
-
     public void decrementTile() {
         range--;
     }
@@ -69,9 +63,6 @@ public class EnemyBullet implements Serializable {
         return y;
     }
 
-    public int getProjectTile() {
-        return projectTile;
-    }
 
     public boolean isCollisioned(float posX, float posY) {
         init();

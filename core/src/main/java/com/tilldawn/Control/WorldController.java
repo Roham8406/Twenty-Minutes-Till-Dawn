@@ -16,27 +16,22 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class WorldController {
-    private PlayerController playerController;
-    private Sprite backgroundFilter;
-    private Texture heartTexture;
-    private TextureRegion backgroundTexture;
-    private Texture ammoTexture;
-    private TextureRegion[][] shottedFrames;
-    private Animation<TextureRegion> shottedAnimation;
-    private Animation<TextureRegion> unshottedAnimation;
-    private AnimatedSprite shottedSprite;
+    private final PlayerController playerController;
+    private final Sprite backgroundFilter;
+    private final TextureRegion backgroundTexture;
+    private final Texture ammoTexture;
+    private final Animation<TextureRegion> shottedAnimation;
+    private final Animation<TextureRegion> unshottedAnimation;
+    private final AnimatedSprite shotSprite;
     private final ArrayList<Sprite> ammoSprites = new ArrayList<>();
-    private TextureRegion[][] heartFrames;
-    private Animation<TextureRegion> heartAnimation;
-    private Animation<TextureRegion> deadHeart;
-    private Sprite timer;
-    private BitmapFont font;
-    private float backgroundX = 0;
-    private float backgroundY = 0;
-    private ArrayList<AnimatedSprite> heartSprites = new ArrayList<>();
-    private Sprite progressBar;
+    private final Animation<TextureRegion> heartAnimation;
+    private final Animation<TextureRegion> deadHeart;
+    private final Sprite timer;
+    private final BitmapFont font;
+    private final ArrayList<AnimatedSprite> heartSprites = new ArrayList<>();
+    private final Sprite progressBar;
     private boolean bossFight;
-    GameController gameController;
+    private final GameController gameController;
 
     public WorldController(PlayerController playerController, GameController gameController) {
         Texture backgroundTexture = new Texture("background.png");
@@ -51,8 +46,8 @@ public class WorldController {
         this.ammoTexture = new Texture(Gdx.files.internal("T/T_AmmoIcon.png"));
         setAmmo();
         this.font = new BitmapFont(Gdx.files.internal("Fonts/Harrington.fnt"));
-        this.heartTexture = new Texture("T/T_HeartAnimation.png");
-        this.heartFrames = TextureRegion.split(heartTexture, 32, 32);
+        Texture heartTexture = new Texture("T/T_HeartAnimation.png");
+        TextureRegion[][] heartFrames = TextureRegion.split(heartTexture, 32, 32);
         this.heartAnimation = new Animation<>(0.2f, heartFrames[0][0], heartFrames[0][1], heartFrames[0][2]);
         this.deadHeart = new Animation<>(0.2f, heartFrames[0][3], heartFrames[0][3]);
         for (int i = 0; i < Main.getMain().getGame().getHero().getMaxHp(); i++) {
@@ -64,12 +59,12 @@ public class WorldController {
             heartSprites.get(i).setPosition(470 + 30 * i, timer.getY() + 15);
         }
         Texture shottedTexture = new Texture("T/T_CurseFX.png");
-        this.shottedFrames = TextureRegion.split(shottedTexture, 32, 32);
+        TextureRegion[][] shottedFrames = TextureRegion.split(shottedTexture, 32, 32);
         this.shottedAnimation = new Animation<>(0.33f, shottedFrames[0][0], shottedFrames[0][1], shottedFrames[0][2]);
         this.unshottedAnimation = new Animation<>(0.33f, shottedFrames[0][3], shottedFrames[0][3]);
-        this.shottedSprite = new AnimatedSprite(unshottedAnimation);
-        this.shottedSprite.setX(Gdx.graphics.getWidth() / 2f);
-        this.shottedSprite.setY(Gdx.graphics.getHeight() / 2f);
+        this.shotSprite = new AnimatedSprite(unshottedAnimation);
+        this.shotSprite.setX(Gdx.graphics.getWidth() / 2f);
+        this.shotSprite.setY(Gdx.graphics.getHeight() / 2f);
 
         Texture progressBar = new Texture(Gdx.files.internal("T/T_ProgressBar.png"));
         this.progressBar = new Sprite(progressBar);
@@ -96,8 +91,8 @@ public class WorldController {
     }
 
     public void update(float delta) {
-        backgroundX = playerController.getPlayer().getPosX();
-        backgroundY = playerController.getPlayer().getPosY();
+        float backgroundX = playerController.getPlayer().getPosX();
+        float backgroundY = playerController.getPlayer().getPosY();
         Main.getBatch().draw(backgroundTexture, backgroundX - backgroundTexture.getRegionWidth() / 2f, backgroundY - backgroundTexture.getRegionHeight() / 2f,
             backgroundTexture.getRegionWidth(), backgroundTexture.getRegionHeight());
         for (Tree tree : Main.getMain().getGame().getTrees()) {
@@ -128,7 +123,7 @@ public class WorldController {
         double distance = Integer.MAX_VALUE;
         int x = 0, y = 0;
         for (Enemy enemy : Main.getMain().getGame().getEnemies().toArray(
-            new Enemy[Main.getMain().getGame().getEnemies().size()]
+            new Enemy[0]
         )) {
             Sprite sprite = enemy.getSprite(backgroundX, backgroundY);
             sprite.setScale(enemy.getWidth(), enemy.getHeight());
@@ -181,8 +176,8 @@ public class WorldController {
             , timer.getY() + timer.getHeight() / 2f + 10);
         drawHearts(delta);
         drawAmmo();
-        shottedSprite.draw(Main.getBatch());
-        shottedSprite.update(delta);
+        shotSprite.draw(Main.getBatch());
+        shotSprite.update(delta);
 
     }
 
@@ -289,11 +284,11 @@ public class WorldController {
     }
 
     public void shotted() {
-        shottedSprite.edit(shottedAnimation);
+        shotSprite.edit(shottedAnimation);
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
-                shottedSprite.edit(unshottedAnimation);
+                shotSprite.edit(unshottedAnimation);
             }
         }, 2);
     }

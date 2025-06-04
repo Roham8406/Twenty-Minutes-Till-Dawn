@@ -13,7 +13,7 @@ import com.tilldawn.View.PauseMenuView;
 
 public class PlayerController {
     private Player player;
-    private GameController gameController;
+    private final GameController gameController;
 
     public PlayerController(Player player, GameController gameController) {
         this.player = player;
@@ -116,9 +116,5 @@ public class PlayerController {
 
     public Player getPlayer() {
         return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 }

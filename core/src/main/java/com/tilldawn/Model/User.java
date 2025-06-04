@@ -11,14 +11,12 @@ import com.tilldawn.Main;
 public class User {
     private int id;
     private String username;
-    private String password;
     private String alert;
     private Integer kills;
     private Integer playtime;
     private Integer score;
     private Integer securityQuestion;
     private String securityAnswer;
-    private String email;
     private Avatar avatar;
 
     public User(String username, String alert) {
@@ -80,10 +78,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setAvatar(Avatar avatar) {

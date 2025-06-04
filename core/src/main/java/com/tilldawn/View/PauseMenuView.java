@@ -59,7 +59,7 @@ public class PauseMenuView implements Screen {
         drawable = new TextureRegionDrawable(new TextureRegion(buttonTexture));
         this.sth = new ImageButton(drawable);
         this.amocrease = new TextButton(Main.getMain().getGame().getAmocrease().toString(), skin);
-        this.procrease = new TextButton(Main.getMain().getGame().getAmocrease().toString(), skin);
+        this.procrease = new TextButton(Main.getMain().getGame().getProcrease().toString(), skin);
         this.speedy = new TextButton(Main.getMain().getGame().getSpeedy().toString(), skin);
         this.damager = new TextButton(Main.getMain().getGame().getDamager().toString(), skin);
         this.vitality = new TextButton(Main.getMain().getGame().getVitality().toString(), skin);

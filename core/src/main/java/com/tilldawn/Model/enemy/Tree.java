@@ -15,10 +15,9 @@ public class Tree implements Serializable {
     private static final long serialVersionUID = 1L;
     private transient Texture texture;
     private transient Sprite sprite;
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
     private transient TextureRegion[][] textureFrames;
-    private transient Animation<TextureRegion> animationFrames;
 
     public Tree(int x, int y, float pos) {
         this.x = x;
@@ -30,7 +29,7 @@ public class Tree implements Serializable {
         if (texture != null) return;
         texture = new Texture("T/T_TreeMonster.png");
         textureFrames = TextureRegion.split(texture, 96, 96);
-        animationFrames = new Animation<>(0.3f, textureFrames[0][0], textureFrames[0][1],
+        Animation<TextureRegion> animationFrames = new Animation<>(0.3f, textureFrames[0][0], textureFrames[0][1],
             textureFrames[0][2], textureFrames[0][1]);
         sprite = new AnimatedSprite(animationFrames);
         ((AnimatedSprite) sprite).update(new Random().nextFloat());
