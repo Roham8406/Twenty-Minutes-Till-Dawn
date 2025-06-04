@@ -178,11 +178,7 @@ public class ProfileMenuController extends MenuController {
         try {
             String username = Main.getMain().getCurrentUser().getUsername();
             FileHandle target = Gdx.files.local("avatars/" + username + "_Avatar.png");
-
-            // Ensure the directory exists
             target.parent().mkdirs();
-
-            // Copy the file
             FileInputStream in = new FileInputStream(sourceFile);
             target.write(in, false);
             in.close();

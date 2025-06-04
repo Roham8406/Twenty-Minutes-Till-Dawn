@@ -20,9 +20,6 @@ public class Avatar {
     private String avatar4 = "avatars/4.png";
     private String avatar5 = "avatars/5.png";
 
-    public static Avatar getAvatar(String avatar) {
-        return new Avatar(); //TODO
-    }
 
     public Avatar() {
         String[] defaultAvatars = {avatar1, avatar2, avatar3, avatar4, avatar5};
@@ -41,16 +38,6 @@ public class Avatar {
         }
         return avatars;
     }
-//    public Array<ImageButton> getDefaultAvatars() {
-//        String[] defaultAvatars = {avatar, avatar1, avatar2, avatar3, avatar4, avatar5};
-//        Array<ImageButton> avatars = new Array<>();
-//        for (String defaultAvatar : defaultAvatars) {
-//            Texture buttonTexture = new Texture(Gdx.files.internal(defaultAvatar));
-//            TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(buttonTexture));
-//            avatars.add(new ImageButton(drawable));
-//        }
-//        return avatars;
-//    }
 
     public String getAvatar() {
         return avatar;

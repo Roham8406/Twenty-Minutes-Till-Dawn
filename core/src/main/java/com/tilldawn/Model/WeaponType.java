@@ -56,7 +56,7 @@ public enum WeaponType {
         init();
         TextureRegionDrawable drawable = new TextureRegionDrawable(textureFrames[0][0]);
         ImageButton button = new ImageButton(drawable);
-        button.setSize(100, 100); //TODO
+        button.setSize(100, 100);
         return button;
     }
 

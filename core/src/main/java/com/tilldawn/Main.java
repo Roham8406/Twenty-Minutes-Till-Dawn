@@ -40,7 +40,7 @@ public class Main extends Game {
 
     @Override
     public void create() {
-        ShaderProgram.pedantic = false; // ignore strict GLSL checks
+        ShaderProgram.pedantic = false;
 
         shader = new ShaderProgram(
             Gdx.files.internal("Glsl/grayscale.vert"),
@@ -49,7 +49,7 @@ public class Main extends Game {
 
         fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
         fboRegion = new TextureRegion(fbo.getColorBufferTexture());
-        fboRegion.flip(false, true); // flip Y
+        fboRegion.flip(false, true);
 
 
         main = this;

@@ -62,7 +62,7 @@ public class MainMenuView implements Screen {
         table.setFillParent(true);
         table.top();
 
-        table.add(header).height(100).colspan(2); // Set height here
+        table.add(header).height(100).colspan(2);
         table.row().pad(140, 0 , 10 , 0);
         table.add(setting).width(500).padRight(30);
         table.add(talent).width(500);

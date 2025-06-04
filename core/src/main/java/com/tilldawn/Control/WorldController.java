@@ -170,8 +170,6 @@ public class WorldController {
         enemiesAttack(delta);
         backgroundFilter.draw(Main.getBatch());
         progressBar.draw(Main.getBatch());
-//        progressBar.setScale((float) ((Gdx.graphics.getWidth() - 880) / 234 * Main.getMain().getGame().getHero().getXp()) /
-//            Main.getMain().getGame().getHero().getLevel()/20,1);
         progressBar.setScale(Gdx.graphics.getWidth() / 234f * Main.getMain().getGame().getHero().getXp() /
             Main.getMain().getGame().getHero().getLevel()/10,1);
         timer.draw(Main.getBatch());
