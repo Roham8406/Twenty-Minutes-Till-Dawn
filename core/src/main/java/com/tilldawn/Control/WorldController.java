@@ -88,6 +88,13 @@ public class WorldController {
 
     }
 
+    public void addHeart() {
+        int x = heartSprites.size();
+        heartSprites.add(new AnimatedSprite(deadHeart));
+        heartSprites.get(x).setPosition(470 + 30 * x, timer.getY() + 15);
+        reviveHeart();
+    }
+
     public void update(float delta) {
         backgroundX = playerController.getPlayer().getPosX();
         backgroundY = playerController.getPlayer().getPosY();

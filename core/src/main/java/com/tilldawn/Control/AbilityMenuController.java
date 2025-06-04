@@ -34,6 +34,7 @@ public class AbilityMenuController extends MenuController {
             if (view.getVitality().isChecked()) {
                 Main.getMain().getGame().getHero().incrementMaxHp();
                 Main.getMain().getGame().incrementVitality();
+                view.getGameController().getWorldController().addHeart();
                 Main.getMain().getScreen().dispose();
                 Main.getMain().setScreen(view.getGameController().getView());
             }
