@@ -12,7 +12,7 @@ import com.tilldawn.Model.enemy.Elder;
 import com.tilldawn.View.PauseMenuView;
 
 public class PlayerController {
-    private Player player;
+    private final Player player;
     private final GameController gameController;
 
     public PlayerController(Player player, GameController gameController) {

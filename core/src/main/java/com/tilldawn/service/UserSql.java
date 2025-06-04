@@ -35,7 +35,7 @@ public class UserSql {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
-            User user = null;
+            User user;
             if (!resultSet.next()) {
                 user = new User(null, Main.getLanguage().UsernameNotFoundError);
                 statement.close();
@@ -210,6 +210,8 @@ public class UserSql {
 
 
     public ArrayList<User> sortScoreboard(String scoreName) {
+        if (!(scoreName.equals("score") || scoreName.equals("playtime") ||
+            scoreName.equals("kills") || scoreName.equals("username"))) {return null;}
         String query = "SELECT * FROM `users` ORDER BY `" + scoreName + "` DESC LIMIT 10";
 
         try {

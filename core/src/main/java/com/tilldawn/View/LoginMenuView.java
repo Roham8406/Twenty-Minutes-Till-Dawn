@@ -21,9 +21,9 @@ public class LoginMenuView implements Screen {
     private final TextButton playAsGuest;
     private final TextButton loginButton;
     public Table table;
-    private Table fields;
+    private final Table fields;
     private final LoginMenuController controller;
-    private Skin skin;
+    private final Skin skin;
 
     public LoginMenuView(LoginMenuController controller, Skin skin) {
         this.skin = skin;

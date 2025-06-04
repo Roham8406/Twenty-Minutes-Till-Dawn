@@ -18,7 +18,7 @@ import java.util.function.Function;
 
 public class ControlSettingsMenuView implements Screen {
     private Stage stage;
-    private Skin skin;
+    private final Skin skin;
     private final Label upLabel;
     private final Label downLabel;
     private final Label leftLabel;

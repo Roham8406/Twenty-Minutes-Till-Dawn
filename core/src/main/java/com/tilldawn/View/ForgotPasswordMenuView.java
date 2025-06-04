@@ -23,7 +23,7 @@ public class ForgotPasswordMenuView implements Screen {
     private final TextButton changePassword;
     private final Integer state;
     public Table table;
-    private Skin skin;
+    private final Skin skin;
     private final ForgotPasswordMenuController controller;
 
     public ForgotPasswordMenuView(ForgotPasswordMenuController controller, Skin skin) {

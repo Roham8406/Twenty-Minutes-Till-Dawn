@@ -14,9 +14,9 @@ import com.tilldawn.Main;
 
 public class GameView implements Screen, InputProcessor {
     private Stage stage;
-    private GameController controller;
-    private Skin skin;
-    private Cursor cursor;
+    private final GameController controller;
+    private final Skin skin;
+    private final Cursor cursor;
 
 
     public GameView(GameController controller, Skin skin) {

@@ -20,7 +20,6 @@ public abstract class Enemy implements Serializable {
     protected boolean flipped;
     protected float x;
     protected float y;
-    protected float lastSpawn;
     protected boolean dead;
     protected Vector2 velocity = new Vector2(0, 0).nor();
     protected transient TextureRegion[][] textureFrames;
@@ -46,7 +45,7 @@ public abstract class Enemy implements Serializable {
         textureFrames = TextureRegion.split(death, 40, 40);
         animationFrames = new Animation<>(0.1f, textureFrames[0][0], textureFrames[0][1],
             textureFrames[0][2], textureFrames[0][3]);
-        Timer.schedule((Timer.Task) new Timer.Task() {
+        Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 textureFrames = TextureRegion.split(seed, 42, 42);

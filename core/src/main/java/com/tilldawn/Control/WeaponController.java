@@ -18,10 +18,6 @@ public class WeaponController {
         this.worldController = worldController;
     }
 
-    public boolean isReloading() {
-        return weapon.isReloading();
-    }
-
     public void update(float delta) {
         weapon.getSprite().draw(Main.getBatch());
         if (weapon.isReloading()) {
@@ -65,16 +61,14 @@ public class WeaponController {
     }
 
     public void updateBullets() {
-        for (Bullet b : Main.getMain().getGame().getBullets().toArray(
-            new Bullet[Main.getMain().getGame().getBullets().size()]
-        )) {
+        for (Bullet b : Main.getMain().getGame().getBullets().toArray(new Bullet[0])) {
             b.getSprite().draw(Main.getBatch());
             Vector2 direction = new Vector2(
                 Gdx.graphics.getWidth() / 2f - b.getX(),
                 -Gdx.graphics.getHeight() / 2f + b.getY()
             ).nor();
 
-            for (Enemy enemy : Main.getMain().getGame().getEnemies().toArray(new Enemy[Main.getMain().getGame().getEnemies().size()])) {
+            for (Enemy enemy : Main.getMain().getGame().getEnemies().toArray(new Enemy[0])) {
                 if (enemy.isDead()) continue;
                 if (enemy.isCollisioned(b.getSprite().getX(), b.getSprite().getY())) {
                     enemy.removeHp(b.getDamage());
@@ -91,9 +85,7 @@ public class WeaponController {
                 Main.getMain().getGame().getBullets().remove(b);
             }
         }
-        for (EnemyBullet b : Main.getMain().getGame().getEnemyBullets().toArray(
-            new EnemyBullet[Main.getMain().getGame().getEnemyBullets().size()]
-        )) {
+        for (EnemyBullet b : Main.getMain().getGame().getEnemyBullets().toArray(new EnemyBullet[0])) {
             b.getSprite().draw(Main.getBatch());
             Vector2 direction = new Vector2(
                 Main.getMain().getGame().getHero().getPosX() - Gdx.graphics.getWidth() / 2f + b.getX() - 16,

@@ -22,12 +22,4 @@ public class AnimatedSprite extends Sprite {
         stateTime += delta;
         this.setRegion(animation.getKeyFrame(stateTime, looping));
     }
-
-    public void setLooping(boolean looping) {
-        this.looping = looping;
-    }
-
-    public boolean isAnimationFinished() {
-        return animation.isAnimationFinished(stateTime);
-    }
 }

@@ -21,9 +21,8 @@ public class Wall implements Serializable {
     private float scaleX;
     private float scaleY;
     private transient TextureRegion[][] textureFrames;
-    private transient Animation<TextureRegion> animationFrames;
-    private boolean horizontal;
-    private boolean nearOrigin;
+    private final boolean horizontal;
+    private final boolean nearOrigin;
 
     public Wall(int x, int y, float pos, boolean horizontal, boolean nearOrigin) {
         this.nearOrigin = nearOrigin;
@@ -39,7 +38,7 @@ public class Wall implements Serializable {
         if (texture != null) return;
         texture = new Texture("T/T_ElectricWall.png");
         textureFrames = TextureRegion.split(texture, 64, 32);
-        animationFrames = new Animation<>(0.2f, textureFrames[0][0], textureFrames[0][1],
+        Animation<TextureRegion> animationFrames = new Animation<>(0.2f, textureFrames[0][0], textureFrames[0][1],
             textureFrames[0][2], textureFrames[0][3], textureFrames[0][4], textureFrames[0][5]);
         sprite = new AnimatedSprite(animationFrames);
         ((AnimatedSprite) sprite).update(new Random().nextFloat());
