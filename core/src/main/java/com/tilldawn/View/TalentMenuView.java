@@ -20,11 +20,21 @@ import java.util.function.Function;
 public class TalentMenuView implements Screen {
     private Stage stage;
     private Skin skin;
-    private final Label hero1;
-    private final Label hero2;
-    private final Label hero3;
-    private final Label cheatCode;
-    private final Label ability;
+    private final TextButton hero1;
+    private final TextButton hero2;
+    private final TextButton hero3;
+    private final TextButton hero4;
+    private final TextButton hero5;
+    private final TextButton cheatCode1;
+    private final TextButton cheatCode2;
+    private final TextButton cheatCode3;
+    private final TextButton cheatCode4;
+    private final TextButton cheatCode5;
+    private final TextButton ability1;
+    private final TextButton ability2;
+    private final TextButton ability3;
+    private final TextButton ability4;
+    private final TextButton ability5;
     private final Label upLabel;
     private final Label downLabel;
     private final Label leftLabel;
@@ -44,11 +54,21 @@ public class TalentMenuView implements Screen {
     public TalentMenuView(TalentMenuController controller, Skin skin) {
         this.controller = controller;
         this.skin = skin;
-        this.hero1 = new Label("Hero1 Information", skin); //todo
-        this.hero2 = new Label("Hero2 Information", skin); //todo
-        this.hero3 = new Label("Hero3 Information", skin); //todo
-        this.cheatCode = new Label("Cheat code information", skin); //todo
-        this.ability = new Label("Abilities information", skin); //todo
+        this.hero1 = new TextButton("Shana, speed: 4, Hp: 4", skin);
+        this.hero2 = new TextButton("Diamond, speed: 1, Hp: 7", skin);
+        this.hero3 = new TextButton("Scarlett, speed: 5, Hp: 3", skin);
+        this.hero4 = new TextButton("Lilith, speed: 3, Hp: 5", skin);
+        this.hero5 = new TextButton("Dasher, speed: 10, Hp: 2", skin);
+        this.cheatCode1 = new TextButton("1: Pass 1min", skin);
+        this.cheatCode2 = new TextButton("2: Add Hp", skin);
+        this.cheatCode3 = new TextButton("3: Next Level", skin);
+        this.cheatCode4 = new TextButton("4: Boss Fight", skin);
+        this.cheatCode5 = new TextButton("5: Fast Reload", skin);
+        this.ability1 = new TextButton("Vitality: Increase Maximum HP", skin);
+        this.ability2 = new TextButton("Damager: 25% more strong for 10s", skin);
+        this.ability3 = new TextButton("Procrease: Increase Projectile", skin);
+        this.ability4 = new TextButton("Amocrease: 5 more strong ammo", skin);
+        this.ability5 = new TextButton("Speedy: Twice faster for 10s", skin);
         this.upLabel = new Label(Main.getLanguage().Up, skin);
         this.downLabel = new Label(Main.getLanguage().Down, skin);
         this.leftLabel = new Label(Main.getLanguage().Left, skin);
@@ -78,15 +98,25 @@ public class TalentMenuView implements Screen {
         table.setFillParent(true);
         table.center();
 
-        table.add(hero1).colspan(6).width(700);
+        table.add(hero1).colspan(2).width(600);
+        table.add(hero2).colspan(2).width(600);
+        table.add(hero3).colspan(2).width(600);
+//        table.add(hero4).colspan(1).width(400);
+//        table.add(hero5).colspan(1).width(400);
         table.row().pad(10, 0 , 10, 0);
-        table.add(hero2).colspan(6).width(700);
+        table.add(cheatCode1).colspan(1).width(300);
+        table.add(cheatCode2).colspan(1).width(300);
+        table.add(cheatCode3).colspan(1).width(300);
+        table.add(cheatCode4).colspan(1).width(300);
+        table.add(cheatCode5).colspan(1).width(300);
         table.row().pad(10, 0 , 10, 0);
-        table.add(hero3).colspan(6).width(700);
+        table.add(ability1).colspan(6).width(900);
         table.row().pad(10, 0 , 10, 0);
-        table.add(cheatCode).colspan(6).width(700);
+        table.add(ability2).colspan(3).width(900).padRight(35);
+        table.add(ability3).colspan(3).width(900);
         table.row().pad(10, 0 , 10, 0);
-        table.add(ability).colspan(6).width(700);
+        table.add(ability4).colspan(3).width(900).padRight(35);
+        table.add(ability5).colspan(3).width(900);
         table.row().pad(10, 0 , 10, 0);
         table.add(autoAimLabel).width(100).padRight(40);
         table.add(autoAimTextButton).width(200).padRight(60);
@@ -102,7 +132,7 @@ public class TalentMenuView implements Screen {
         table.add(rightLabel).width(100).padRight(40);
         table.add(rightTextButton).width(200).padRight(60);
         table.row().pad(10, 0 , 10, 0);
-        table.add(mainMenu).colspan(6).width(500);
+        table.add(mainMenu).colspan(6).width(600);
 
         stage.addActor(table);
     }
