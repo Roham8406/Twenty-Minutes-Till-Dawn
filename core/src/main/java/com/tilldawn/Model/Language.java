@@ -15,7 +15,7 @@ public enum Language {
         "Change password", "Sign Up", "Password", "Forgot Password?", "Continue As Guest", "Login", "Setting Menu",
         "Pre-Game Menu", "Scoreboard Menu", "Talent Menu", "Login Menu", "Logout", "Profile Menu", "Load Game", "Resume",
         "Save", "Give Up", "Grayscale", "Start", "Change Avatar", "Delete Account", "Change Info", "Apply",
-        "Choose Local Avatar", "Music Volume", "Music Track", "SFXs", "Control Setting", "Auto Reload"),
+        "Choose Local Avatar", "Music Volume", "Music Track", "SFXs", "Control Setting", "Auto Reload", "Shoot"),
     Spanish("Español","¡Teclas similares para dos comandos!", "Por favor, introduce tu nombre de usuario.",
         "Por favor, responde a la pregunta.", "La respuesta que has introducido es incorrecta.", "Por favor, introduce tu nueva contraseña",
         "Contraseña demasiado fácil", "Los campos son esenciales", "Personaje", "Arma", "seleccionado.", "Tiempo ajustado a",
@@ -29,7 +29,7 @@ public enum Language {
         "¡Felicidades, sobreviviste!", "Perdedor...", "Haz clic para terminar.", "Buscar usuario", "Autorizar respuesta", "Nueva contraseña",
         "Cambiar contraseña", "Registrarse", "Contraseña", "¿Olvidaste tu contraseña?", "Continuar como invitado", "Iniciar sesión", "Menú de configuración",
         "Menú previo al juego", "Menú del marcador", "Menú de talentos", "Menú de inicio de sesión", "Cerrar sesión", "Menú de perfil", "Cargar partida", "Reanudar",
-        "Guardar", "Renunciar", "Escala de grises", "Iniciar", "Cambiar avatar", "Eliminar cuenta", "Cambiar información", "Aplicar", "Elegir avatar local", "Volumen de la música", "Pista de música", "Efectos de sonido", "Configuración de control", "Recarga automática");
+        "Guardar", "Renunciar", "Escala de grises", "Iniciar", "Cambiar avatar", "Eliminar cuenta", "Cambiar información", "Aplicar", "Elegir avatar local", "Volumen de la música", "Pista de música", "Efectos de sonido", "Configuración de control", "Recarga automática", "disparar");
     private final String name;
     public final String SimilarKeysError;
     public final String NoUsernameError;
@@ -117,6 +117,7 @@ public enum Language {
     public final String SFXs;
     public final String ControlSetting;
     public final String AutoReload;
+    public final String Shoot;
 
 
     Language(String name,
@@ -205,7 +206,8 @@ public enum Language {
              String MusicTrack,
              String SFXs,
              String ControlSetting,
-             String AutoReload) {
+             String AutoReload,
+             String Shoot) {
 
         this.name = name;
         this.SimilarKeysError = SimilarKeysError;
@@ -294,6 +296,7 @@ public enum Language {
         this.SFXs = SFXs;
         this.ControlSetting = ControlSetting;
         this.AutoReload = AutoReload;
+        this.Shoot = Shoot;
     }
 
 

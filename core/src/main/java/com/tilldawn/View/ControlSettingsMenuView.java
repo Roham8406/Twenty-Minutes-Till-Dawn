@@ -27,12 +27,14 @@ public class ControlSettingsMenuView implements Screen {
     private final Label rightLabel;
     private final Label autoAimLabel;
     private final Label reloadLabel;
+    private final Label shootLabel;
     private final TextButton upTextButton;
     private final TextButton downTextButton;
     private final TextButton leftTextButton;
     private final TextButton rightTextButton;
     private final TextButton autoAimTextButton;
     private final TextButton reloadTextButton;
+    private final TextButton shootTextButton;
     private final TextButton mainMenu;
     public Table table;
     private final ControlSettingMenuController controller;
@@ -45,14 +47,18 @@ public class ControlSettingsMenuView implements Screen {
         this.rightLabel = new Label(Main.getLanguage().Right, skin);
         this.autoAimLabel = new Label(Main.getLanguage().AutoAim, skin);
         this.reloadLabel = new Label(Main.getLanguage().Reload, skin);
+        this.shootLabel = new Label(Main.getLanguage().Shoot, skin);
         Function<String, String> keyDecoder = key ->
-            Input.Keys.toString(Main.getMain().getControl().getKeys().get(key));
+            (Main.getMain().getControl().getKeys().get(key) != Input.Buttons.LEFT) ?
+                Input.Keys.toString(Main.getMain().getControl().getKeys().get(key)) :
+                "Click";
         this.upTextButton = new TextButton(keyDecoder.apply("up"), skin);
         this.downTextButton = new TextButton(keyDecoder.apply("down"), skin);
         this.leftTextButton = new TextButton(keyDecoder.apply("left"), skin);
         this.rightTextButton = new TextButton(keyDecoder.apply("right"), skin);
         this.autoAimTextButton = new TextButton(keyDecoder.apply("autoAim"), skin);
         this.reloadTextButton = new TextButton(keyDecoder.apply("reload"), skin);
+        this.shootTextButton = new TextButton(keyDecoder.apply("shoot"), skin);
         this.mainMenu = new TextButton(Main.getLanguage().MainMenu, skin);
         this.table = new Table();
         this.skin = skin;
@@ -81,6 +87,9 @@ public class ControlSettingsMenuView implements Screen {
         table.add(downTextButton).width(200).padRight(60);
         table.add(rightLabel).width(100).padRight(40);
         table.add(rightTextButton).width(200).padRight(60);
+        table.row().pad(10, 0 , 10, 0);
+        table.add(shootLabel).width(100).padRight(40);
+        table.add(shootTextButton).width(200).padRight(60);
         table.row().pad(10, 0 , 10, 0);
         table.add(mainMenu).colspan(6).width(500);
 
@@ -123,7 +132,7 @@ public class ControlSettingsMenuView implements Screen {
     }
 
     private String keyDecoder (int key) {
-        return Input.Keys.toString(key);
+        return key == Input.Buttons.LEFT ? "Click" : Input.Keys.toString(key);
     }
 
     public TextButton getAutoAimTextButton() {
@@ -170,6 +179,15 @@ public class ControlSettingsMenuView implements Screen {
     public void setRight() {
         Integer keyCode = Main.getMain().getControl().changeRight(controller);
         rightTextButton.setText(keyDecoder(keyCode));
+    }
+
+    public TextButton getShootTextButton() {
+        return shootTextButton;
+    }
+
+    public void setShoot() {
+        Integer keyCode = Main.getMain().getControl().changeShoot(controller);
+        shootTextButton.setText(keyDecoder(keyCode));
     }
 
 

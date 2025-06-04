@@ -43,6 +43,10 @@ public class ControlSettingMenuController extends MenuController {
             if (view.getUpTextButton().isChecked()) {
                 view.setUpKey();
             }
+            if (view.getShootTextButton().isChecked()) {
+                view.setShoot();
+                view.getShootTextButton().setChecked(false);
+            }
             if (view.getMainMenu().isChecked()) {
                 ArrayList<Integer> keyCodes = new ArrayList<>();
                 for (Integer value : control.values()) {

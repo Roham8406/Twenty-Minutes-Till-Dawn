@@ -26,7 +26,14 @@ public class Control implements Serializable {
         keys.put("right", Input.Keys.D);
         keys.put("autoAim", Input.Keys.SPACE);
         keys.put("reload", Input.Keys.R);
+        keys.put("shoot", Input.Buttons.LEFT);
     }
+
+    public Integer changeShoot(ControlSettingMenuController stage) {
+        changeKey(stage, "shoot");
+        return keys.get("shoot");
+    }
+
 
     public Integer changeUp(ControlSettingMenuController stage) {
         changeKey(stage, "up");
@@ -64,6 +71,14 @@ public class Control implements Serializable {
             @Override
             public boolean keyDown(int keycode) {
                 keys.put(key, keycode);
+                Main.getMain().getScreen().dispose();
+                Main.getMain().setScreen(new ControlSettingsMenuView(new ControlSettingMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
+                return true;
+            }
+
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                keys.put(key, Input.Buttons.LEFT);
                 Main.getMain().getScreen().dispose();
                 Main.getMain().setScreen(new ControlSettingsMenuView(new ControlSettingMenuController(), GameAssetManager.getGameAssetManager().getSkin()));
                 return true;

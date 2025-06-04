@@ -31,33 +31,45 @@ public class PlayerController {
     }
 
 
+    private boolean decodeKey(String string, boolean hold) {
+        return hold ? (Gdx.input.isButtonPressed(Main.getMain().getGame().getControl().getKeys().get(string)) ||
+                Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get(string))) :
+            (Gdx.input.isButtonJustPressed(Main.getMain().getGame().getControl().getKeys().get(string)) ||
+                Gdx.input.isKeyJustPressed(Main.getMain().getGame().getControl().getKeys().get(string)));
+    }
     public void handlePlayerInput(){
+        if (decodeKey("shoot", false)){
+            gameController.getWeaponController().handleWeaponShoot(
+                Gdx.input.getX(),
+                Gdx.input.getY()
+            );
+        }
         boolean flag = true;
-        if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("up"))){
+        if (decodeKey("up", true)){
             player.setPosY(player.getPosY() - player.getSpeed());
             player.setPlayerRunning(true);
             flag = false;
         }
-        if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("right"))){
+        if (decodeKey("right", true)){
             player.setPosX(player.getPosX() - player.getSpeed());
             player.setPlayerRunning(true);
             flag = false;
         }
-        if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("down"))){
+        if (decodeKey("down", true)){
             player.setPosY(player.getPosY() + player.getSpeed());
             player.setPlayerRunning(true);
             flag = false;
         }
-        if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("left"))){
+        if (decodeKey("left", true)){
             player.setPosX(player.getPosX() + player.getSpeed());
             player.setPlayerRunning(true);
             flag = false;
             player.getPlayerSprite().flip(true, false);
         }
-        if (Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get("reload"))){
+        if (decodeKey("reload", false)){
             Main.getMain().getGame().getWeapon().reload();
         }
-        if (Gdx.input.isKeyJustPressed(Main.getMain().getGame().getControl().getKeys().get("autoAim"))){
+        if (decodeKey("autoAim", false)){
             Main.getMain().getGame().triggerAutoAim();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
