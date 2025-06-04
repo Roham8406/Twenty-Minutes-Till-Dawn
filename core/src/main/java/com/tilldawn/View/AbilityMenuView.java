@@ -3,17 +3,15 @@ package com.tilldawn.View;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.AbilityMenuController;
 import com.tilldawn.Control.GameController;
-import com.tilldawn.Control.SettingMenuController;
 import com.tilldawn.Main;
-import com.tilldawn.Model.MusicTracks;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class AbilityMenuView implements Screen {
@@ -62,7 +60,7 @@ public class AbilityMenuView implements Screen {
 
         for (TextButton ability : abilities) {
             table.add(ability).width(600);
-            table.row().pad(10, 0 , 10, 0);
+            table.row().pad(10, 0, 10, 0);
         }
 
         stage.addActor(table);

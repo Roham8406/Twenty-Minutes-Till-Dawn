@@ -5,14 +5,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.ForgotPasswordMenuController;
-import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Main;
-import com.tilldawn.Model.GameAssetManager;
-import com.tilldawn.Model.User;
 
 public class ForgotPasswordMenuView implements Screen {
     private Stage stage;
@@ -75,22 +71,25 @@ public class ForgotPasswordMenuView implements Screen {
             case 0: {
                 table.add(usernameLabel).width(100).padRight(40);
                 table.add(usernameField).width(300);
-                table.row().pad(10,0,10,0);
+                table.row().pad(10, 0, 10, 0);
                 table.add(findUsername).colspan(2).width(500);
-            } break;
+            }
+            break;
             case 1: {
                 table.add(securityQuestion).width(300);
-                table.row().pad(10,0,10,0);
+                table.row().pad(10, 0, 10, 0);
                 table.add(securityAnswerField).width(300);
-                table.row().pad(10,0,10,0);
+                table.row().pad(10, 0, 10, 0);
                 table.add(authorize).width(600);
-            } break;
+            }
+            break;
             case 2: {
                 table.add(newPassword).width(200).padRight(40);
                 table.add(newPasswordField).width(300);
-                table.row().pad(10,0,10,0);
+                table.row().pad(10, 0, 10, 0);
                 table.add(changePassword).colspan(2).width(600);
-            } break;
+            }
+            break;
 
         }
         stage.addActor(table);
@@ -161,7 +160,7 @@ public class ForgotPasswordMenuView implements Screen {
     public void alert(String message, Integer timer) {
         final Table alertBox = new Table(skin);
         alertBox.setSize(1000, 50);
-        alertBox.setPosition(Gdx.graphics.getWidth() / 2f,0, Align.bottom);
+        alertBox.setPosition(Gdx.graphics.getWidth() / 2f, 0, Align.bottom);
 
         Label label = new Label(message, skin);
         alertBox.add(label);

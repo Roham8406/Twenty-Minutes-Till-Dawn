@@ -2,8 +2,9 @@ package com.tilldawn.Control;
 
 import com.tilldawn.Main;
 import com.tilldawn.Model.GameAssetManager;
-import com.tilldawn.Model.enemy.Elder;
-import com.tilldawn.View.*;
+import com.tilldawn.View.EndMenuView;
+import com.tilldawn.View.MainMenuView;
+import com.tilldawn.View.PauseMenuView;
 import com.tilldawn.service.SaveService;
 
 public class PauseMenuController extends MenuController {

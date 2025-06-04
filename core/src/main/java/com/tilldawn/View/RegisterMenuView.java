@@ -5,10 +5,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.tilldawn.Control.LoginMenuController;
 import com.tilldawn.Control.RegisterMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.Model.SecurityQuestions;
@@ -45,8 +43,8 @@ public class RegisterMenuView implements Screen {
         }
         this.playAsGuest = new TextButton(Main.getLanguage().ContinueAsGuest, skin);
         this.securityQuestion.setItems(Arrays.stream(SecurityQuestions.values())
-                                        .map(SecurityQuestions::getQuestion)
-                                        .toArray(String[]::new));
+            .map(SecurityQuestions::getQuestion)
+            .toArray(String[]::new));
 
         controller.setView(this);
     }
@@ -60,16 +58,16 @@ public class RegisterMenuView implements Screen {
         table.center();
         table.add(usernameLabel).width(100).padRight(100);
         table.add(usernameField).width(300);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(passwordLabel).width(100).padRight(100);
         table.add(passwordField).width(300);
-        table.row().pad(10, 0 , 10 , 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(securityQuestion).width(800).colspan(2).center();
-        table.row().pad(10, 0 , 10 , 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(securityAnswer).width(500).colspan(2).center();
-        table.row().pad(10, 0 , 10 , 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(register).width(500).colspan(2).center();
-        table.row().pad(10, 0 , 10 , 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(playAsGuest).width(500).colspan(2).center();
 
 
@@ -137,7 +135,7 @@ public class RegisterMenuView implements Screen {
     public void alert(String message, Integer timer) {
         final Table alertBox = new Table(skin);
         alertBox.setSize(1000, 50);
-        alertBox.setPosition(Gdx.graphics.getWidth() / 2f,0, Align.bottom);
+        alertBox.setPosition(Gdx.graphics.getWidth() / 2f, 0, Align.bottom);
 
         Label label = new Label(message, skin);
         alertBox.add(label);

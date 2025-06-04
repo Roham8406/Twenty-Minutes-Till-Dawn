@@ -2,7 +2,6 @@ package com.tilldawn.Control;
 
 import com.tilldawn.Main;
 import com.tilldawn.Model.GameAssetManager;
-import com.tilldawn.View.LoginMenuView;
 import com.tilldawn.View.MainMenuView;
 import com.tilldawn.View.ScoreboardMenuView;
 

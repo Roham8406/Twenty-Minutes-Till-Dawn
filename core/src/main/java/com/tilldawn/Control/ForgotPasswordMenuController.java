@@ -6,7 +6,6 @@ import com.tilldawn.Model.Response;
 import com.tilldawn.Model.User;
 import com.tilldawn.View.ForgotPasswordMenuView;
 import com.tilldawn.View.LoginMenuView;
-import com.tilldawn.View.MainMenuView;
 import com.tilldawn.service.UserSql;
 
 public class ForgotPasswordMenuController extends MenuController {
@@ -38,7 +37,8 @@ public class ForgotPasswordMenuController extends MenuController {
                         this.view = view.setState(1);
                         view.setSecurityQuestion(user.getSecurityQuestion());
                     }
-                } break;
+                }
+                break;
                 case 1: {
                     if (view.getAuthorize().isChecked()) {
                         if (view.getSecurityAnswerField().getText().isEmpty()) {
@@ -54,7 +54,8 @@ public class ForgotPasswordMenuController extends MenuController {
                         }
                         view.setState(2);
                     }
-                } break;
+                }
+                break;
                 case 2: {
                     if (view.getChangePassword().isChecked()) {
                         if (view.getNewPasswordField().getText().isEmpty()) {

@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.EndMenuController;
 import com.tilldawn.Main;
@@ -28,7 +27,7 @@ public class EndMenuView implements Screen {
     public EndMenuView(EndMenuController controller, Skin skin, boolean won, Player player) {
         this.controller = controller;
         this.isWon = won;
-        this.won = new TextButton(won?Main.getLanguage().Congrats:Main.getLanguage().Loser, skin);
+        this.won = new TextButton(won ? Main.getLanguage().Congrats : Main.getLanguage().Loser, skin);
         this.kills = new TextButton(Main.getLanguage().Kills + ": " + player.getKills(), skin);
         this.playTime = Main.getMain().getGame().getTimer().getDuration()
             - Main.getMain().getGame().getTimer().getRemaining();
@@ -51,13 +50,13 @@ public class EndMenuView implements Screen {
         table.center();
 
         table.add(won).width(800);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(kills).width(400);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(xp).width(400);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(playtime).width(400);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(mainMenu).width(400);
 
         stage.addActor(table);

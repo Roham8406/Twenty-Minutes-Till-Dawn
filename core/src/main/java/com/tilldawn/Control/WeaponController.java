@@ -13,7 +13,7 @@ public class WeaponController {
     private final Weapon weapon;
     private final WorldController worldController;
 
-    public WeaponController(WorldController worldController, Weapon weapon){
+    public WeaponController(WorldController worldController, Weapon weapon) {
         this.weapon = weapon;
         this.worldController = worldController;
     }
@@ -25,7 +25,7 @@ public class WeaponController {
     public void update(float delta) {
         weapon.getSprite().draw(Main.getBatch());
         if (weapon.isReloading()) {
-            ((AnimatedSprite)weapon.getSprite()).update(delta);
+            ((AnimatedSprite) weapon.getSprite()).update(delta);
         }
         updateBullets();
     }
@@ -41,11 +41,11 @@ public class WeaponController {
         weaponSprite.setRotation((float) (3.14 - angle * MathUtils.radiansToDegrees));
     }
 
-    public void handleWeaponShoot(int x, int y){
+    public void handleWeaponShoot(int x, int y) {
         if (weapon.canShoot()) {
             worldController.removeAmmo();
             for (int i = 0; i < weapon.getProjectTile(); i++) {
-                Timer.schedule(new Timer.Task(){
+                Timer.schedule(new Timer.Task() {
                     @Override
                     public void run() {
                         Main.getMain().getGame().getBullets().add(
@@ -65,13 +65,13 @@ public class WeaponController {
     }
 
     public void updateBullets() {
-        for(Bullet b : Main.getMain().getGame().getBullets().toArray(
+        for (Bullet b : Main.getMain().getGame().getBullets().toArray(
             new Bullet[Main.getMain().getGame().getBullets().size()]
         )) {
             b.getSprite().draw(Main.getBatch());
             Vector2 direction = new Vector2(
-                Gdx.graphics.getWidth()/2f - b.getX(),
-                -Gdx.graphics.getHeight()/2f + b.getY()
+                Gdx.graphics.getWidth() / 2f - b.getX(),
+                -Gdx.graphics.getHeight() / 2f + b.getY()
             ).nor();
 
             for (Enemy enemy : Main.getMain().getGame().getEnemies().toArray(new Enemy[Main.getMain().getGame().getEnemies().size()])) {
@@ -91,13 +91,13 @@ public class WeaponController {
                 Main.getMain().getGame().getBullets().remove(b);
             }
         }
-        for(EnemyBullet b : Main.getMain().getGame().getEnemyBullets().toArray(
+        for (EnemyBullet b : Main.getMain().getGame().getEnemyBullets().toArray(
             new EnemyBullet[Main.getMain().getGame().getEnemyBullets().size()]
         )) {
             b.getSprite().draw(Main.getBatch());
             Vector2 direction = new Vector2(
-                Main.getMain().getGame().getHero().getPosX() -Gdx.graphics.getWidth()/2f + b.getX() - 16,
-                Main.getMain().getGame().getHero().getPosY() -Gdx.graphics.getHeight()/2f + b.getY() - 16
+                Main.getMain().getGame().getHero().getPosX() - Gdx.graphics.getWidth() / 2f + b.getX() - 16,
+                Main.getMain().getGame().getHero().getPosY() - Gdx.graphics.getHeight() / 2f + b.getY() - 16
             ).nor();
 
 
@@ -109,7 +109,7 @@ public class WeaponController {
                 Main.getMain().getGame().getEnemyBullets().remove(b);
             }
 
-            if (b.isCollisioned(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f)) {
+            if (b.isCollisioned(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f)) {
                 Main.getMain().getGame().getEnemyBullets().remove(b);
                 if (!Main.getMain().getGame().getHero().isInvincible()) {
                     worldController.shotted();

@@ -15,15 +15,15 @@ public class PlayerController {
     private Player player;
     private GameController gameController;
 
-    public PlayerController(Player player, GameController gameController){
+    public PlayerController(Player player, GameController gameController) {
         this.player = player;
         this.gameController = gameController;
     }
 
-    public void update(){
+    public void update() {
         player.getPlayerSprite().draw(Main.getBatch());
 
-        if(player.isPlayerIdle()){
+        if (player.isPlayerIdle()) {
             idleAnimation();
         }
 
@@ -33,43 +33,44 @@ public class PlayerController {
 
     private boolean decodeKey(String string, boolean hold) {
         return hold ? (Gdx.input.isButtonPressed(Main.getMain().getGame().getControl().getKeys().get(string)) ||
-                Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get(string))) :
+            Gdx.input.isKeyPressed(Main.getMain().getGame().getControl().getKeys().get(string))) :
             (Gdx.input.isButtonJustPressed(Main.getMain().getGame().getControl().getKeys().get(string)) ||
                 Gdx.input.isKeyJustPressed(Main.getMain().getGame().getControl().getKeys().get(string)));
     }
-    public void handlePlayerInput(){
-        if (decodeKey("shoot", false)){
+
+    public void handlePlayerInput() {
+        if (decodeKey("shoot", false)) {
             gameController.getWeaponController().handleWeaponShoot(
                 Gdx.input.getX(),
                 Gdx.input.getY()
             );
         }
         boolean flag = true;
-        if (decodeKey("up", true)){
+        if (decodeKey("up", true)) {
             player.setPosY(player.getPosY() - player.getSpeed());
             player.setPlayerRunning(true);
             flag = false;
         }
-        if (decodeKey("right", true)){
+        if (decodeKey("right", true)) {
             player.setPosX(player.getPosX() - player.getSpeed());
             player.setPlayerRunning(true);
             flag = false;
         }
-        if (decodeKey("down", true)){
+        if (decodeKey("down", true)) {
             player.setPosY(player.getPosY() + player.getSpeed());
             player.setPlayerRunning(true);
             flag = false;
         }
-        if (decodeKey("left", true)){
+        if (decodeKey("left", true)) {
             player.setPosX(player.getPosX() + player.getSpeed());
             player.setPlayerRunning(true);
             flag = false;
             player.getPlayerSprite().flip(true, false);
         }
-        if (decodeKey("reload", false)){
+        if (decodeKey("reload", false)) {
             Main.getMain().getGame().getWeapon().reload();
         }
-        if (decodeKey("autoAim", false)){
+        if (decodeKey("autoAim", false)) {
             Main.getMain().getGame().triggerAutoAim();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
@@ -99,15 +100,14 @@ public class PlayerController {
     }
 
 
-    public void idleAnimation(){
+    public void idleAnimation() {
         Animation<TextureRegion> animation = Main.getMain().getGame().getHero().getCharacterAnimation();
         Sprite sprite = player.getPlayerSprite();
         sprite.setRegion(animation.getKeyFrame(player.getTime()));
 
         if (!animation.isAnimationFinished(player.getTime())) {
             player.setTime(player.getTime() + Gdx.graphics.getDeltaTime());
-        }
-        else {
+        } else {
             player.setTime(0);
         }
 

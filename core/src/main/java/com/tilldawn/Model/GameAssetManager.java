@@ -3,8 +3,6 @@ package com.tilldawn.Model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.tilldawn.Main;
@@ -16,7 +14,7 @@ public class GameAssetManager {
     private final Texture backgroundTexture = new Texture(Gdx.files.internal("menubackground.jpg"));
 
 
-    private GameAssetManager(){
+    private GameAssetManager() {
 
     }
 
@@ -24,8 +22,8 @@ public class GameAssetManager {
         return backgroundTexture;
     }
 
-    public static GameAssetManager getGameAssetManager(){
-        if (gameAssetManager == null){
+    public static GameAssetManager getGameAssetManager() {
+        if (gameAssetManager == null) {
             gameAssetManager = new GameAssetManager();
         }
         return gameAssetManager;
@@ -44,7 +42,7 @@ public class GameAssetManager {
     }
 
 
-    public String getBullet(){
+    public String getBullet() {
         return bullet;
     }
 }

@@ -4,18 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.ControlSettingMenuController;
-import com.tilldawn.Control.SettingMenuController;
 import com.tilldawn.Main;
-import com.tilldawn.Model.MusicTracks;
 
-import java.util.Arrays;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class ControlSettingsMenuView implements Screen {
@@ -80,17 +78,17 @@ public class ControlSettingsMenuView implements Screen {
         table.add(upTextButton).width(200).padRight(60);
         table.add(reloadLabel).width(100).padRight(40);
         table.add(reloadTextButton).width(200).padRight(60);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(leftLabel).width(100).padRight(40);
         table.add(leftTextButton).width(200).padRight(60);
         table.add(downLabel).width(100).padRight(40);
         table.add(downTextButton).width(200).padRight(60);
         table.add(rightLabel).width(100).padRight(40);
         table.add(rightTextButton).width(200).padRight(60);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(shootLabel).width(100).padRight(40);
         table.add(shootTextButton).width(200).padRight(60);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(mainMenu).colspan(6).width(500);
 
         stage.addActor(table);
@@ -130,7 +128,7 @@ public class ControlSettingsMenuView implements Screen {
 
     }
 
-    private String keyDecoder (int key) {
+    private String keyDecoder(int key) {
         return key == Input.Buttons.LEFT ? "Click" : Input.Keys.toString(key);
     }
 
@@ -210,7 +208,7 @@ public class ControlSettingsMenuView implements Screen {
     public void alert(String message, Integer timer) {
         final Table alertBox = new Table(skin);
         alertBox.setSize(1000, 50);
-        alertBox.setPosition(Gdx.graphics.getWidth() / 2f,0, Align.bottom);
+        alertBox.setPosition(Gdx.graphics.getWidth() / 2f, 0, Align.bottom);
 
         Label label = new Label(message, skin);
         alertBox.add(label);

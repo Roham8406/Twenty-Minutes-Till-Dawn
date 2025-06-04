@@ -22,13 +22,13 @@ public abstract class Enemy implements Serializable {
     protected float y;
     protected float lastSpawn;
     protected boolean dead;
-    protected Vector2 velocity = new Vector2(0, 0).nor();;
+    protected Vector2 velocity = new Vector2(0, 0).nor();
     protected transient TextureRegion[][] textureFrames;
     protected transient Animation<TextureRegion> animationFrames;
     protected transient Texture seed = new Texture("T/T_LunaBlackHoleDamage_0.png");
     protected transient Texture death = new Texture("T/T_DeathFX.png");
 
-    public void removeHp(int hp){
+    public void removeHp(int hp) {
         this.hp -= hp;
         if (this.hp <= 0) {
             die();
@@ -46,7 +46,7 @@ public abstract class Enemy implements Serializable {
         textureFrames = TextureRegion.split(death, 40, 40);
         animationFrames = new Animation<>(0.1f, textureFrames[0][0], textureFrames[0][1],
             textureFrames[0][2], textureFrames[0][3]);
-        Timer.schedule((Timer.Task) new Timer.Task(){
+        Timer.schedule((Timer.Task) new Timer.Task() {
             @Override
             public void run() {
                 textureFrames = TextureRegion.split(seed, 42, 42);
@@ -73,8 +73,8 @@ public abstract class Enemy implements Serializable {
 
     public boolean isCollisioned(float posX, float posY) {
         init();
-        return Math.abs(posX + this.x - Gdx.graphics.getWidth()/2f) < 28 &&
-            Math.abs(posY + this.y - Gdx.graphics.getHeight()/2f) < 50;
+        return Math.abs(posX + this.x - Gdx.graphics.getWidth() / 2f) < 28 &&
+            Math.abs(posY + this.y - Gdx.graphics.getHeight() / 2f) < 50;
     }
 
     public float getWidth() {
@@ -86,8 +86,8 @@ public abstract class Enemy implements Serializable {
     }
 
     public void goBack(Vector2 direction) {
-        x -= direction.x*20;
-        y -= direction.y*20;
+        x -= direction.x * 20;
+        y -= direction.y * 20;
     }
 
     protected void init() {

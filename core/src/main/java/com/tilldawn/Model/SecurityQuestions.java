@@ -12,6 +12,7 @@ public enum SecurityQuestions {
     Q7(Main.getLanguage().Q7);
 
     private String question;
+
     SecurityQuestions(String question) {
         this.question = question;
     }

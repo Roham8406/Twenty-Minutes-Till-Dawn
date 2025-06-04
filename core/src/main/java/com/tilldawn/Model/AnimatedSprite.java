@@ -1,6 +1,5 @@
 package com.tilldawn.Model;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,6 +17,7 @@ public class AnimatedSprite extends Sprite {
     public void edit(Animation<TextureRegion> animation) {
         this.animation = animation;
     }
+
     public void update(float delta) {
         stateTime += delta;
         this.setRegion(animation.getKeyFrame(stateTime, looping));

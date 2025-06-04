@@ -5,18 +5,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.tilldawn.Control.GameController;
 import com.tilldawn.Control.PreGameMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.Model.GameCharacter;
 import com.tilldawn.Model.WeaponType;
-import org.w3c.dom.Text;
-
-import java.awt.font.ImageGraphicAttribute;
 
 public class PreGameMenuView implements Screen {
 
@@ -68,17 +62,17 @@ public class PreGameMenuView implements Screen {
         table.add(scarlet).colspan(12).height(100).padRight(30);
         table.add(lilith).colspan(12).height(100).padRight(30);
         table.add(dasher).colspan(12).height(100);
-        table.row().pad(10, 0 , 10 , 0);
+        table.row().pad(10, 0, 10, 0);
         table.setFillParent(true);
         table.add(revolver).colspan(20).height(100).padRight(30);
         table.add(shotgun).colspan(20).height(100).padRight(30);
         table.add(smg).colspan(20).height(100);
-        table.row().pad(10, 0 , 10 , 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(time2).colspan(15).width(300).padRight(30);
         table.add(time5).colspan(15).width(300).padRight(30);
         table.add(time10).colspan(15).width(300).padRight(30);
         table.add(time20).colspan(15).width(300);
-        table.row().pad(10, 0 , 10 , 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(start).colspan(60).width(400);
 
         stage.addActor(table);
@@ -177,7 +171,7 @@ public class PreGameMenuView implements Screen {
     public void alert(String message, Integer timer) {
         final Table alertBox = new Table(skin);
         alertBox.setSize(1000, 50);
-        alertBox.setPosition(Gdx.graphics.getWidth() / 2f,0, Align.bottom);
+        alertBox.setPosition(Gdx.graphics.getWidth() / 2f, 0, Align.bottom);
 
         Label label = new Label(message, skin);
         alertBox.add(label);

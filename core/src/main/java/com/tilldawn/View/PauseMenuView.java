@@ -8,10 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.tilldawn.Control.AbilityMenuController;
 import com.tilldawn.Control.GameController;
 import com.tilldawn.Control.PauseMenuController;
 import com.tilldawn.Main;
@@ -84,31 +82,31 @@ public class PauseMenuView implements Screen {
         table.add(new Label(Main.getLanguage().Amocrease, skin)).colspan(2).width(250).padRight(30);
         table.add(new Label(Main.getLanguage().Damager, skin)).colspan(2).width(250).padRight(30);
         table.add(new Label(Main.getLanguage().Speedy, skin)).colspan(2).width(250);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(vitality).colspan(2).width(250).padRight(30);
         table.add(procrease).colspan(2).width(250).padRight(30);
         table.add(amocrease).colspan(2).width(250).padRight(30);
         table.add(damager).colspan(2).width(250).padRight(30);
         table.add(speedy).colspan(2).width(250);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(resume).colspan(5).width(300).padRight(30);
         table.add(blackAndWhite).colspan(5).width(300);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(save).colspan(5).width(300).padRight(30);
         table.add(giveUp).colspan(5).width(300);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(timeDiscount).colspan(2).width(50).padRight(30);
         table.add(hpIncrement).colspan(2).width(50).padRight(30);
         table.add(levelIncrement).colspan(2).width(50).padRight(30);
         table.add(bossFight).colspan(2).width(50).padRight(30);
         table.add(sth).colspan(2).width(50);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(new Label("Num 1", skin)).colspan(2).width(50).padRight(30);
         table.add(new Label("Num 2", skin)).colspan(2).width(50).padRight(30);
         table.add(new Label("Num 3", skin)).colspan(2).width(50).padRight(30);
         table.add(new Label("Num 4", skin)).colspan(2).width(50).padRight(30);
         table.add(new Label("Num 5", skin)).colspan(2).width(50);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
 
         stage.addActor(table);
     }
@@ -194,7 +192,7 @@ public class PauseMenuView implements Screen {
     public void alert(String message, Integer timer) {
         final Table alertBox = new Table(skin);
         alertBox.setSize(1000, 50);
-        alertBox.setPosition(Gdx.graphics.getWidth() / 2f,0, Align.bottom);
+        alertBox.setPosition(Gdx.graphics.getWidth() / 2f, 0, Align.bottom);
 
         Label label = new Label(message, skin);
         alertBox.add(label);

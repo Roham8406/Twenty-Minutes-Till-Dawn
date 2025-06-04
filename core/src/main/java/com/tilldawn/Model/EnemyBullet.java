@@ -1,6 +1,5 @@
 package com.tilldawn.Model;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.tilldawn.Main;
@@ -19,7 +18,7 @@ public class EnemyBullet implements Serializable {
     private float posY;
     private int range = 120;
 
-    public EnemyBullet(float x, float y){
+    public EnemyBullet(float x, float y) {
         this.x = x;
         this.y = y;
         this.posX = x;
@@ -27,14 +26,14 @@ public class EnemyBullet implements Serializable {
         init();
     }
 
-    private void init(){
+    private void init() {
         if (sprite != null) return;
         sprite = new Sprite(texture);
-        sprite.setSize(20 , 20);
+        sprite.setSize(20, 20);
         updatePos();
     }
 
-    public void updatePos(){
+    public void updatePos() {
         init();
         sprite.setX(posX + Main.getMain().getGame().getHero().getPosX());
         sprite.setY(posY + Main.getMain().getGame().getHero().getPosY());

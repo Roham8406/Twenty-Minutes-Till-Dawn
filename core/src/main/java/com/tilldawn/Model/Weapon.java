@@ -1,10 +1,8 @@
 package com.tilldawn.Model;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Timer;
-import com.tilldawn.Control.WeaponController;
 import com.tilldawn.Main;
 import com.tilldawn.View.GameView;
 
@@ -23,7 +21,7 @@ public class Weapon implements Serializable {
     private boolean reloading = false;
     private float timeReload;
 
-    public Weapon(WeaponType type){
+    public Weapon(WeaponType type) {
         this.weaponType = type;
         this.ammo = weaponType.getAmmoMax();
         this.timeReload = weaponType.getTimeReload();
@@ -34,9 +32,9 @@ public class Weapon implements Serializable {
         if (Main.getMain().isSfx()) Sfx.Reload.play();
         reloading = true;
         this.ammo = weaponType.getAmmoMax() + maxAmmo;
-        ((GameView)Main.getMain().getScreen()).getController().getWorldController().setAmmo();
+        ((GameView) Main.getMain().getScreen()).getController().getWorldController().setAmmo();
 
-        Timer.schedule(new Timer.Task(){
+        Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 reloading = false;
@@ -44,22 +42,22 @@ public class Weapon implements Serializable {
         }, timeReload);
     }
 
-    private void init(){
-        if (sprite == null){
+    private void init() {
+        if (sprite == null) {
             sprite = new Sprite(weaponType.getDefaultTexture());
             sprite.setX((float) Gdx.graphics.getWidth() / 2 - 25);
             sprite.setY((float) Gdx.graphics.getHeight() / 2 - 25);
-            sprite.setSize(50,50);
+            sprite.setSize(50, 50);
             reloadingSprite = new AnimatedSprite(weaponType.getReloadAnimation());
-            reloadingSprite.setX((float) Gdx.graphics.getWidth() / 2  - 12.5f);
+            reloadingSprite.setX((float) Gdx.graphics.getWidth() / 2 - 12.5f);
             reloadingSprite.setY((float) Gdx.graphics.getHeight() / 2 - 12.5f);
-            reloadingSprite.setSize(50,50);
+            reloadingSprite.setSize(50, 50);
         }
     }
 
     public Sprite getSprite() {
         init();
-        if (reloading){
+        if (reloading) {
             return reloadingSprite;
         } else {
             return sprite;
@@ -70,7 +68,7 @@ public class Weapon implements Serializable {
         return ammo;
     }
 
-    public void setAmmo(int ammo){
+    public void setAmmo(int ammo) {
         this.ammo = ammo;
     }
 
@@ -96,7 +94,7 @@ public class Weapon implements Serializable {
 
     public void incrementDamage() {
         damage = (int) (damage * 1.25);
-        Timer.schedule(new Timer.Task(){
+        Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 damage = (int) (0.8 * damage);

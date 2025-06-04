@@ -1,7 +1,7 @@
 package com.tilldawn.Model;
 
 public enum Language {
-    English("English","Similar keys for two commands!", "Please enter your username.",
+    English("English", "Similar keys for two commands!", "Please enter your username.",
         "Please answer the question.", "The answer you entered is incorrect.", "Please enter your new password",
         "Password too easy", "The fields are essential", "Character ", "Weapon ", " selected.", "Time adjusted to ",
         "minutes", "The username must contain only a-zA-z0-9_", "No file selected", "Kills", "Username", "Score",
@@ -16,7 +16,7 @@ public enum Language {
         "Pre-Game Menu", "Scoreboard Menu", "Talent Menu", "Login Menu", "Logout", "Profile Menu", "Load Game", "Resume",
         "Save", "Give Up", "Grayscale", "Start", "Change Avatar", "Delete Account", "Change Info", "Apply",
         "Choose Local Avatar", "Music Volume", "Music Track", "SFXs", "Control Setting", "Auto Reload", "Shoot"),
-    Spanish("Español","¡Teclas similares para dos comandos!", "Por favor, introduce tu nombre de usuario.",
+    Spanish("Español", "¡Teclas similares para dos comandos!", "Por favor, introduce tu nombre de usuario.",
         "Por favor, responde a la pregunta.", "La respuesta que has introducido es incorrecta.", "Por favor, introduce tu nueva contraseña",
         "Contraseña demasiado fácil", "Los campos son esenciales", "Personaje", "Arma", "seleccionado.", "Tiempo ajustado a",
         "minutos", "El nombre de usuario debe contener solo a-zA-z0-9_", "No se ha seleccionado ningún archivo", "Victorias", "usuario", "Puntuación",
@@ -302,7 +302,9 @@ public enum Language {
 
     public static Language findLanguage(String language) {
         for (Language value : Language.values()) {
-            if (value.getName().equals(language)) {return value;}
+            if (value.getName().equals(language)) {
+                return value;
+            }
         }
         return null;
     }

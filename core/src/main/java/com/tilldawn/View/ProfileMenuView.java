@@ -5,15 +5,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Control.ProfileMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.Model.Avatar;
-import com.tilldawn.Model.User;
 
 public class ProfileMenuView implements Screen {
     private Stage stage;
@@ -81,25 +77,25 @@ public class ProfileMenuView implements Screen {
 
         if (changingAvatar) {
             table.add(new Avatar(controller.getPath()).getActor(skin)).height(200);
-            table.row().pad(10, 0 , 10, 0);
+            table.row().pad(10, 0, 10, 0);
             table.add(chooseAvatar).height(100);
-            table.row().pad(10, 0 , 10, 0);
+            table.row().pad(10, 0, 10, 0);
             table.add(chooseLocalAvatar).width(700);
-            table.row().pad(10, 0 , 10, 0);
+            table.row().pad(10, 0, 10, 0);
             table.add(apply).width(700);
         } else {
             table.add(usernameLabel).width(80).padRight(50);
             table.add(username).width(300);
-            table.row().pad(10, 0 , 10, 0);
+            table.row().pad(10, 0, 10, 0);
             table.add(passwordLabel).width(80).padRight(50);
             table.add(password).width(300);
-            table.row().pad(10, 0 , 10, 0);
+            table.row().pad(10, 0, 10, 0);
             table.add(changeInfo).colspan(2).width(500);
-            table.row().pad(10, 0 , 10, 0);
+            table.row().pad(10, 0, 10, 0);
             table.add(changeAvatar).colspan(2).width(500);
-            table.row().pad(10, 0 , 10, 0);
+            table.row().pad(10, 0, 10, 0);
             table.add(deleteAccount).colspan(2).width(500);
-            table.row().pad(10, 0 , 10, 0);
+            table.row().pad(10, 0, 10, 0);
             table.add(apply).width(500).colspan(2);
         }
 
@@ -179,7 +175,7 @@ public class ProfileMenuView implements Screen {
     public void alert(String message, Integer timer) {
         final Table alertBox = new Table(skin);
         alertBox.setSize(1000, 50);
-        alertBox.setPosition(Gdx.graphics.getWidth() / 2f,0, Align.bottom);
+        alertBox.setPosition(Gdx.graphics.getWidth() / 2f, 0, Align.bottom);
 
         Label label = new Label(message, skin);
         alertBox.add(label);

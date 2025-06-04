@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tilldawn.Main;
 
@@ -65,7 +64,9 @@ public class User {
     }
 
     public String getAlert() {
-        if (alert == null) {return "200";}
+        if (alert == null) {
+            return "200";
+        }
         return alert;
     }
 
@@ -93,7 +94,7 @@ public class User {
         this.kills += kills;
     }
 
-    public void  addPlaytime(int playtime) {
+    public void addPlaytime(int playtime) {
         this.playtime += playtime;
     }
 

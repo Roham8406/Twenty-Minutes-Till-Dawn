@@ -42,7 +42,7 @@ public class Wall implements Serializable {
         animationFrames = new Animation<>(0.2f, textureFrames[0][0], textureFrames[0][1],
             textureFrames[0][2], textureFrames[0][3], textureFrames[0][4], textureFrames[0][5]);
         sprite = new AnimatedSprite(animationFrames);
-        ((AnimatedSprite)sprite).update(new Random().nextFloat());
+        ((AnimatedSprite) sprite).update(new Random().nextFloat());
     }
 
     public void setScaleX(float scaleX) {
@@ -100,7 +100,7 @@ public class Wall implements Serializable {
             } else {
                 return new Vector2(10, 0);
             }
-        } else  {
+        } else {
             if (!horizontal) {
                 return new Vector2(0, -10);
             } else {
@@ -110,8 +110,8 @@ public class Wall implements Serializable {
     }
 
     public boolean isCollisioned(float posX, float posY) {
-        return Math.abs(posX + this.x - Gdx.graphics.getWidth()/2f) < 64 * scaleX &&
-            Math.abs(posY + this.y - Gdx.graphics.getHeight()/2f) < 32 * scaleY;
+        return Math.abs(posX + this.x - Gdx.graphics.getWidth() / 2f) < 64 * scaleX &&
+            Math.abs(posY + this.y - Gdx.graphics.getHeight() / 2f) < 32 * scaleY;
     }
 
     public void setAbsY(float y) {

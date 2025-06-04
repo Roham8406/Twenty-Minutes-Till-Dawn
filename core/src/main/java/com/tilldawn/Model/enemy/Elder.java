@@ -9,10 +9,9 @@ import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
 import com.tilldawn.Model.Countdown;
-import com.tilldawn.Model.EnemyBullet;
 import com.tilldawn.View.GameView;
 
-public class Elder extends Enemy{
+public class Elder extends Enemy {
     private Float lastDash;
     private boolean dashing;
     private static boolean spawn = false;
@@ -26,7 +25,7 @@ public class Elder extends Enemy{
     }
 
     @Override
-    protected void init(){
+    protected void init() {
         super.init();
         if (texture != null) return;
         texture = new Texture("T/T_ShubNiggurath.png");
@@ -64,7 +63,7 @@ public class Elder extends Enemy{
             if (lastDash - 5 > Main.getMain().getGame().getTimer().getRemaining()) {
                 dashing = true;
                 lastDash = Main.getMain().getGame().getTimer().getRemaining();
-                Timer.schedule(new Timer.Task(){
+                Timer.schedule(new Timer.Task() {
                     @Override
                     public void run() {
                         dashing = false;
@@ -78,10 +77,10 @@ public class Elder extends Enemy{
     public void die() {
         if (hp > 0) return;
         super.die();
-        Timer.schedule(new Timer.Task(){
+        Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
-                ((GameView)Main.getMain().getScreen()).getController().getWorldController().endBossFight();
+                ((GameView) Main.getMain().getScreen()).getController().getWorldController().endBossFight();
             }
         }, 1);
     }

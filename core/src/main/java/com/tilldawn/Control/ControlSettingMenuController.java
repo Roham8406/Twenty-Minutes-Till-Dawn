@@ -4,7 +4,6 @@ import com.tilldawn.Main;
 import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.View.ControlSettingsMenuView;
 import com.tilldawn.View.MainMenuView;
-import com.tilldawn.View.SettingsMenuView;
 
 import java.util.ArrayList;
 import java.util.Map;

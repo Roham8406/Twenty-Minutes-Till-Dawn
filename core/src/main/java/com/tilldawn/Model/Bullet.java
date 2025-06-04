@@ -20,7 +20,7 @@ public class Bullet implements Serializable {
     private float posY;
     private int range = 120;
 
-    public Bullet(float x, float y, int projectTile, int damage){
+    public Bullet(float x, float y, int projectTile, int damage) {
         this.x = x;
         this.posX = Main.getMain().getGame().getHero().getPosX();
         this.y = y;
@@ -30,10 +30,12 @@ public class Bullet implements Serializable {
         updatePos();
     }
 
-    private void init(){
-        if (sprite != null) {return;}
+    private void init() {
+        if (sprite != null) {
+            return;
+        }
         sprite = new Sprite(texture);
-        sprite.setSize(20 , 20);
+        sprite.setSize(20, 20);
     }
 
     public void updatePos() {

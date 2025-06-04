@@ -10,7 +10,7 @@ import com.tilldawn.Model.AnimatedSprite;
 import com.tilldawn.Model.Countdown;
 import com.tilldawn.Model.EnemyBullet;
 
-public class EyeBat extends Enemy{
+public class EyeBat extends Enemy {
     private Float lastShot;
 
     public EyeBat(float x, float y, float pos) {
@@ -28,18 +28,18 @@ public class EyeBat extends Enemy{
         texture = new Texture("T/T_EyeBat.png");
         textureFrames = TextureRegion.split(texture, 96, 96);
         animationFrames = new Animation<>(0.3f, textureFrames[0][0], textureFrames[0][1],
-            textureFrames[0][2],  textureFrames[0][3]);
+            textureFrames[0][2], textureFrames[0][3]);
         sprite = new AnimatedSprite(animationFrames);
     }
 
     public static Integer spawnCount() {
         Countdown countdown = Main.getMain().getGame().getTimer();
-        if (countdown.getRemaining() > countdown.getDuration()*3f/4f) return 0;
+        if (countdown.getRemaining() > countdown.getDuration() * 3f / 4f) return 0;
         if (Main.getMain().getGame().getLastSpawn().get(1) - 10 < countdown.getRemaining()) {
             return 0;
         }
         Main.getMain().getGame().getLastSpawn().set(1, countdown.getRemaining());
-        return (int)Math.ceil((3*countdown.getDuration() - 4*countdown.getRemaining() + 30)/30);
+        return (int) Math.ceil((3 * countdown.getDuration() - 4 * countdown.getRemaining() + 30) / 30);
     }
 
 

@@ -21,7 +21,7 @@ public class Player implements Serializable {
     private transient Sprite playerSprite;
     private float posX = 0;
     private float posY = 0;
-//    private CollisionRect rect ;
+    //    private CollisionRect rect ;
     private float time = 0;
     private float speed;
     private int hp;
@@ -39,7 +39,7 @@ public class Player implements Serializable {
     private boolean isPlayerIdle = true;
     private boolean isPlayerRunning = false;
 
-    public Player(GameCharacter gameCharacter){
+    public Player(GameCharacter gameCharacter) {
         //        rect = new CollisionRect((float) Gdx.graphics.getWidth() / 2, (float) Gdx.graphics.getHeight(), playerTexture.getRegionWidth() * 3, playerTexture.getRegionHeight() * 3);
         this.gameCharacter = gameCharacter;
         hp = gameCharacter.getHealth();
@@ -55,8 +55,8 @@ public class Player implements Serializable {
         playerTexture = gameCharacter.getDefaultTexture();
         playerSprite = new Sprite(playerTexture);
         playerSprite.setSize(playerTexture.getRegionWidth() * 3, playerTexture.getRegionHeight() * 3);
-        playerSprite.setPosition((float) Gdx.graphics.getWidth() / 2 - playerSprite.getWidth()/2,
-            (float) Gdx.graphics.getHeight() / 2 - playerSprite.getHeight()/2);
+        playerSprite.setPosition((float) Gdx.graphics.getWidth() / 2 - playerSprite.getWidth() / 2,
+            (float) Gdx.graphics.getHeight() / 2 - playerSprite.getHeight() / 2);
         playerSprite.setPosition((float) Gdx.graphics.getWidth() / 2,
             (float) Gdx.graphics.getHeight() / 2);
     }
@@ -147,8 +147,8 @@ public class Player implements Serializable {
 
     private void incrementXp(GameController gameController, int XP) {
         xp += XP;
-        if (xp >= level*20) {
-            xp -= level*20;
+        if (xp >= level * 20) {
+            xp -= level * 20;
             level++;
             Main.getMain().getScreen().dispose();
             Main.getMain().setScreen(new AbilityMenuView(new AbilityMenuController(),
@@ -172,9 +172,9 @@ public class Player implements Serializable {
         }
     }
 
-    public void incrementSpeed () {
+    public void incrementSpeed() {
         speed *= 2;
-        Timer.schedule(new Timer.Task(){
+        Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 speed /= 2;

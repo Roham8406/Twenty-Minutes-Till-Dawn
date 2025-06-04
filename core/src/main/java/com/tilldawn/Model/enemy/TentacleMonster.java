@@ -10,7 +10,7 @@ import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
 import com.tilldawn.Model.Countdown;
 
-public class TentacleMonster extends Enemy{
+public class TentacleMonster extends Enemy {
 
     public TentacleMonster(float x, float y, float pos) {
         this.hp = 25;
@@ -27,7 +27,7 @@ public class TentacleMonster extends Enemy{
         animationFrames = new Animation<>(0.3f, textureFrames[0][0], textureFrames[0][1],
             textureFrames[0][2]);
         sprite = new AnimatedSprite(animationFrames);
-        Timer.schedule(new Timer.Task(){
+        Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 if (!dead) {
@@ -45,7 +45,7 @@ public class TentacleMonster extends Enemy{
             return 0;
         }
         Main.getMain().getGame().getLastSpawn().set(0, countdown.getRemaining());
-        return (int)Math.ceil((countdown.getDuration() - countdown.getRemaining())/30);
+        return (int) Math.ceil((countdown.getDuration() - countdown.getRemaining()) / 30);
     }
 
     @Override

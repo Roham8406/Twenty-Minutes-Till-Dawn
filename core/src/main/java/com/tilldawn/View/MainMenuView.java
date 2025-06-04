@@ -3,16 +3,16 @@ package com.tilldawn.View;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.MainMenuController;
 import com.tilldawn.Main;
-import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.Model.User;
-import com.badlogic.gdx.graphics.GL20;
 
 
 public class MainMenuView implements Screen {
@@ -63,13 +63,13 @@ public class MainMenuView implements Screen {
         table.top();
 
         table.add(header).height(100).colspan(2);
-        table.row().pad(140, 0 , 10 , 0);
+        table.row().pad(140, 0, 10, 0);
         table.add(setting).width(500).padRight(30);
         table.add(talent).width(500);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(pregame).width(500).padRight(30);
         table.add(scoreboard).width(500);
-        table.row().pad(10, 0 , 10 , 0);
+        table.row().pad(10, 0, 10, 0);
         if (isSigned) {
             table.add(profile).width(500).padRight(30);
             table.add(loadGame).width(500);
@@ -150,7 +150,7 @@ public class MainMenuView implements Screen {
     public void alert(String message, Integer timer) {
         final Table alertBox = new Table(skin);
         alertBox.setSize(1000, 50);
-        alertBox.setPosition(Gdx.graphics.getWidth() / 2f,0, Align.bottom);
+        alertBox.setPosition(Gdx.graphics.getWidth() / 2f, 0, Align.bottom);
 
         Label label = new Label(message, skin);
         alertBox.add(label);

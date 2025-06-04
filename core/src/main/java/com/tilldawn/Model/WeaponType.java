@@ -1,6 +1,5 @@
 package com.tilldawn.Model;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,12 +12,12 @@ public enum WeaponType {
     Shotgun(Main.getLanguage().Shotgun, "T/T_Shotgun_SS.png", 2, 1, 4, 10),
     Smg(Main.getLanguage().DualSMGs, "T/T_DualSMGs_SS.png", 24, 2, 1, 8);
 
-    private String name;
-    private String frames;
-    private Integer ammoMax;
-    private Integer timeReload;
-    private Integer damage;
-    private Integer projectTile;
+    private final String name;
+    private final String frames;
+    private final Integer ammoMax;
+    private final Integer timeReload;
+    private final Integer damage;
+    private final Integer projectTile;
     private Texture texture;
     TextureRegion[][] textureFrames;
     Animation<TextureRegion> reloadAnimation;

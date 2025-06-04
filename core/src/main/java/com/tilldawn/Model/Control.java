@@ -3,13 +3,9 @@ package com.tilldawn.Model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.tilldawn.Control.ControlSettingMenuController;
-import com.tilldawn.Control.SettingMenuController;
 import com.tilldawn.Main;
 import com.tilldawn.View.ControlSettingsMenuView;
-import com.tilldawn.View.SettingsMenuView;
 
 import java.io.Serializable;
 import java.util.HashMap;

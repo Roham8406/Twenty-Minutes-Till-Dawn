@@ -20,7 +20,7 @@ public class Tree implements Serializable {
     private transient TextureRegion[][] textureFrames;
     private transient Animation<TextureRegion> animationFrames;
 
-    public Tree(int x, int y, float pos){
+    public Tree(int x, int y, float pos) {
         this.x = x;
         this.y = y;
         init();
@@ -33,7 +33,7 @@ public class Tree implements Serializable {
         animationFrames = new Animation<>(0.3f, textureFrames[0][0], textureFrames[0][1],
             textureFrames[0][2], textureFrames[0][1]);
         sprite = new AnimatedSprite(animationFrames);
-        ((AnimatedSprite)sprite).update(new Random().nextFloat());
+        ((AnimatedSprite) sprite).update(new Random().nextFloat());
     }
 
     public TextureRegion getTexture() {
@@ -57,7 +57,7 @@ public class Tree implements Serializable {
     }
 
     public boolean isCollisioned(float posX, float posY) {
-        return Math.abs(posX + this.x - Gdx.graphics.getWidth()/2f) < 28 &&
-            Math.abs(posY + this.y - Gdx.graphics.getHeight()/2f) < 50;
+        return Math.abs(posX + this.x - Gdx.graphics.getWidth() / 2f) < 28 &&
+            Math.abs(posY + this.y - Gdx.graphics.getHeight() / 2f) < 50;
     }
 }

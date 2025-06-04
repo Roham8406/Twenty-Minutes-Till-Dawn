@@ -51,7 +51,7 @@ public class Countdown implements Serializable {
 
     @Override
     public String toString() {
-        return (int)remaining/60 + "' : " + (int)remaining%60 + "\"";
+        return (int) remaining / 60 + "' : " + (int) remaining % 60 + "\"";
     }
 
     public float getDuration() {

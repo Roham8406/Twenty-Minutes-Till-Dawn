@@ -1,8 +1,8 @@
 package com.tilldawn.Model;
 
 public enum MusicTracks {
-    Hitman("Hitman","tracks/Hitman.mp3"),
-    Adventure("Adventure","tracks/Adventure.mp3");
+    Hitman("Hitman", "tracks/Hitman.mp3"),
+    Adventure("Adventure", "tracks/Adventure.mp3");
 
     private MusicTracks(String trackName, String path) {
         this.trackName = trackName;
@@ -14,7 +14,9 @@ public enum MusicTracks {
 
     public static MusicTracks findMusic(String music) {
         for (MusicTracks value : MusicTracks.values()) {
-            if (value.getTrackName().equals(music)) {return value;}
+            if (value.getTrackName().equals(music)) {
+                return value;
+            }
         }
         return null;
     }

@@ -26,6 +26,7 @@ public class UserSql {
 
 
     }
+
     public User findUser(String username, String password) {
 
         String query = "SELECT * FROM users WHERE username = ?";
@@ -110,6 +111,7 @@ public class UserSql {
             return new Response(e.getMessage(), false);
         }
     }
+
     public Response registerUser(String username, String password, String securityAnswer, Integer securityQuestion) {
         String query = "INSERT INTO users (username, password, securityQuestion, securityAnswer, avatar) VALUES (?, ?, ?, ?, ?)";
 
@@ -219,10 +221,10 @@ public class UserSql {
 
             while (resultSet.next()) {
                 users.add(new User(0,
-                                   resultSet.getString("username"),
-                                   resultSet.getInt("kills"),
-                                   resultSet.getInt("playTime"),
-                                   resultSet.getInt("score"), null));
+                    resultSet.getString("username"),
+                    resultSet.getInt("kills"),
+                    resultSet.getInt("playTime"),
+                    resultSet.getInt("score"), null));
             }
 
             return users;

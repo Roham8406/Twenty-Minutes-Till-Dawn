@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.ScoreboardMenuController;
@@ -60,7 +59,7 @@ public class ScoreboardMenuView implements Screen {
         table.add(kill).width(200).padRight(40);
         table.add(score).width(200).padRight(40);
         table.add(playtime).width(200).padRight(40);
-        table.row().pad(40, 0 , 10 , 0);
+        table.row().pad(40, 0, 10, 0);
         ArrayList<User> users = Main.getMain().getUserSql().sortScoreboard(scoreName);
         if (users == null) {
             alert(Main.getLanguage().SomethingWentWrong, 5);
@@ -96,7 +95,7 @@ public class ScoreboardMenuView implements Screen {
                     label.setColor(0.5f, 0, 0, 1);
             }
             table.add(label).colspan(4).width(1160);
-            table.row().pad(10, 0 , 10, 0);
+            table.row().pad(10, 0, 10, 0);
         }
 
         table.add(mainMenu).colspan(4).width(500);
@@ -150,7 +149,7 @@ public class ScoreboardMenuView implements Screen {
     public void alert(String message, Integer timer) {
         final Table alertBox = new Table(skin);
         alertBox.setSize(1000, 50);
-        alertBox.setPosition(Gdx.graphics.getWidth() / 2f,0, Align.bottom);
+        alertBox.setPosition(Gdx.graphics.getWidth() / 2f, 0, Align.bottom);
 
         Label label = new Label(message, skin);
         alertBox.add(label);

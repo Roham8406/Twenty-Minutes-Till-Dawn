@@ -2,30 +2,20 @@ package com.tilldawn.Control;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tilldawn.Main;
 import com.tilldawn.Model.Avatar;
 import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.Model.Response;
-import com.tilldawn.View.LoginMenuView;
 import com.tilldawn.View.MainMenuView;
-import com.tilldawn.View.PreGameMenuView;
 import com.tilldawn.View.ProfileMenuView;
 import com.tilldawn.service.UserSql;
 
 import javax.swing.*;
-import java.awt.dnd.DropTarget;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 public class ProfileMenuController extends MenuController {
     private ProfileMenuView view;

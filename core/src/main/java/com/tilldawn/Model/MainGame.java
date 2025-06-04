@@ -16,7 +16,7 @@ public class MainGame implements Serializable {
     private boolean autoAim;
     private Weapon weapon;
     private Control control;
-    private boolean autoReload ;
+    private boolean autoReload;
     private Countdown timer;
     private ArrayList<Tree> trees = new ArrayList<>();
     private ArrayList<Wall> walls = new ArrayList<>();
@@ -45,12 +45,12 @@ public class MainGame implements Serializable {
         Random rand = new Random();
         int treesNumber = rand.nextInt(50, 70);
         for (int i = 0; i < treesNumber; i++) {
-            trees.add(new Tree(rand.nextInt(0,3776), rand.nextInt(0, 2680), rand.nextFloat(0, 5)));
+            trees.add(new Tree(rand.nextInt(0, 3776), rand.nextInt(0, 2680), rand.nextFloat(0, 5)));
         }
-        walls.add(new Wall(1888,0, rand.nextFloat(0, 5), false, true));
-        walls.add(new Wall(0,1344, rand.nextFloat(0, 5), true, true));
-        walls.add(new Wall(1888,2688, rand.nextFloat(0, 5), false, false));
-        walls.add(new Wall(3776,1344, rand.nextFloat(0, 5), true, false));
+        walls.add(new Wall(1888, 0, rand.nextFloat(0, 5), false, true));
+        walls.add(new Wall(0, 1344, rand.nextFloat(0, 5), true, true));
+        walls.add(new Wall(1888, 2688, rand.nextFloat(0, 5), false, false));
+        walls.add(new Wall(3776, 1344, rand.nextFloat(0, 5), true, false));
     }
 
     public Player getHero() {
@@ -104,15 +104,19 @@ public class MainGame implements Serializable {
     public void incrementVitality() {
         vitality++;
     }
+
     public void incrementAmocrease() {
         amocrease++;
     }
+
     public void incrementDamager() {
         damager++;
     }
+
     public void incrementProcrease() {
         procrease++;
     }
+
     public void incrementSpeedy() {
         speedy++;
     }

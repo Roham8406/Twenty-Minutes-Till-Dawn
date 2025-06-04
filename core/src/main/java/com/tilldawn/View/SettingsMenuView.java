@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tilldawn.Control.SettingMenuController;
 import com.tilldawn.Main;
@@ -67,22 +66,22 @@ public class SettingsMenuView implements Screen {
 
         table.add(languageLabel).width(200).padRight(30);
         table.add(language).colspan(2).width(500);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(musicVolumeLabel).width(200).padRight(30);
         table.add(musicVolume).colspan(2).width(500);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(musicTrackLabel).width(200).padRight(30);
         table.add(musicTrack).colspan(2).width(500);
-        table.row().pad(10, 0 , 10, 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(sfx).width(400).padRight(50);
         table.add(blackAndWhite).width(600).padRight(50);
         table.add(autoReload).width(500);
         if (Main.getMain().isSfx()) sfx.setChecked(true);
         if (Main.getMain().isBlackAndWhite()) blackAndWhite.setChecked(true);
         if (Main.getMain().isAutoReload()) autoReload.setChecked(true);
-        table.row().pad(10, 0 , 10 , 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(controlSettings).colspan(3).width(500);
-        table.row().pad(10, 0 , 10 , 0);
+        table.row().pad(10, 0, 10, 0);
         table.add(mainMenu).colspan(3).width(500);
 
         stage.addActor(table);
