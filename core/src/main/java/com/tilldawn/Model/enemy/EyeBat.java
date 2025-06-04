@@ -39,7 +39,7 @@ public class EyeBat extends Enemy {
             return 0;
         }
         Main.getMain().getGame().getLastSpawn().set(1, countdown.getRemaining());
-        return (int) Math.ceil((3 * countdown.getDuration() - 4 * countdown.getRemaining() + 30) / 30);
+        return (int) Math.ceil((3 * countdown.getDuration() - 4 * countdown.getRemaining() + 30) / 30 / 2);
     }
 
 

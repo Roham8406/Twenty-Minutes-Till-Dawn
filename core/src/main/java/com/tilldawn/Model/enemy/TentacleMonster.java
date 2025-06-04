@@ -45,7 +45,7 @@ public class TentacleMonster extends Enemy {
             return 0;
         }
         Main.getMain().getGame().getLastSpawn().set(0, countdown.getRemaining());
-        return (int) Math.ceil((countdown.getDuration() - countdown.getRemaining()) / 30);
+        return (int) Math.ceil((countdown.getDuration() - countdown.getRemaining()) / 30 / 2);
     }
 
     @Override
