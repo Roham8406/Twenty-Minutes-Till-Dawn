@@ -3,6 +3,7 @@ package com.tilldawn.Model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.tilldawn.Main;
 
 import java.io.Serializable;
@@ -13,20 +14,23 @@ public class Bullet implements Serializable {
     private final transient Texture texture = GameAssetManager.getGameAssetManager().getBullet();
     private transient Sprite sprite;
     private final int damage;
-    private final int projectTile;
-    private final float x;
-    private final float y;
+    private final float projectTile;
+    private final Vector2 velocity;
     private float posX;
     private float posY;
     private int range = 120;
 
-    public Bullet(float x, float y, int projectTile, int damage) {
-        this.x = x;
+    public Bullet(float x, float y, float projectTile, int damage) {
         this.posX = Main.getMain().getGame().getHero().getPosX();
-        this.y = y;
         this.posY = Main.getMain().getGame().getHero().getPosY();
         this.damage = damage;
         this.projectTile = projectTile;
+        velocity = new Vector2(
+            Gdx.graphics.getWidth() / 2f - x,
+            -Gdx.graphics.getHeight() / 2f + y
+        ).nor();
+        velocity.rotateDeg(projectTile * 3);
+
         updatePos();
     }
 
@@ -66,12 +70,8 @@ public class Bullet implements Serializable {
         return range == 0;
     }
 
-    public float getX() {
-        return x;
-    }
-
-    public float getY() {
-        return y;
+    public Vector2 getVelocity() {
+        return velocity;
     }
 
     public void setPosX(float posX) {

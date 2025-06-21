@@ -41,14 +41,11 @@ public class WeaponController {
         if (weapon.canShoot()) {
             worldController.removeAmmo();
             for (int i = 0; i < weapon.getProjectTile(); i++) {
-                Timer.schedule(new Timer.Task() {
-                    @Override
-                    public void run() {
-                        Main.getMain().getGame().getBullets().add(
-                            new Bullet(x, y, weapon.getProjectTile(), weapon.getDamage())
-                        );
-                    }
-                }, 0.2f * i);
+                Main.getMain().getGame().getBullets().add(new Bullet(
+                    x, y,
+                    i - weapon.getProjectTile() / 2f,
+                    weapon.getDamage())
+                );
             }
             weapon.setAmmo(weapon.getAmmo() - 1);
             if (Main.getMain().isSfx()) Sfx.Shot.play();
@@ -63,10 +60,7 @@ public class WeaponController {
     public void updateBullets() {
         for (Bullet b : Main.getMain().getGame().getBullets().toArray(new Bullet[0])) {
             b.getSprite().draw(Main.getBatch());
-            Vector2 direction = new Vector2(
-                Gdx.graphics.getWidth() / 2f - b.getX(),
-                -Gdx.graphics.getHeight() / 2f + b.getY()
-            ).nor();
+            Vector2 direction = b.getVelocity();
 
             for (Enemy enemy : Main.getMain().getGame().getEnemies().toArray(new Enemy[0])) {
                 if (enemy.isDead()) continue;
