@@ -1,5 +1,6 @@
 package com.tilldawn.Model.enemy;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -9,6 +10,7 @@ import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
 import com.tilldawn.Model.Countdown;
 import com.tilldawn.Model.EnemyBullet;
+import com.tilldawn.Model.GameAssetManager;
 
 public class EyeBat extends Enemy {
     private Float lastShot;
@@ -24,12 +26,8 @@ public class EyeBat extends Enemy {
     @Override
     protected void init() {
         super.init();
-        if (texture != null) return;
-        texture = new Texture("T/T_EyeBat.png");
-        textureFrames = TextureRegion.split(texture, 96, 96);
-        animationFrames = new Animation<>(0.3f, textureFrames[0][0], textureFrames[0][1],
-            textureFrames[0][2], textureFrames[0][3]);
-        sprite = new AnimatedSprite(animationFrames);
+        if (sprite != null) return;
+        sprite = GameAssetManager.getGameAssetManager().getEyeBat();
     }
 
     public static Integer spawnCount() {
@@ -39,7 +37,7 @@ public class EyeBat extends Enemy {
             return 0;
         }
         Main.getMain().getGame().getLastSpawn().set(1, countdown.getRemaining());
-        return (int) Math.ceil((3 * countdown.getDuration() - 4 * countdown.getRemaining() + 30) / 30 / 2);
+        return (int) Math.ceil((3 * countdown.getDuration() - 4 * countdown.getRemaining() + 30) / 30);
     }
 
 
@@ -61,7 +59,7 @@ public class EyeBat extends Enemy {
         }
     }
 
-    public boolean isCollisioned(float posX, float posY) {
+    public boolean isCollided(float posX, float posY) {
         init();
         return Math.abs(posX - sprite.getX()) < 80 &&
             Math.abs(posY - sprite.getY()) < 70;

@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Bullet implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final transient Texture texture = new Texture(GameAssetManager.getGameAssetManager().getBullet());
+    private final transient Texture texture = GameAssetManager.getGameAssetManager().getBullet();
     private transient Sprite sprite;
     private final int damage;
     private final int projectTile;

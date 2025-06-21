@@ -139,7 +139,7 @@ public class WorldController {
                     y = (int) sprite.getY();
                 }
             }
-            if (enemy.isCollisioned(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f)) {
+            if (enemy.isCollided(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f)) {
                 if (enemy.isDead()) {
                     playerController.getPlayer().incrementXp(gameController);
                     Main.getMain().getGame().getEnemies().remove(enemy);

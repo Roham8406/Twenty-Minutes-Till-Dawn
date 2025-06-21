@@ -1,14 +1,13 @@
 package com.tilldawn.Model.enemy;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
 import com.tilldawn.Model.Countdown;
+import com.tilldawn.Model.GameAssetManager;
 import com.tilldawn.View.GameView;
 
 public class Elder extends Enemy {
@@ -27,12 +26,8 @@ public class Elder extends Enemy {
     @Override
     protected void init() {
         super.init();
-        if (texture != null) return;
-        texture = new Texture("T/T_ShubNiggurath.png");
-        textureFrames = TextureRegion.split(texture, 96, 96);
-        animationFrames = new Animation<>(0.3f, textureFrames[0][0], textureFrames[0][1],
-            textureFrames[0][2]);
-        sprite = new AnimatedSprite(animationFrames);
+        if (sprite != null) return;
+        sprite = GameAssetManager.getGameAssetManager().getElder();
     }
 
     public static Integer spawnCount() {
@@ -85,7 +80,7 @@ public class Elder extends Enemy {
         }, 1);
     }
 
-    public boolean isCollisioned(float posX, float posY) {
+    public boolean isCollided(float posX, float posY) {
         init();
         return Math.abs(posX - sprite.getX()) < 80 &&
             Math.abs(posY - sprite.getY()) < 70;

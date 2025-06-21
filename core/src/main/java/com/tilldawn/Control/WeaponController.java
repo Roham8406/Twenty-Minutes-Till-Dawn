@@ -70,7 +70,7 @@ public class WeaponController {
 
             for (Enemy enemy : Main.getMain().getGame().getEnemies().toArray(new Enemy[0])) {
                 if (enemy.isDead()) continue;
-                if (enemy.isCollisioned(b.getSprite().getX(), b.getSprite().getY())) {
+                if (enemy.isCollided(b.getSprite().getX(), b.getSprite().getY())) {
                     enemy.removeHp(b.getDamage());
                     enemy.goBack(direction);
                     Main.getMain().getGame().getBullets().remove(b);

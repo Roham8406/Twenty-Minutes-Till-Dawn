@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class EnemyBullet implements Serializable {
     private static final long serialVersionUID = 1L;
-    private final transient Texture texture = new Texture(GameAssetManager.getGameAssetManager().getBullet());
+    private final transient Texture texture = GameAssetManager.getGameAssetManager().getBullet();
     private transient Sprite sprite;
     private final float x;
     private final float y;

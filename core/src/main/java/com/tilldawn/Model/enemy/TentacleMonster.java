@@ -1,5 +1,6 @@
 package com.tilldawn.Model.enemy;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.tilldawn.Main;
 import com.tilldawn.Model.AnimatedSprite;
 import com.tilldawn.Model.Countdown;
+import com.tilldawn.Model.GameAssetManager;
 
 public class TentacleMonster extends Enemy {
 
@@ -21,19 +23,13 @@ public class TentacleMonster extends Enemy {
     @Override
     protected void init() {
         super.init();
-        if (texture != null) return;
-        texture = new Texture("T/T_TentacleEnemy.png");
-        textureFrames = TextureRegion.split(texture, 64, 64);
-        animationFrames = new Animation<>(0.3f, textureFrames[0][0], textureFrames[0][1],
-            textureFrames[0][2]);
-        sprite = new AnimatedSprite(animationFrames);
+        if (sprite != null) return;
+        sprite = GameAssetManager.getGameAssetManager().getTentacleSpawning();
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 if (!dead) {
-                    animationFrames = new Animation<>(0.3f, textureFrames[2][0], textureFrames[2][1],
-                        textureFrames[2][2], textureFrames[2][3]);
-                    sprite = new AnimatedSprite(animationFrames);
+                    sprite = GameAssetManager.getGameAssetManager().getTentacle();
                 }
             }
         }, 1);
@@ -45,7 +41,7 @@ public class TentacleMonster extends Enemy {
             return 0;
         }
         Main.getMain().getGame().getLastSpawn().set(0, countdown.getRemaining());
-        return (int) Math.ceil((countdown.getDuration() - countdown.getRemaining()) / 30 / 2);
+        return (int) Math.ceil((countdown.getDuration() - countdown.getRemaining()) / 30);
     }
 
     @Override
@@ -62,7 +58,7 @@ public class TentacleMonster extends Enemy {
         }
     }
 
-    public boolean isCollisioned(float posX, float posY) {
+    public boolean isCollided(float posX, float posY) {
         init();
         return Math.abs(posX - sprite.getX()) < 28 &&
             Math.abs(posY - sprite.getY()) < 50;
